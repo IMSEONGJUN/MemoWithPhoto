@@ -43,6 +43,8 @@ class MemoCell: UITableViewCell {
     private func setupUI() {
         [thumnailImageView, titleLabel, somePartsOfMemoLabel, dateLabel].forEach {contentView.addSubview($0)}
         accessoryType = .disclosureIndicator
+        thumnailImageView.layer.cornerRadius = 12
+        thumnailImageView.clipsToBounds = true
         somePartsOfMemoLabel.numberOfLines = 2
         somePartsOfMemoLabel.lineBreakMode = .byTruncatingTail
         dateLabel.font = UIFont.systemFont(ofSize: 12)

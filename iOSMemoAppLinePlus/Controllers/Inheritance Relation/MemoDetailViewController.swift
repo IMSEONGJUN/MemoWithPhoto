@@ -14,12 +14,14 @@ class MemoDetailViewController: CreateNewMemoViewController {
     var indexPath: IndexPath!
     var isFilteredBefore = false
     let collectionForEdit = ImageCollectionVCInCreateVC()
+    var isContinuousEdit = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         let collectionForDisplay = ImageCollectionVCInDetailVC()
         collectionForDisplay.memo = self.memo
         add(childVC: collectionForDisplay, to: addImageViewContainer)
+        
         addImageViewContainer.backgroundColor = .white
         configure()
         setupNavigationBar()
@@ -67,8 +69,11 @@ class MemoDetailViewController: CreateNewMemoViewController {
     }
     
     func switchingImageAddingViewEditMode() {
-        addImageViewContainer.subviews.first?.removeFromSuperview()
-        addImageViewContainer.subviews[addImageViewContainer.subviews.endIndex - 1].removeFromSuperview()
+        if !isContinuousEdit {
+            addImageViewContainer.subviews.first?.removeFromSuperview()
+            addImageViewContainer.subviews[addImageViewContainer.subviews.endIndex - 1].removeFromSuperview()
+        }
+        isContinuousEdit = true
         addImageViewContainer.backgroundColor = .white
         
         collectionForEdit.imagesToAdd = memo.images?.imageArray()
@@ -130,6 +135,10 @@ class MemoDetailViewController: CreateNewMemoViewController {
     override func configureMemoTextView() {
         memoTextView.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
         memoTextView.textColor = .black
+    }
+    
+    deinit {
+        print("DetailVC Deinit")
     }
     
 
