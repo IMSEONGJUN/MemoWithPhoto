@@ -28,7 +28,8 @@ class MemoListViewController: UIViewController {
         DataManager.shared.fetchMemo()
         if DataManager.shared.memoList.isEmpty {
             DispatchQueue.main.async {
-                self.showEmptyStateView(with: "메모가 없습니다.\n 새 메모를 만들어보세요!", in: self.view, imageName: "list")
+                self.showEmptyStateView(with: "메모가 없습니다.\n 새 메모를 만들어보세요!", in: self.view,
+                                        imageName: EmptyStateViewImageName.list, superViewType: .memoList)
             }
         } else {
             tableView.reloadData()

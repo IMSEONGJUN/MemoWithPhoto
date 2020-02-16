@@ -16,13 +16,13 @@ class CreateNewMemoViewController: UIViewController {
     var addedImages = [UIImage]()
     
     let addImageViewContainer = UIView()
-    
+    let imageCollectionVC = ImageCollectionVCInCreateVC()
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
         setupNavigationBar()
         setConstraints()
-        let imageCollectionVC = ImageCollectionVCInCreateVC()
+        
         
         add(childVC: imageCollectionVC, to: addImageViewContainer)
         createDismissKeyboardTapGesture()
@@ -53,14 +53,15 @@ class CreateNewMemoViewController: UIViewController {
     }
     
     private func setConstraints() {
-        let topBottomInset:CGFloat = 60
+        let topInset:CGFloat = topbarHeight
+        let bottomInset:CGFloat = 10
         let sideInset:CGFloat = 10
         let padding:CGFloat = 12
         
         
         titleTextField.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(sideInset)
-            $0.top.equalToSuperview().inset(topBottomInset)
+            $0.top.equalToSuperview().inset(topInset)
             $0.height.equalToSuperview().multipliedBy(0.05)
         }
         
@@ -73,7 +74,7 @@ class CreateNewMemoViewController: UIViewController {
         addImageViewContainer.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(sideInset)
             $0.top.equalTo(memoTextView.snp.bottom).offset(padding)
-            $0.bottom.equalToSuperview().offset(-topBottomInset)
+            $0.bottom.equalToSuperview().offset(-bottomInset)
         }
     }
     

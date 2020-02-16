@@ -33,6 +33,7 @@
 		CE49680C23F6EC770056E444 /* ImageCollectionVCInCreateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE49680B23F6EC770056E444 /* ImageCollectionVCInCreateVC.swift */; };
 		CE49680F23F7CD1F0056E444 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE49680E23F7CD1F0056E444 /* UIViewController+Ext.swift */; };
 		CE49681223F7CDA50056E444 /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE49681123F7CDA50056E444 /* EmptyStateView.swift */; };
+		CE8CF70223F85D4A00B5DC67 /* NotiLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8CF70123F85D4A00B5DC67 /* NotiLabel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +67,7 @@
 		CE49680B23F6EC770056E444 /* ImageCollectionVCInCreateVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionVCInCreateVC.swift; sourceTree = "<group>"; };
 		CE49680E23F7CD1F0056E444 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
 		CE49681123F7CDA50056E444 /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
+		CE8CF70123F85D4A00B5DC67 /* NotiLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotiLabel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -215,6 +217,7 @@
 			children = (
 				CE4967FD23F5465C0056E444 /* TitleLabel.swift */,
 				CE4967FF23F546950056E444 /* BodyLabel.swift */,
+				CE8CF70123F85D4A00B5DC67 /* NotiLabel.swift */,
 			);
 			path = Labels;
 			sourceTree = "<group>";
@@ -360,6 +363,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE4967EF23F486330056E444 /* DataManager.swift in Sources */,
+				CE8CF70223F85D4A00B5DC67 /* NotiLabel.swift in Sources */,
 				CE49680623F58B7C0056E444 /* Constants.swift in Sources */,
 				CE49680F23F7CD1F0056E444 /* UIViewController+Ext.swift in Sources */,
 				CE4967CB23F46FF50056E444 /* ViewController.swift in Sources */,

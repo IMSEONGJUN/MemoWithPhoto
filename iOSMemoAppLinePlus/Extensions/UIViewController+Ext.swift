@@ -19,13 +19,30 @@ extension UIViewController {
         }
     }
     
-    func showEmptyStateView(with message: String, in view: UIView, imageName: String) {
+    func showEmptyStateView(with message: String, in view: UIView, imageName: String, superViewType: VeryBottomViewTypeOfEmptyStateView) {
         let emptyStateView = EmptyStateView(message: message, imageName: imageName)
+        if imageName == EmptyStateViewImageName.picture {
+            emptyStateView.isOnTheCreateVC = true
+            emptyStateView.veryBottomView = superViewType
+        }
+
         addChild(emptyStateView)
         view.addSubview(emptyStateView.view)
         emptyStateView.view.frame = view.bounds
         emptyStateView.didMove(toParent: self)
     }
+    
+    var topbarHeight: CGFloat {
+        if #available(iOS 13.0, *) {
+           return (self.navigationController?.navigationBar.frame.height ?? 0.0)
+        } else {
+            return UIApplication.shared.statusBarFrame.size.height +
+                (self.navigationController?.navigationBar.frame.height ?? 0.0)
+        }
+        
+    }
+//
+    
 
 }
 

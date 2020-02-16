@@ -8,33 +8,35 @@
 
 import UIKit
 
-class NotiLabel: TitleLabel {
-    override var intrinsicContentSize: CGSize {
-        get {
-            let originalIntrinsicContentSize = super.intrinsicContentSize
-            let height = originalIntrinsicContentSize.height + 15
-            layer.cornerRadius = height / 2
-            layer.masksToBounds = true
-            return CGSize(width: originalIntrinsicContentSize.width + 20, height: height)
-        }
-    }
+protocol EmptyStateViewDelegate: class {
+    func presentImageSourceSelection(view: EmptyStateView) // 여기부터
 }
-
-
 
 class EmptyStateView: UIViewController {
 
     let messageLabel = NotiLabel(textAlignment: .center, fontSize: 18)
     let logoImageView = UIImageView()
-    let addNewMemoButton = UIButton()
+    let createNewButton = UIButton()
+    
+    
+    var veryBottomView: VeryBottomViewTypeOfEmptyStateView!
+    var isOnTheCreateVC = false
+    
+    weak var delegate: EmptyStateViewDelegate?
+    
     var token: NSObjectProtocol?
     
-    var padding:CGFloat = 30
+    var padding:CGFloat = 10
     
     override func viewDidLoad() {
         view.backgroundColor = .white
         configure()
         setConstraints()
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         setNotiObserver()
     }
     
@@ -51,8 +53,9 @@ class EmptyStateView: UIViewController {
     private func configure() {
         view.addSubview(messageLabel)
         view.addSubview(logoImageView)
-        view.addSubview(addNewMemoButton)
+        view.addSubview(createNewButton)
         
+        view.backgroundColor = .yellow
         messageLabel.numberOfLines = 2
         messageLabel.backgroundColor = .systemPurple
         messageLabel.textColor = .white
@@ -60,9 +63,11 @@ class EmptyStateView: UIViewController {
         
         logoImageView.translatesAutoresizingMaskIntoConstraints = false
         
-        addNewMemoButton.setImage(UIImage(named: "plus"), for: .normal)
-        addNewMemoButton.addTarget(self, action: #selector(didTapCreateNewMemoButton), for: .touchUpInside)
-        addNewMemoButton.translatesAutoresizingMaskIntoConstraints = false
+        createNewButton.setImage(UIImage(named: "plus"), for: .normal)
+        createNewButton.addTarget(self, action: #selector(didTapCreateNewButton), for: .touchUpInside)
+        createNewButton.translatesAutoresizingMaskIntoConstraints = false
+        createNewButton.isHidden = false
+        
     }
     
     private func setConstraints() {
@@ -72,10 +77,10 @@ class EmptyStateView: UIViewController {
             logoImageView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.3),
             logoImageView.heightAnchor.constraint(equalTo: logoImageView.widthAnchor),
             
-            addNewMemoButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            addNewMemoButton.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: padding),
-            addNewMemoButton.widthAnchor.constraint(equalTo: logoImageView.widthAnchor, multiplier: 0.6),
-            addNewMemoButton.heightAnchor.constraint(equalTo: addNewMemoButton.widthAnchor),
+            createNewButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            createNewButton.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: padding),
+            createNewButton.widthAnchor.constraint(equalTo: logoImageView.widthAnchor, multiplier: 0.4),
+            createNewButton.heightAnchor.constraint(equalTo: createNewButton.widthAnchor),
             
             messageLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             messageLabel.bottomAnchor.constraint(equalTo: logoImageView.topAnchor, constant: -padding)
@@ -83,19 +88,36 @@ class EmptyStateView: UIViewController {
     }
     
     private func setNotiObserver() {
-        token = NotificationCenter.default.addObserver(forName: EmptyStateView.newMemoCreated, object: nil,
-                                                       queue: OperationQueue.main,
-                                                       using: { (noti) in
-            if let vc = self.parent as? MemoListViewController {
-                vc.didTapAddNewMemoButton()
-            }
-        })
+        if isOnTheCreateVC {
+            token = NotificationCenter.default.addObserver(forName: EmptyStateView.didTapNewImageAddedButton, object: nil,
+                                                           queue: OperationQueue.main,
+                                                           using: { (noti) in
+                if let vc = self.parent as? ImageCollectionVCInCreateVC {
+                    self.view.removeFromSuperview()
+                    vc.presentActionSheetToSelectImageSource()
+                }
+            })
+        } else {
+            token = NotificationCenter.default.addObserver(forName: EmptyStateView.didTapNewMemoCreatedButton, object: nil,
+                                                           queue: OperationQueue.main,
+                                                           using: { (noti) in
+                if let vc = self.parent as? MemoListViewController {
+                    vc.didTapAddNewMemoButton()
+                }
+            })
+        }
     }
     
-    @objc private func didTapCreateNewMemoButton() {
-        NotificationCenter.default.post(name: EmptyStateView.newMemoCreated, object: nil)
+    @objc private func didTapCreateNewButton() {
+        if isOnTheCreateVC {
+            print("add image")
+            NotificationCenter.default.post(name: EmptyStateView.didTapNewImageAddedButton, object: nil)
+        } else {
+            print("add memo")
+            NotificationCenter.default.post(name: EmptyStateView.didTapNewMemoCreatedButton, object: nil)
+        }
     }
-    
+
     deinit{
         if let token = token {
             NotificationCenter.default.removeObserver(token)
@@ -104,5 +126,6 @@ class EmptyStateView: UIViewController {
 }
 
 extension EmptyStateView {
-    static let newMemoCreated = Notification.Name(rawValue: "didTapCreateNewMemoButton")
+    static let didTapNewMemoCreatedButton = Notification.Name(rawValue: "didTapCreateNewMemoButton")
+    static let didTapNewImageAddedButton = Notification.Name(rawValue: "didTapNewImageAddedButton")
 }

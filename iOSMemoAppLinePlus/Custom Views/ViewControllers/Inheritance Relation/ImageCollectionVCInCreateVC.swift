@@ -7,13 +7,8 @@
 //
 
 import UIKit
-import SnapKit
+import SnapKit // Third party Library
 import MobileCoreServices
-
-
-protocol ImageCollectionVCInCreateVCDelegate: class {
-    func presentActionSheetForSelectImageSource()
-}
 
 
 class ImageCollectionVCInCreateVC: ImageCollectionVCInDetailVC {
@@ -23,10 +18,12 @@ class ImageCollectionVCInCreateVC: ImageCollectionVCInDetailVC {
     
     let addImagesButton = CustomButton(backgroundColor: MyColors.KeyColor, title: "이미지 추가하기")
     
-    var imagesToAdd: [UIImage]? {
+    var imagesToAdd: [UIImage]! {
         didSet{
             if imagesToAdd?.isEmpty ?? true {
-                showEmptyStateView(with: "사진을 등록하실 수 있습니다.", in: self.view, imageName: "picture")
+                DispatchQueue.main.async {
+                    self.showEmptyStateView(with: "사진을 등록하실 수 있습니다.", in: self.view, imageName: EmptyStateViewImageName.picture, superViewType: .createNew)
+                }
             } else {
                 guard let createVC = self.parent as? CreateNewMemoViewController else {return}
                 guard let images = self.imagesToAdd else {return}
@@ -38,13 +35,13 @@ class ImageCollectionVCInCreateVC: ImageCollectionVCInDetailVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
-        imagePicker.delegate = self
-        imagePicker.allowsEditing = true
-        
+ 
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        imagePicker.delegate = self
+        imagePicker.allowsEditing = true
         checkImagesArrayEmpty()
     }
     
@@ -52,7 +49,7 @@ class ImageCollectionVCInCreateVC: ImageCollectionVCInDetailVC {
         view.addSubview(addImagesButton)
         addImagesButton.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(collectionView.snp.bottom).offset(10)
+            $0.top.equalTo(collectionView.snp.bottom).offset(5)
             $0.width.equalToSuperview().multipliedBy(0.5)
         }
         addImagesButton.addTarget(self, action: #selector(didTapImageAddButton), for: .touchUpInside)
@@ -60,18 +57,21 @@ class ImageCollectionVCInCreateVC: ImageCollectionVCInDetailVC {
     
     private func checkImagesArrayEmpty() {
         if imagesToAdd?.isEmpty ?? true {
-            showEmptyStateView(with: "사진을 등록하실 수 있습니다.", in: self.view, imageName: "picture")
+            DispatchQueue.main.async {
+                self.showEmptyStateView(with: "사진을 등록하실 수 있습니다.", in: self.view, imageName: EmptyStateViewImageName.picture,
+                superViewType: .createNew)
+            }
         }
     }
     
     @objc func didTapImageAddButton() {
         print("tap")
-        presentActionSheetForSelectImageSource()
+        presentActionSheetToSelectImageSource()
         print("tap")
     }
     
-    func presentActionSheetForSelectImageSource() {
-        let alert = UIAlertController(title: "선택", message: "", preferredStyle: .alert)
+    func presentActionSheetToSelectImageSource() {
+        let alert = UIAlertController(title: "선택", message: "", preferredStyle: .actionSheet)
         let takePhoto = UIAlertAction(title: "사진 찍기", style: .default) { (_) in
             guard UIImagePickerController.isSourceTypeAvailable(.camera) else {return}
             
@@ -85,10 +85,12 @@ class ImageCollectionVCInCreateVC: ImageCollectionVCInDetailVC {
             self.imagePicker.sourceType = .savedPhotosAlbum
             //imagePicker.sourceType = .photoLibrary
             
-            self.present(self.imagePicker, animated: true) // 앨범만 띄울 수는 있다
+            self.present(self.imagePicker, animated: true)
         }
+        let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
         alert.addAction(takePhoto)
         alert.addAction(album)
+        alert.addAction(cancel)
         self.present(alert, animated: true)
         
     }
@@ -120,16 +122,29 @@ extension ImageCollectionVCInCreateVC: UIImagePickerControllerDelegate, UINaviga
             let originalImage = info[.originalImage] as! UIImage
             let editedImage = info[.editedImage] as? UIImage
             let selectedImage = editedImage ?? originalImage
-            self.imagesToAdd?.append(selectedImage)
+            if self.imagesToAdd == nil {
+                let imageArr = [selectedImage]
+                self.imagesToAdd = imageArr
+                collectionView.reloadData()
+            } else {
+                self.imagesToAdd.append(selectedImage)
+                collectionView.reloadData()
+            }
+            
             if picker.sourceType == .camera {
                 UIImageWriteToSavedPhotosAlbum(selectedImage, nil, nil, nil)
             }
-        } else if UTTypeEqual(mediaType, kUTTypeMovie) {
-            if let mediaPath = (info[.mediaURL] as? NSURL)?.path, UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(mediaPath) {
-                UISaveVideoAtPathToSavedPhotosAlbum(mediaPath, nil, nil, nil)
-            }
-
         }
         picker.dismiss(animated: true)
     }
+}
+
+extension ImageCollectionVCInCreateVC: EmptyStateViewDelegate {
+    func presentImageSourceSelection(view: EmptyStateView) {
+        guard let superView = view.parent as? CreateNewMemoViewController else {return}
+        superView.addImageViewContainer.bringSubviewToFront(superView.imageCollectionVC.view)
+        presentActionSheetToSelectImageSource()
+    }
+    
+    
 }

@@ -23,3 +23,14 @@ enum PlaceHolderImages {
 enum MyColors {
     static let KeyColor = UIColor(red: 0/255, green: 186/255, blue: 0/255, alpha: 1)
 }
+
+enum EmptyStateViewImageName {
+    static let list = "list"
+    static let picture = "picture"
+}
+
+enum VeryBottomViewTypeOfEmptyStateView {
+    case memoList
+    case detail
+    case createNew
+}

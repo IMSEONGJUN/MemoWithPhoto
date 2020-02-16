@@ -23,6 +23,7 @@ class ImageCellForCollection: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        configure()
     }
     
     required init?(coder: NSCoder) {
@@ -30,9 +31,12 @@ class ImageCellForCollection: UICollectionViewCell {
     }
     
     private func configure() {
-        imageView.contentMode = .scaleAspectFit
-        backgroundView = imageView
+        imageView.contentMode = .scaleAspectFill
+        contentView.addSubview(imageView)
+        imageView.clipsToBounds = true
+        imageView.addSubview(buttonContainer)
         buttonContainer.addSubview(removeButton)
+        buttonContainer.backgroundColor = .green
         buttonContainer.alpha = 0.5
         removeButton.setImage(UIImage(named: "remove"), for: .normal)
         imageView.addSubview(removeButton)
@@ -40,10 +44,11 @@ class ImageCellForCollection: UICollectionViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        imageView.frame = bounds
-        let removeButtonSize:CGFloat = imageView.frame.width * 0.2
-        removeButton.frame = CGRect(x: imageView.frame.width - removeButtonSize, y: 0, width: removeButtonSize, height: removeButtonSize)
-        buttonContainer.frame = removeButton.frame
+        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4))
+        imageView.frame = contentView.bounds
+        let removeButtonSize:CGFloat = imageView.frame.size.width * 0.2
+        buttonContainer.frame = CGRect(x: imageView.frame.size.width - removeButtonSize, y: 0, width: removeButtonSize, height: removeButtonSize)
+        removeButton.frame = buttonContainer.frame
         imageView.bringSubviewToFront(removeButton)
     }
 }
