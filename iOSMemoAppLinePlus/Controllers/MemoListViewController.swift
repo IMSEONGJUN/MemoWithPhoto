@@ -26,12 +26,19 @@ class MemoListViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         DataManager.shared.fetchMemo()
+        checkCoreDataEmpty()
+    }
+    
+    func checkCoreDataEmpty() {
         if DataManager.shared.memoList.isEmpty {
             DispatchQueue.main.async {
                 self.showEmptyStateView(with: "메모가 없습니다.\n 새 메모를 만들어보세요!", in: self.view,
                                         imageName: EmptyStateViewImageName.list, superViewType: .memoList)
             }
         } else {
+            if self.children.count > 0{
+                self.children.forEach({ $0.willMove(toParent: nil); $0.view.removeFromSuperview(); $0.removeFromParent() })
+            }
             tableView.reloadData()
         }
     }
@@ -58,8 +65,10 @@ class MemoListViewController: UIViewController {
     }
     
     private func setNotiToken() {
-        token = NotificationCenter.default.addObserver(forName: CreateNewMemoViewController.newMemoCreated, object: nil,
-                                                       queue: OperationQueue.main) { [weak self] (noti) in
+        token = NotificationCenter.default.addObserver(
+            forName: CreateNewMemoViewController.newMemoCreated,
+            object: nil,
+            queue: OperationQueue.main) { [weak self] (noti) in
             guard let self = self else{return}
             self.tableView.reloadData()
         }
@@ -114,16 +123,31 @@ extension MemoListViewController: UITableViewDelegate {
         var activeArray = isSearching ? DataManager.shared.filteredMemoList : DataManager.shared.memoList
         if isSearching {
             let memoDateForRemove = DataManager.shared.filteredMemoList[indexPath.row].createdDate
-            activeArray.removeAll(where: {$0.createdDate == memoDateForRemove})
+            if let index = DataManager.shared.memoList.firstIndex(where: {$0.createdDate == memoDateForRemove}) {
+                let commit = DataManager.shared.memoList[index]
+                DataManager.shared.mainContext.delete(commit)
+                DataManager.shared.memoList.remove(at: index)
+            }
         } else {
+            let commit = activeArray[indexPath.row]
+            DataManager.shared.mainContext.delete(commit)
             activeArray.remove(at: indexPath.row)
         }
-        
-        tableView.deleteRows(at: [indexPath], with: .left)
         DataManager.shared.saveContext()
+//        tableView.deleteRows(at: [indexPath], with: .left)
+        
         DataManager.shared.fetchMemo()
         DispatchQueue.main.async {
             tableView.reloadData()
         }
+        checkCoreDataEmpty()
     }
 }
+
+
+//                let viewControllers:[UIViewController] = self.children
+//                for viewContoller in viewControllers{
+//                    viewContoller.willMove(toParent: nil)
+//                    viewContoller.view.removeFromSuperview()
+//                    viewContoller.removeFromParent()
+//                }

@@ -50,6 +50,7 @@ class DataManager {
         memoList.insert(memoToEdit, at: 0)
         
         saveContext()
+        fetchMemo()
     }
     
     
@@ -65,6 +66,7 @@ class DataManager {
         memoList.insert(newMemo, at: index)
         
         saveContext()
+        fetchMemo()
     }
     
     // MARK: - Core Data stack
