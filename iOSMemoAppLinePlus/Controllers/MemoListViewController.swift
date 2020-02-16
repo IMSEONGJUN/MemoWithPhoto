@@ -103,8 +103,21 @@ extension MemoListViewController: UITableViewDelegate {
         let memo = activeArray[indexPath.row]
         let memoDetailVC = MemoDetailViewController()
         memoDetailVC.memo = memo
+        memoDetailVC.indexPath = indexPath
+        memoDetailVC.isFilteredBefore = isSearching
 
         navigationController?.pushViewController(memoDetailVC, animated: true)
     }
     
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        guard editingStyle == .delete else {return}
+        var activeArray = isSearching ? DataManager.shared.filteredMemoList : DataManager.shared.memoList
+        activeArray.remove(at: indexPath.row)
+        tableView.deleteRows(at: [indexPath], with: .left)
+        DataManager.shared.saveContext()
+        DataManager.shared.fetchMemo()
+        DispatchQueue.main.async {
+            tableView.reloadData()
+        }
+    }
 }

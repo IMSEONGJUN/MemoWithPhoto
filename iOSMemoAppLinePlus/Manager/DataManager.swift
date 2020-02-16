@@ -26,8 +26,8 @@ class DataManager {
     func fetchMemo() {
         let request: NSFetchRequest<Memo> = Memo.fetchRequest()
         
-        let sortByDateDesc = NSSortDescriptor(key: "createdDate", ascending: false)
-        request.sortDescriptors = [sortByDateDesc]
+//        let sortByDateDesc = NSSortDescriptor(key: "createdDate", ascending: false)
+//        request.sortDescriptors = [sortByDateDesc]
         
         do{
             memoList = try mainContext.fetch(request)
@@ -37,7 +37,21 @@ class DataManager {
         
     }
     
-    func addNewMemo(title: String?, memo: String?, images: Data?) {
+    func editMemo(index: Int,title: String?, memo: String?, images: Data?, isEdited: Bool = true) {
+        let memoToEdit = memoList[index]
+        memoToEdit.title = title
+        memoToEdit.content = memo
+        memoToEdit.images = images
+        memoToEdit.isEdited = isEdited
+        memoToEdit.recentlyModifyDate = Date()
+        
+        memoList.insert(memoToEdit, at: 0)
+        
+        saveContext()
+    }
+    
+    
+    func addNewMemo(title: String?, memo: String?, images: Data?, at index:Int = 0) {
         let newMemo = Memo(context: mainContext)
         newMemo.title = title
         newMemo.content = memo
@@ -46,7 +60,7 @@ class DataManager {
         newMemo.createdDate = Date()
         newMemo.recentlyModifyDate = nil
         
-        memoList.insert(newMemo, at: 0)
+        memoList.insert(newMemo, at: index)
         
         saveContext()
     }
@@ -55,7 +69,7 @@ class DataManager {
     
     lazy var persistentContainer: NSPersistentContainer = {
          
-          let container = NSPersistentContainer(name: "SJMemo")
+          let container = NSPersistentContainer(name: "LinePlusMemo")
           container.loadPersistentStores(completionHandler: { (storeDescription, error) in
               if let error = error as NSError? {
             

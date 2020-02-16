@@ -99,6 +99,15 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		CE0BFA2223F98E5300AABB62 /* Inheritance Relation */ = {
+			isa = PBXGroup;
+			children = (
+				CE4967E923F4826B0056E444 /* MemoDetailViewController.swift */,
+				CE4967F323F48A810056E444 /* CreateNewMemoViewController.swift */,
+			);
+			path = "Inheritance Relation";
+			sourceTree = "<group>";
+		};
 		CE4967BA23F46FF50056E444 = {
 			isa = PBXGroup;
 			children = (
@@ -150,8 +159,7 @@
 			isa = PBXGroup;
 			children = (
 				CE4967DE23F471C00056E444 /* MemoListViewController.swift */,
-				CE4967E923F4826B0056E444 /* MemoDetailViewController.swift */,
-				CE4967F323F48A810056E444 /* CreateNewMemoViewController.swift */,
+				CE0BFA2223F98E5300AABB62 /* Inheritance Relation */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";

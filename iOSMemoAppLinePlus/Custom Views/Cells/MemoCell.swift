@@ -42,18 +42,21 @@ class MemoCell: UITableViewCell {
     
     private func setupUI() {
         [thumnailImageView, titleLabel, somePartsOfMemoLabel, dateLabel].forEach {contentView.addSubview($0)}
+        accessoryType = .disclosureIndicator
         somePartsOfMemoLabel.numberOfLines = 2
+        somePartsOfMemoLabel.lineBreakMode = .byTruncatingTail
+        dateLabel.font = UIFont.systemFont(ofSize: 12)
     }
     
     private func setConstraints() {
-        let padding: CGFloat = 20
+        let padding: CGFloat = 10
         
         let imageViewHeightRatio: CGFloat = 0.8
         
-        let titleLabelWidthRatio: CGFloat = 0.5
+        let titleLabelWidthRatio: CGFloat = 0.4
         let titleLabelHeightRatio: CGFloat = 0.3
         
-        let somePartsOfMemoLabelWidthRatio: CGFloat = 0.6
+        let somePartsOfMemoLabelWidthRatio: CGFloat = 0.4
         let somePartsOfMemoLabelHeightRatio: CGFloat = 0.5
         
         thumnailImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -83,7 +86,7 @@ class MemoCell: UITableViewCell {
         dateLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             dateLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            dateLabel.leadingAnchor.constraint(equalTo: somePartsOfMemoLabel.trailingAnchor, constant: padding),
+            dateLabel.leadingAnchor.constraint(equalTo: somePartsOfMemoLabel.trailingAnchor),
         ])
     }
     

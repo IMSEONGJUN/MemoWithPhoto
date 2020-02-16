@@ -16,15 +16,13 @@ class CreateNewMemoViewController: UIViewController {
     let placeholderTextForTextView = "메모 내용을 입력하세요."
     var addedImages = [UIImage]()
     
-    let addImageViewContainer = UIView()
+    var addImageViewContainer = UIView()
     let imageCollectionVC = ImageCollectionVCInCreateVC()
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
         setupNavigationBar()
         setConstraints()
-        
-        
         add(childVC: imageCollectionVC, to: addImageViewContainer)
         createDismissKeyboardTapGesture()
     }
@@ -32,13 +30,11 @@ class CreateNewMemoViewController: UIViewController {
     private func setupViews() {
         view.backgroundColor = .white
         [titleTextField, memoTextView, addImageViewContainer].forEach({view.addSubview($0)})
-//        titleTextField.backgroundColor = .yellow
-//        memoTextView.backgroundColor = .blue
-        memoTextView.text = self.placeholderTextForTextView
-        memoTextView.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
-        memoTextView.textColor = .lightGray
-        memoTextView.delegate = self
-        
+        configureTitleTextField()
+        configureMemoTextView()
+    }
+    
+    private func configureTitleTextField() {
         let titleTextFieldPaddingView = UIView(frame: CGRect(x: 0, y: 0, width: 6, height: titleTextField.frame.height))
         titleTextField.leftView = titleTextFieldPaddingView
         titleTextField.leftViewMode = .always
@@ -49,7 +45,15 @@ class CreateNewMemoViewController: UIViewController {
         titleTextField.delegate = self
     }
     
-    private func setupNavigationBar() {
+    func configureMemoTextView() {
+        memoTextView.text = self.placeholderTextForTextView
+        memoTextView.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
+        memoTextView.textColor = .lightGray
+        memoTextView.delegate = self
+    }
+    
+    
+    func setupNavigationBar() {
         title = "새 메모"
         let cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(didTapCancelButton))
         let saveButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(didTapSaveButton))
@@ -99,9 +103,12 @@ class CreateNewMemoViewController: UIViewController {
             presentAlertOnMainThread(title: "메모가 없습니다.", message: "메모를 입력하세요")
             return
         }
-        let coreDataObjectArray = addedImages.coreDataRepresentation()
-        
-        DataManager.shared.addNewMemo(title: title, memo: memo, images: coreDataObjectArray)
+        if addedImages.isEmpty {
+            DataManager.shared.addNewMemo(title: title, memo: memo, images: nil)
+        } else {
+            guard let coreDataObjectArray = addedImages.coreDataRepresentation() else {return}
+            DataManager.shared.addNewMemo(title: title, memo: memo, images: coreDataObjectArray)
+        }
         
         NotificationCenter.default.post(name:CreateNewMemoViewController.newMemoCreated, object: nil)
         

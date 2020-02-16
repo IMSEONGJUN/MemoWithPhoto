@@ -12,7 +12,7 @@ class NotiLabel: TitleLabel {
     override var intrinsicContentSize: CGSize {
         get {
             let originalIntrinsicContentSize = super.intrinsicContentSize
-            let height = originalIntrinsicContentSize.height + 15
+            let height = originalIntrinsicContentSize.height + 10
             layer.cornerRadius = height / 2
             layer.masksToBounds = true
             return CGSize(width: originalIntrinsicContentSize.width + 20, height: height)

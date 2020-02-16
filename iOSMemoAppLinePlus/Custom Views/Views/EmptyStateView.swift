@@ -26,7 +26,7 @@ class EmptyStateView: UIViewController {
     
     var token: NSObjectProtocol?
     
-    var padding:CGFloat = 10
+    var padding:CGFloat = 5
     
     override func viewDidLoad() {
         view.backgroundColor = .white
@@ -55,7 +55,6 @@ class EmptyStateView: UIViewController {
         view.addSubview(logoImageView)
         view.addSubview(createNewButton)
         
-        view.backgroundColor = .lightGray
         messageLabel.numberOfLines = 2
         messageLabel.backgroundColor = .systemPurple
         messageLabel.textColor = .white
@@ -72,9 +71,9 @@ class EmptyStateView: UIViewController {
     
     private func setConstraints() {
         NSLayoutConstraint.activate([
-            logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 10),
+            logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -10),
             logoImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            logoImageView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.3),
+            logoImageView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.2),
             logoImageView.heightAnchor.constraint(equalTo: logoImageView.widthAnchor),
             
             createNewButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),

@@ -78,7 +78,7 @@ class ImageCollectionVCInDetailVC: UIViewController {
 
 extension ImageCollectionVCInDetailVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return memo.images?.count ?? 0
+        return memo.images?.imageArray()?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
