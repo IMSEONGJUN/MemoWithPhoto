@@ -26,8 +26,8 @@ class DataManager {
     func fetchMemo() {
         let request: NSFetchRequest<Memo> = Memo.fetchRequest()
         
-//        let sortByDateDesc = NSSortDescriptor(key: "createdDate", ascending: false)
-//        request.sortDescriptors = [sortByDateDesc]
+        let sortByDateDesc = NSSortDescriptor(key: "recentlyModifyDate", ascending: false)
+        request.sortDescriptors = [sortByDateDesc]
         
         do{
             memoList = try mainContext.fetch(request)
@@ -45,6 +45,8 @@ class DataManager {
         memoToEdit.isEdited = isEdited
         memoToEdit.recentlyModifyDate = Date()
         
+        memoList.remove(at: index)
+        
         memoList.insert(memoToEdit, at: 0)
         
         saveContext()
@@ -58,7 +60,7 @@ class DataManager {
         newMemo.images = images
         newMemo.isEdited = false
         newMemo.createdDate = Date()
-        newMemo.recentlyModifyDate = nil
+        newMemo.recentlyModifyDate = Date()
         
         memoList.insert(newMemo, at: index)
         

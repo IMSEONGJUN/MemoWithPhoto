@@ -112,7 +112,13 @@ extension MemoListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         guard editingStyle == .delete else {return}
         var activeArray = isSearching ? DataManager.shared.filteredMemoList : DataManager.shared.memoList
-        activeArray.remove(at: indexPath.row)
+        if isSearching {
+            let memoDateForRemove = DataManager.shared.filteredMemoList[indexPath.row].createdDate
+            activeArray.removeAll(where: {$0.createdDate == memoDateForRemove})
+        } else {
+            activeArray.remove(at: indexPath.row)
+        }
+        
         tableView.deleteRows(at: [indexPath], with: .left)
         DataManager.shared.saveContext()
         DataManager.shared.fetchMemo()

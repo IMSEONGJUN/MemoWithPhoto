@@ -88,6 +88,7 @@ extension ImageCollectionVCInDetailVC: UICollectionViewDataSource {
         }
         cell.imageView.image = images[indexPath.item]
         cell.buttonContainer.isHidden = true
+        cell.removeButton.isHidden = true
         
         return cell
     }

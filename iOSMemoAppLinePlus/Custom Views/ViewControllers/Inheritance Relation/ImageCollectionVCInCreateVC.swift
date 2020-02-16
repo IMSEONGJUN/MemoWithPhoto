@@ -125,10 +125,15 @@ extension ImageCollectionVCInCreateVC: UIImagePickerControllerDelegate, UINaviga
             if self.imagesToAdd == nil {
                 let imageArr = [selectedImage]
                 self.imagesToAdd = imageArr
-                collectionView.reloadData()
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData()
+                }
+                
             } else {
                 self.imagesToAdd.append(selectedImage)
-                collectionView.reloadData()
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData()
+                }
             }
             
             if picker.sourceType == .camera {
@@ -139,12 +144,12 @@ extension ImageCollectionVCInCreateVC: UIImagePickerControllerDelegate, UINaviga
     }
 }
 
-extension ImageCollectionVCInCreateVC: EmptyStateViewDelegate {
-    func presentImageSourceSelection(view: EmptyStateView) {
-        guard let superView = view.parent as? CreateNewMemoViewController else {return}
-        superView.addImageViewContainer.bringSubviewToFront(superView.imageCollectionVC.view)
-        presentActionSheetToSelectImageSource()
-    }
-    
-    
-}
+//extension ImageCollectionVCInCreateVC: EmptyStateViewDelegate {
+//    func presentImageSourceSelection(view: EmptyStateView) {
+//        guard let superView = view.parent as? CreateNewMemoViewController else {return}
+//        superView.addImageViewContainer.bringSubviewToFront(superView.imageCollectionVC.view)
+//        presentActionSheetToSelectImageSource()
+//    }
+//
+//
+//}

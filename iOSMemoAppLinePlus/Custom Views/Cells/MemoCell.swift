@@ -26,7 +26,7 @@ class MemoCell: UITableViewCell {
             }
             self.titleLabel.text = self.memoData.title
             self.somePartsOfMemoLabel.text = self.memoData.content
-            self.dateLabel.text = formatter.string(for: self.memoData.createdDate) 
+            self.dateLabel.text = formatter.string(for: self.memoData.recentlyModifyDate)
         }
     }
     

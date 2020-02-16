@@ -17,6 +17,7 @@ class ImageCellForCollection: UICollectionViewCell {
     
     static let identifier = "ImageCellForCollection"
     
+    var isImageFromURL = false
     let imageView = UIImageView()
     let removeButton = UIButton()
     let buttonContainer = UIView()

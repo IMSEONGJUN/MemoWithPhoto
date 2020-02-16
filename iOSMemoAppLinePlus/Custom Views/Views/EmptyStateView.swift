@@ -8,21 +8,19 @@
 
 import UIKit
 
-protocol EmptyStateViewDelegate: class {
-    func presentImageSourceSelection(view: EmptyStateView) // 여기부터
-}
+//protocol EmptyStateViewDelegate: class {
+//    func presentImageSourceSelection(view: EmptyStateView) // 여기부터
+//}
 
 class EmptyStateView: UIViewController {
-
+    
     let messageLabel = NotiLabel(textAlignment: .center, fontSize: 18)
     let logoImageView = UIImageView()
     let createNewButton = UIButton()
     
-    
-    var veryBottomView: VeryBottomViewTypeOfEmptyStateView!
     var isOnTheCreateVC = false
     
-    weak var delegate: EmptyStateViewDelegate?
+//    weak var delegate: EmptyStateViewDelegate?
     
     var token: NSObjectProtocol?
     
@@ -65,7 +63,6 @@ class EmptyStateView: UIViewController {
         createNewButton.setImage(UIImage(named: "plus"), for: .normal)
         createNewButton.addTarget(self, action: #selector(didTapCreateNewButton), for: .touchUpInside)
         createNewButton.translatesAutoresizingMaskIntoConstraints = false
-        createNewButton.isHidden = false
         
     }
     
@@ -88,21 +85,23 @@ class EmptyStateView: UIViewController {
     
     private func setNotiObserver() {
         if isOnTheCreateVC {
-            token = NotificationCenter.default.addObserver(forName: EmptyStateView.didTapNewImageAddedButton, object: nil,
+            token = NotificationCenter.default.addObserver(forName: EmptyStateView.didTapNewImageAddedButton,
+                                                           object: nil,
                                                            queue: OperationQueue.main,
                                                            using: { (noti) in
-                if let vc = self.parent as? ImageCollectionVCInCreateVC {
-                    self.view.removeFromSuperview()
-                    vc.presentActionSheetToSelectImageSource()
-                }
+                                                            if let vc = self.parent as? ImageCollectionVCInCreateVC {
+                                                                self.view.removeFromSuperview()
+                                                                vc.presentActionSheetToSelectImageSource()
+                                                            }
             })
         } else {
-            token = NotificationCenter.default.addObserver(forName: EmptyStateView.didTapNewMemoCreatedButton, object: nil,
+            token = NotificationCenter.default.addObserver(forName: EmptyStateView.didTapNewMemoCreatedButton,
+                                                           object: nil,
                                                            queue: OperationQueue.main,
                                                            using: { (noti) in
-                if let vc = self.parent as? MemoListViewController {
-                    vc.didTapAddNewMemoButton()
-                }
+                                                            if let vc = self.parent as? MemoListViewController {
+                                                                vc.didTapAddNewMemoButton()
+                                                            }
             })
         }
     }
@@ -116,7 +115,7 @@ class EmptyStateView: UIViewController {
             NotificationCenter.default.post(name: EmptyStateView.didTapNewMemoCreatedButton, object: nil)
         }
     }
-
+    
     deinit{
         if let token = token {
             NotificationCenter.default.removeObserver(token)

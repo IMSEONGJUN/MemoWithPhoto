@@ -102,18 +102,22 @@ class MemoDetailViewController: CreateNewMemoViewController {
                 let memoDate = DataManager.shared.filteredMemoList[indexPath.row].createdDate
                 if let index = DataManager.shared.memoList.firstIndex(where: {$0.createdDate == memoDate}){
                     DataManager.shared.editMemo(index: index, title: title, memo: memo, images: imageForCoreData)
+                    DataManager.shared.fetchMemo()
                 }
             } else {
                 DataManager.shared.editMemo(index: indexPath.row, title: title, memo: memo, images: imageForCoreData)
+                DataManager.shared.fetchMemo()
             }
         } else {
             if isFilteredBefore {
                 let memoDate = DataManager.shared.filteredMemoList[indexPath.row].createdDate
                 if let index = DataManager.shared.memoList.firstIndex(where: {$0.createdDate == memoDate}){
                     DataManager.shared.editMemo(index: index, title: title, memo: memo, images: nil)
+                    DataManager.shared.fetchMemo()
                 }
             } else {
                 DataManager.shared.editMemo(index: indexPath.row, title: title, memo: memo, images: nil)
+                DataManager.shared.fetchMemo()
             }
         }
         

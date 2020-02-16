@@ -10,7 +10,7 @@ import UIKit
 
 let formatter: DateFormatter = {
    let f = DateFormatter()
-    f.dateFormat = "MM-dd-yyyy HH:mm"
+    f.dateFormat = "yyyy-MM-dd HH:mm"
     f.locale = Locale(identifier: "Ko_kr")
     return f
 }()
@@ -32,4 +32,9 @@ enum VeryBottomViewTypeOfEmptyStateView {
     case memoList
     case detail
     case createNew
+}
+
+enum MainThumnailImageType : Int {
+    case imageType = 0
+    case urlType = 1
 }

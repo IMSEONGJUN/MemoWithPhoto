@@ -23,7 +23,9 @@ extension UIViewController {
         let emptyStateView = EmptyStateView(message: message, imageName: imageName)
         if imageName == EmptyStateViewImageName.picture {
             emptyStateView.isOnTheCreateVC = true
-            emptyStateView.veryBottomView = superViewType
+            if superViewType == .detail {
+                emptyStateView.createNewButton.isHidden = true
+            }
         }
 
         addChild(emptyStateView)
