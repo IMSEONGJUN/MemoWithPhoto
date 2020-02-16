@@ -55,7 +55,7 @@ class EmptyStateView: UIViewController {
         view.addSubview(logoImageView)
         view.addSubview(createNewButton)
         
-        view.backgroundColor = .yellow
+        view.backgroundColor = .lightGray
         messageLabel.numberOfLines = 2
         messageLabel.backgroundColor = .systemPurple
         messageLabel.textColor = .white

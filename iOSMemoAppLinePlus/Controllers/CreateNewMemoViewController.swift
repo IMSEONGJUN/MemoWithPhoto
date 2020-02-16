@@ -13,6 +13,7 @@ class CreateNewMemoViewController: UIViewController {
        
     var titleTextField = UITextField()
     var memoTextView = UITextView()
+    let placeholderTextForTextView = "메모 내용을 입력하세요."
     var addedImages = [UIImage]()
     
     let addImageViewContainer = UIView()
@@ -31,14 +32,19 @@ class CreateNewMemoViewController: UIViewController {
     private func setupViews() {
         view.backgroundColor = .white
         [titleTextField, memoTextView, addImageViewContainer].forEach({view.addSubview($0)})
-        titleTextField.backgroundColor = .yellow
-        memoTextView.backgroundColor = .blue
+//        titleTextField.backgroundColor = .yellow
+//        memoTextView.backgroundColor = .blue
+        memoTextView.text = self.placeholderTextForTextView
+        memoTextView.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
+        memoTextView.textColor = .lightGray
+        memoTextView.delegate = self
         
-        let titleTextFieldPaddingView = UIView(frame: CGRect(x: 0, y: 0, width: 12, height: titleTextField.frame.height))
+        let titleTextFieldPaddingView = UIView(frame: CGRect(x: 0, y: 0, width: 6, height: titleTextField.frame.height))
         titleTextField.leftView = titleTextFieldPaddingView
         titleTextField.leftViewMode = .always
         titleTextField.autocorrectionType = .no
         titleTextField.keyboardType = .alphabet
+        titleTextField.placeholder = "제목"
         titleTextField.becomeFirstResponder()
         titleTextField.delegate = self
     }
@@ -133,4 +139,20 @@ extension CreateNewMemoViewController: UITextFieldDelegate {
             return true
         }
         
+}
+
+extension CreateNewMemoViewController: UITextViewDelegate {
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.textColor == .lightGray {
+            textView.text = ""
+            textView.textColor = .black
+        }
+    }
+
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.isEmpty {
+            textView.text = placeholderTextForTextView
+            textView.textColor = .lightGray
+        }
+    }
 }
