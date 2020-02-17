@@ -53,9 +53,9 @@ class MemoListViewController: UIViewController {
 
     private func configureTableView() {
         tableView.dataSource = self
+        tableView.delegate = self
         tableView.rowHeight = 100
         tableView.register(MemoCell.self, forCellReuseIdentifier: MemoCell.identifier)
-        tableView.delegate = self
         tableView.tableFooterView = UIView(frame: .zero)
         view.addSubview(tableView)
     }
@@ -81,6 +81,7 @@ class MemoListViewController: UIViewController {
             }
         }
         let createNewMemoVC = UINavigationController(rootViewController: CreateNewMemoViewController())
+        createNewMemoVC.modalPresentationStyle = .fullScreen
         present(createNewMemoVC, animated: true)
     }
     
@@ -125,16 +126,16 @@ extension MemoListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         guard editingStyle == .delete else {return}
-        var activeArray = isSearching ? DataManager.shared.filteredMemoList : DataManager.shared.memoList
-        if isSearching {
-            let memoDateForRemove = DataManager.shared.filteredMemoList[indexPath.row].createdDate
-            if let index = DataManager.shared.memoList.firstIndex(where: {$0.createdDate == memoDateForRemove}) {
-                let commit = DataManager.shared.memoList[index]
-                DataManager.shared.mainContext.delete(commit)
-//                DataManager.shared.memoList.remove(at: index)
-                activeArray.remove(at: activeArray.firstIndex(of: activeArray[index])!)
-            }
-        } else {
+        let activeArray = isSearching ? DataManager.shared.filteredMemoList : DataManager.shared.memoList
+//        if isSearching {
+//            let memoDateForRemove = DataManager.shared.filteredMemoList[indexPath.row].createdDate
+//            if let index = DataManager.shared.memoList.firstIndex(where: {$0.createdDate == memoDateForRemove}) {
+//                let commit = DataManager.shared.memoList[index]
+//                DataManager.shared.mainContext.delete(commit)
+////                DataManager.shared.memoList.remove(at: index)
+//                activeArray.remove(at: activeArray.firstIndex(of: activeArray[index])!)
+//            }
+//        } else {
             let commit = activeArray[indexPath.row]
             DataManager.shared.mainContext.delete(commit)
             DataManager.shared.fetchMemo()
@@ -146,7 +147,7 @@ extension MemoListViewController: UITableViewDelegate {
 //            let commit = activeArray[indexPath.row]
 //            DataManager.shared.mainContext.delete(commit)
 //            activeArray.remove(at: activeArray.firstIndex(of: activeArray[indexPath.row])!)
-        }
+//        }
 //        DataManager.shared.saveContext()
         
         

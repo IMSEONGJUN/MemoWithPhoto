@@ -11,7 +11,6 @@ import SnapKit
 
 class CreateNewMemoViewController: UIViewController {
        
-//    var memo: Memo!
     var titleTextField = UITextField()
     var memoTextView = UITextView()
     let placeholderTextForTextView = "메모 내용을 입력하세요."
@@ -22,6 +21,10 @@ class CreateNewMemoViewController: UIViewController {
     
     var addImageViewContainer = UIView()
     let imageCollectionVC = ImageCollectionVCInCreateVC()
+    
+    
+    // MARK:  - LifeCycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
@@ -71,11 +74,8 @@ class CreateNewMemoViewController: UIViewController {
         memoTextView.delegate = self
     }
     
-    
-    
-    
     private func setConstraints() {
-        let topInset:CGFloat = topbarHeight
+        let topInset:CGFloat = topbarHeight + 10
         let bottomInset:CGFloat = 10
         let sideInset:CGFloat = 10
         let titleAndMemoPadding:CGFloat = 12
@@ -105,6 +105,9 @@ class CreateNewMemoViewController: UIViewController {
         let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:)))
         view.addGestureRecognizer(tap)
     }
+    
+    
+    // MARK: - Action
     
     func saveMemo() {
         guard let title = titleTextField.text, title.count > 0 else {
@@ -146,9 +149,12 @@ class CreateNewMemoViewController: UIViewController {
     }
     
 }
+
+
 extension CreateNewMemoViewController {
     static let newMemoCreated = Notification.Name(rawValue: "newMemoCreated")
 }
+
 
 extension CreateNewMemoViewController: UITextFieldDelegate {
     

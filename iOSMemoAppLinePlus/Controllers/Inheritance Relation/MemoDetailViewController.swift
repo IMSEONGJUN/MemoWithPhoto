@@ -14,19 +14,16 @@ class MemoDetailViewController: CreateNewMemoViewController {
     var indexPath: IndexPath!
     var isFilteredBefore = false
     let collectionForEdit = ImageCollectionVCInCreateVC()
-//    var isContinuousEdit = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         addImageViewContainer.backgroundColor = .white
         configure()
-//        setupNavigationBar()
         setTextEditingDisabled()
     }
     
     override func addChildViewController() {
         let collectionForDisplay = ImageCollectionVCInDetailVC()
-//        collectionForDisplay.memo = self.memo
         add(childVC: collectionForDisplay, to: addImageViewContainer)
     }
     
@@ -63,8 +60,7 @@ class MemoDetailViewController: CreateNewMemoViewController {
         } else if sender.title == "Save" {
             let success = saveEditedMemo()
             guard success else {return}
-            titleTextField.isUserInteractionEnabled = false
-            memoTextView.isEditable = false
+            setTextEditingDisabled()
             sender.title = "Edit"
             switchingImageAddingViewDisplayMode()
         }
@@ -139,10 +135,8 @@ class MemoDetailViewController: CreateNewMemoViewController {
         
     }
     
-    
-    
-    
     override func configureMemoTextView() {
+        memoTextView.backgroundColor = MyColors.titleAndContents
         memoTextView.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
         memoTextView.textColor = .black
     }
