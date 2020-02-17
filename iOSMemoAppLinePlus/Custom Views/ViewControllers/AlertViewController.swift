@@ -34,15 +34,22 @@ class AlertViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.black.withAlphaComponent(0.6)
+        setupView()
         configureContainerView()
         configureTitleLabel()
         configureMessageLabel()
         configureConfirmButton()
     }
     
-    func configureContainerView() {
+    func setupView() {
+        view.backgroundColor = UIColor.black.withAlphaComponent(0.6)
         view.addSubview(containerView)
+        containerView.addSubview(titleLabel)
+        containerView.addSubview(messageLabel)
+        containerView.addSubview(confirmButton)
+    }
+    
+    func configureContainerView() {
         containerView.backgroundColor = .white
         containerView.layer.cornerRadius = 16
         containerView.layer.borderWidth = 2
@@ -59,7 +66,6 @@ class AlertViewController: UIViewController {
     }
     
     func configureTitleLabel() {
-        containerView.addSubview(titleLabel)
         titleLabel.text = alertTitle
         
         NSLayoutConstraint.activate([
@@ -71,7 +77,6 @@ class AlertViewController: UIViewController {
     }
     
     func configureMessageLabel() {
-        containerView.addSubview(messageLabel)
         messageLabel.text = alertMessage
         messageLabel.numberOfLines = 4
         
@@ -84,7 +89,6 @@ class AlertViewController: UIViewController {
     }
     
     func configureConfirmButton() {
-        containerView.addSubview(confirmButton)
         confirmButton.setTitle(buttonTitle, for: .normal)
         confirmButton.addTarget(self, action: #selector(dismissVC), for: .touchUpInside)
         

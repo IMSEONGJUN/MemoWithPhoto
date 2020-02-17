@@ -196,7 +196,6 @@ extension ImageCollectionVCInCreateVC: UIImagePickerControllerDelegate, UINaviga
 extension ImageCollectionVCInCreateVC: ImageCellForCollectionDelegate {
     
     func didTapRemoveButtonOnImage(in cell: ImageCellForCollection) {
-        print("cell delegate")
         guard let indexPath = collectionView.indexPath(for: cell) else { return }
         collectionView.performBatchUpdates({
             self.imagesToAdd.remove(at: indexPath.row)

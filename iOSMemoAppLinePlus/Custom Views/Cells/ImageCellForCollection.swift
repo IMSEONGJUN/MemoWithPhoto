@@ -47,15 +47,18 @@ class ImageCellForCollection: UICollectionViewCell {
     }
     
     @objc private func didTapRemoveButton() {
-        print("removeButton Tap!!")
         delegate?.didTapRemoveButtonOnImage(in: self)
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
+        let removeButtonSizeRatioToImageView: CGFloat = 0.2
+        let cellInset: CGFloat = 10
+        
+        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: cellInset, left: cellInset,
+                                                                     bottom: cellInset, right: cellInset))
         imageView.frame = contentView.bounds
-        let removeButtonSize:CGFloat = imageView.frame.size.width * 0.2
+        let removeButtonSize:CGFloat = imageView.frame.size.width * removeButtonSizeRatioToImageView
         removeButton.frame = CGRect(x: imageView.frame.size.width - removeButtonSize, y: 0, width: removeButtonSize, height: removeButtonSize)
 //        imageView.bringSubviewToFront(removeButton)
     }

@@ -22,11 +22,6 @@ class ImageCollectionVCInDetailVC: UIViewController {
         fetchMemo()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-//        fetchMemo()
-    }
-    
     func fetchMemo() {
         guard let detailVC = self.parent as? MemoDetailViewController else {
             return
@@ -38,7 +33,6 @@ class ImageCollectionVCInDetailVC: UIViewController {
             }
             showEmptyStateViewOnDetailVC()
         }
-        
     }
     
     func showEmptyStateViewOnDetailVC() {

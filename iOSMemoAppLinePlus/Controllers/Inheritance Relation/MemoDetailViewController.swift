@@ -61,23 +61,17 @@ class MemoDetailViewController: CreateNewMemoViewController {
             switchingImageAddingViewEditMode()
             
         } else if sender.title == "Save" {
+            let success = saveEditedMemo()
+            guard success else {return}
             titleTextField.isUserInteractionEnabled = false
             memoTextView.isEditable = false
             sender.title = "Edit"
-            saveEditedMemo()
             switchingImageAddingViewDisplayMode()
         }
         
     }
     
     func switchingImageAddingViewEditMode() {
-//        if !isContinuousEdit {
-//            addImageViewContainer.subviews.first?.removeFromSuperview()
-//            addImageViewContainer.subviews[addImageViewContainer.subviews.endIndex - 1].removeFromSuperview()
-//        }
-//        isContinuousEdit = true
-        
-        
         if self.children.count > 0{
             self.children.forEach({ $0.willMove(toParent: nil); $0.view.removeFromSuperview(); $0.removeFromParent() })
         }
@@ -88,7 +82,6 @@ class MemoDetailViewController: CreateNewMemoViewController {
     }
     
     func switchingImageAddingViewDisplayMode() {
-//        addImageViewContainer.subviews.first?.removeFromSuperview()
         let collectionForDisplay = ImageCollectionVCInDetailVC()
         collectionForDisplay.memo = DataManager.shared.memoList.first
 
@@ -103,15 +96,16 @@ class MemoDetailViewController: CreateNewMemoViewController {
         }
     }
     
-    func saveEditedMemo() {
-        guard let title = titleTextField.text else {
+    func saveEditedMemo() -> Bool {
+        guard let title = titleTextField.text, title.count > 0 else {
             presentAlertOnMainThread(title: "제목이 없습니다.", message: "제목을 입력하세요")
-            return
+            titleTextField.becomeFirstResponder()
+            return false
         }
         guard let memo = memoTextView.text,
               memo.count > 0 else{
             presentAlertOnMainThread(title: "메모가 없습니다.", message: "메모를 입력하세요")
-            return
+            return false
         }
         
         if let imageForCoreData = collectionForEdit.imagesToAdd?.coreDataRepresentation() {
@@ -133,23 +127,15 @@ class MemoDetailViewController: CreateNewMemoViewController {
                 if let index = DataManager.shared.memoList.firstIndex(where: {$0.createdDate == memoDate}){
                     DataManager.shared.editMemo(index: index, title: title, memo: memo, images: nil)
                     DataManager.shared.fetchMemo()
-                    self.memo.title = title
-                    self.memo.content = memo
-                    self.memo.recentlyModifyDate = Date()
-                    self.memo.isEdited = true
-                    self.memo.images = nil
+                    self.memo = DataManager.shared.memoList.first
                 }
             } else {
                 DataManager.shared.editMemo(index: indexPath.row, title: title, memo: memo, images: nil)
                 DataManager.shared.fetchMemo()
-                self.memo.title = title
-                self.memo.content = memo
-                self.memo.recentlyModifyDate = Date()
-                self.memo.isEdited = true
-                self.memo.images = nil
+                self.memo = DataManager.shared.memoList.first
             }
         }
-        
+        return true
         
     }
     
