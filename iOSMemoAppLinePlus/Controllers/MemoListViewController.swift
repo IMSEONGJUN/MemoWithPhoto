@@ -75,6 +75,11 @@ class MemoListViewController: UIViewController {
     }
     
     @objc func didTapAddNewMemoButton() {
+        DispatchQueue.main.async {
+            if self.children.count > 0{
+                self.children.forEach({ $0.willMove(toParent: nil); $0.view.removeFromSuperview(); $0.removeFromParent() })
+            }
+        }
         let createNewMemoVC = UINavigationController(rootViewController: CreateNewMemoViewController())
         present(createNewMemoVC, animated: true)
     }
@@ -126,17 +131,26 @@ extension MemoListViewController: UITableViewDelegate {
             if let index = DataManager.shared.memoList.firstIndex(where: {$0.createdDate == memoDateForRemove}) {
                 let commit = DataManager.shared.memoList[index]
                 DataManager.shared.mainContext.delete(commit)
-                DataManager.shared.memoList.remove(at: index)
+//                DataManager.shared.memoList.remove(at: index)
+                activeArray.remove(at: activeArray.firstIndex(of: activeArray[index])!)
             }
         } else {
             let commit = activeArray[indexPath.row]
             DataManager.shared.mainContext.delete(commit)
-            activeArray.remove(at: indexPath.row)
+            DataManager.shared.fetchMemo()
+            DataManager.shared.saveContext()
+            
+            tableView.deleteRows(at: [indexPath], with: .left)
+            
+            
+//            let commit = activeArray[indexPath.row]
+//            DataManager.shared.mainContext.delete(commit)
+//            activeArray.remove(at: activeArray.firstIndex(of: activeArray[indexPath.row])!)
         }
-        DataManager.shared.saveContext()
-//        tableView.deleteRows(at: [indexPath], with: .left)
+//        DataManager.shared.saveContext()
         
-        DataManager.shared.fetchMemo()
+        
+//        DataManager.shared.fetchMemo()
         DispatchQueue.main.async {
             tableView.reloadData()
         }

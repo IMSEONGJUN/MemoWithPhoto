@@ -27,7 +27,7 @@ class EmptyStateView: UIViewController {
     var padding:CGFloat = 5
     
     override func viewDidLoad() {
-        view.backgroundColor = .white
+        view.backgroundColor = .lightGray
         configure()
         setConstraints()
         

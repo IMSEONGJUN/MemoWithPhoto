@@ -15,6 +15,9 @@ class CreateNewMemoViewController: UIViewController {
     var titleTextField = UITextField()
     var memoTextView = UITextView()
     let placeholderTextForTextView = "메모 내용을 입력하세요."
+    var isMemoEditing = true
+    let noticeLabel = UILabel()
+    
     var addedImages = [UIImage]()
     
     var addImageViewContainer = UIView()
@@ -39,25 +42,6 @@ class CreateNewMemoViewController: UIViewController {
         configureMemoTextView()
     }
     
-    private func configureTitleTextField() {
-        let titleTextFieldPaddingView = UIView(frame: CGRect(x: 0, y: 0, width: 6, height: titleTextField.frame.height))
-        titleTextField.leftView = titleTextFieldPaddingView
-        titleTextField.leftViewMode = .always
-        titleTextField.autocorrectionType = .no
-        titleTextField.keyboardType = .alphabet
-        titleTextField.placeholder = "제목"
-        titleTextField.becomeFirstResponder()
-        titleTextField.delegate = self
-    }
-    
-    func configureMemoTextView() {
-        memoTextView.text = self.placeholderTextForTextView
-        memoTextView.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
-        memoTextView.textColor = .lightGray
-        memoTextView.delegate = self
-    }
-    
-    
     func setupNavigationBar() {
         title = "새 메모"
         let cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(didTapCancelButton))
@@ -67,11 +51,35 @@ class CreateNewMemoViewController: UIViewController {
         navigationItem.rightBarButtonItem = saveButton
     }
     
+    private func configureTitleTextField() {
+        let titleTextFieldPaddingView = UIView(frame: CGRect(x: 0, y: 0, width: 6, height: titleTextField.frame.height))
+        titleTextField.leftView = titleTextFieldPaddingView
+        titleTextField.backgroundColor = MyColors.titleAndContents
+        titleTextField.leftViewMode = .always
+        titleTextField.autocorrectionType = .no
+        titleTextField.keyboardType = .alphabet
+        titleTextField.placeholder = "제목"
+        titleTextField.becomeFirstResponder()
+        titleTextField.delegate = self
+    }
+    
+    func configureMemoTextView() {
+        memoTextView.backgroundColor = MyColors.titleAndContents
+        memoTextView.text = self.placeholderTextForTextView
+        memoTextView.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
+        memoTextView.textColor = .lightGray
+        memoTextView.delegate = self
+    }
+    
+    
+    
+    
     private func setConstraints() {
         let topInset:CGFloat = topbarHeight
         let bottomInset:CGFloat = 10
         let sideInset:CGFloat = 10
-        let padding:CGFloat = 12
+        let titleAndMemoPadding:CGFloat = 12
+        let memoAndImagePadding:CGFloat = 50
         
         
         titleTextField.snp.makeConstraints {
@@ -82,13 +90,13 @@ class CreateNewMemoViewController: UIViewController {
         
         memoTextView.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(sideInset)
-            $0.top.equalTo(titleTextField.snp.bottom).offset(padding)
-            $0.height.equalToSuperview().multipliedBy(0.45)
+            $0.top.equalTo(titleTextField.snp.bottom).offset(titleAndMemoPadding)
+            $0.height.equalToSuperview().multipliedBy(0.35)
         }
         
         addImageViewContainer.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(sideInset)
-            $0.top.equalTo(memoTextView.snp.bottom).offset(padding)
+            $0.top.equalTo(memoTextView.snp.bottom).offset(memoAndImagePadding)
             $0.bottom.equalToSuperview().offset(-bottomInset)
         }
     }
