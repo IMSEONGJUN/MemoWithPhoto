@@ -26,9 +26,10 @@ class MemoDetailViewController: CreateNewMemoViewController {
     
     override func addChildViewController() {
         let collectionForDisplay = ImageCollectionVCInDetailVC()
-        collectionForDisplay.memo = self.memo
+//        collectionForDisplay.memo = self.memo
         add(childVC: collectionForDisplay, to: addImageViewContainer)
     }
+    
     override func setupNavigationBar() {
         let backButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(didTapBackButton))
         let editButton = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(didTapEditButton(_:)))
@@ -59,7 +60,7 @@ class MemoDetailViewController: CreateNewMemoViewController {
             sender.title = "Save"
             switchingImageAddingViewEditMode()
             
-        } else {
+        } else if sender.title == "Save" {
             titleTextField.isUserInteractionEnabled = false
             memoTextView.isEditable = false
             sender.title = "Edit"
@@ -96,6 +97,9 @@ class MemoDetailViewController: CreateNewMemoViewController {
         }
         DispatchQueue.main.async {
             self.add(childVC: collectionForDisplay, to: self.addImageViewContainer)
+            if self.memo.images?.imageArray() == nil{
+                collectionForDisplay.showEmptyStateViewOnDetailVC()
+            }
         }
     }
     
@@ -112,24 +116,16 @@ class MemoDetailViewController: CreateNewMemoViewController {
         
         if let imageForCoreData = collectionForEdit.imagesToAdd?.coreDataRepresentation() {
             if isFilteredBefore {
-                let memoDate = DataManager.shared.filteredMemoList[indexPath.row].createdDate
-                if let index = DataManager.shared.memoList.firstIndex(where: {$0.createdDate == memoDate}){
+                let memoDateInfilteredList = DataManager.shared.filteredMemoList[indexPath.row].createdDate
+                if let index = DataManager.shared.memoList.firstIndex(where: {$0.createdDate == memoDateInfilteredList}){
                     DataManager.shared.editMemo(index: index, title: title, memo: memo, images: imageForCoreData)
                     DataManager.shared.fetchMemo()
-                    self.memo.title = title
-                    self.memo.content = memo
-                    self.memo.recentlyModifyDate = Date()
-                    self.memo.isEdited = true
-                    self.memo.images = imageForCoreData
+                    self.memo = DataManager.shared.memoList.first
                 }
             } else {
                 DataManager.shared.editMemo(index: indexPath.row, title: title, memo: memo, images: imageForCoreData)
                 DataManager.shared.fetchMemo()
-                self.memo.title = title
-                self.memo.content = memo
-                self.memo.recentlyModifyDate = Date()
-                self.memo.isEdited = true
-                self.memo.images = imageForCoreData
+                self.memo = DataManager.shared.memoList.first
             }
         } else {
             if isFilteredBefore {

@@ -11,6 +11,7 @@ import SnapKit
 
 class CreateNewMemoViewController: UIViewController {
        
+//    var memo: Memo!
     var titleTextField = UITextField()
     var memoTextView = UITextView()
     let placeholderTextForTextView = "메모 내용을 입력하세요."

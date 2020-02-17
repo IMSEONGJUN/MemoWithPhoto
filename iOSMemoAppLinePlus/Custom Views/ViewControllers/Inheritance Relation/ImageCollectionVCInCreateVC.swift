@@ -41,6 +41,7 @@ class ImageCollectionVCInCreateVC: ImageCollectionVCInDetailVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
+        setupLongPressGestureRecognizer()
  
     }
     
@@ -73,10 +74,10 @@ class ImageCollectionVCInCreateVC: ImageCollectionVCInDetailVC {
         }
     }
     
-    @objc func didTapImageAddButton() {
-        print("tap")
-        presentActionSheetToSelectImageSource()
-        print("tap")
+    func setupLongPressGestureRecognizer() {
+        let gesture = UILongPressGestureRecognizer(target: self, action: #selector(reorderCollectionViewItem(_:)))
+        gesture.minimumPressDuration = 0.5
+        collectionView.addGestureRecognizer(gesture)
     }
     
     func presentActionSheetToSelectImageSource() {
@@ -104,7 +105,31 @@ class ImageCollectionVCInCreateVC: ImageCollectionVCInDetailVC {
         
     }
     
-    // MARK: - Overridden UICollectionView DataSource
+    @objc func didTapImageAddButton() {
+        presentActionSheetToSelectImageSource()
+    }
+    
+    @objc private func reorderCollectionViewItem(_ sender: UILongPressGestureRecognizer) {
+        let location = sender.location(in: collectionView)
+        print(location)
+        switch sender.state {
+        case .began:
+            guard let indexPath = collectionView.indexPathForItem(at: location) else {break}
+            print(indexPath)
+            collectionView.beginInteractiveMovementForItem(at: indexPath)
+        case .changed:
+            collectionView.updateInteractiveMovementTargetPosition(location)
+        case .cancelled:
+            collectionView.cancelInteractiveMovement()
+        case .ended:
+            collectionView.endInteractiveMovement()
+        default:
+            break
+        }
+    }
+    
+    
+    // MARK: - Overridden and Just UICollectionView DataSource Method
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return imagesToAdd?.count ?? 0
@@ -118,10 +143,20 @@ class ImageCollectionVCInCreateVC: ImageCollectionVCInDetailVC {
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        guard sourceIndexPath != destinationIndexPath else {return}
+        let source = sourceIndexPath.item
+        let destination = destinationIndexPath.item
+        
+        let element = imagesToAdd.remove(at: source)
+        imagesToAdd.insert(element, at: destination)
+    }
+    
+    // MARK: - Overridden UICollectionView Delegate Method
+    
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("select in createVC")
     }
-    
 }
 
 
@@ -158,16 +193,6 @@ extension ImageCollectionVCInCreateVC: UIImagePickerControllerDelegate, UINaviga
     }
 }
 
-//extension ImageCollectionVCInCreateVC: EmptyStateViewDelegate {
-//    func presentImageSourceSelection(view: EmptyStateView) {
-//        guard let superView = view.parent as? CreateNewMemoViewController else {return}
-//        superView.addImageViewContainer.bringSubviewToFront(superView.imageCollectionVC.view)
-//        presentActionSheetToSelectImageSource()
-//    }
-//
-//
-//}
-
 extension ImageCollectionVCInCreateVC: ImageCellForCollectionDelegate {
     
     func didTapRemoveButtonOnImage(in cell: ImageCellForCollection) {
@@ -178,9 +203,7 @@ extension ImageCollectionVCInCreateVC: ImageCellForCollectionDelegate {
             self.collectionView.deleteItems(at: [indexPath])
             self.checkImagesArrayEmpty()
             self.collectionView.reloadData()
-            
         }, completion: nil)
     }
-    
     
 }

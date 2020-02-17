@@ -19,14 +19,7 @@ class MemoCell: UITableViewCell {
     
     var memoData: Memo! {
         didSet {
-            if let retrievedImageArray = self.memoData.images?.imageArray(){
-                self.thumnailImageView.image = retrievedImageArray.first
-            } else {
-                self.thumnailImageView.image = PlaceHolderImages.addedImage
-            }
-            self.titleLabel.text = self.memoData.title
-            self.somePartsOfMemoLabel.text = self.memoData.content
-            self.dateLabel.text = formatter.string(for: self.memoData.recentlyModifyDate)
+            reConfigureCell()
         }
     }
     
@@ -38,6 +31,17 @@ class MemoCell: UITableViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func reConfigureCell() {
+        if let retrievedImageArray = self.memoData.images?.imageArray(), retrievedImageArray.count != 0{
+            self.thumnailImageView.image = retrievedImageArray.first
+        } else {
+            self.thumnailImageView.image = PlaceHolderImages.addedImage
+        }
+        self.titleLabel.text = self.memoData.title
+        self.somePartsOfMemoLabel.text = self.memoData.content
+        self.dateLabel.text = formatter.string(for: self.memoData.recentlyModifyDate)
     }
     
     private func setupUI() {

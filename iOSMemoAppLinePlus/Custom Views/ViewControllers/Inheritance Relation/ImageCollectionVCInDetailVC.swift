@@ -36,10 +36,14 @@ class ImageCollectionVCInDetailVC: UIViewController {
             if self.children.count > 0{
                 self.children.forEach({ $0.willMove(toParent: nil); $0.view.removeFromSuperview(); $0.removeFromParent() })
             }
-            showEmptyStateView(with: "등록된 이미지가 없습니다", in: self.view, imageName: EmptyStateViewImageName.picture,
-                               superViewType: .detail)
+            showEmptyStateViewOnDetailVC()
         }
         
+    }
+    
+    func showEmptyStateViewOnDetailVC() {
+        showEmptyStateView(with: "등록된 이미지가 없습니다", in: self.view, imageName: EmptyStateViewImageName.picture,
+        superViewType: .detail)
     }
     
     private func configureCollectionView() {
