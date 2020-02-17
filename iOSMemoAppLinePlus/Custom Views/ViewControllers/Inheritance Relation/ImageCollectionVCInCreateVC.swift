@@ -112,9 +112,14 @@ class ImageCollectionVCInCreateVC: ImageCollectionVCInDetailVC {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImageCellForCollection.identifier, for: indexPath) as! ImageCellForCollection
+        cell.delegate = self
         guard let image = imagesToAdd?[indexPath.item] else {return cell}
         cell.imageView.image = image
         return cell
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("select in createVC")
     }
     
 }
@@ -162,3 +167,20 @@ extension ImageCollectionVCInCreateVC: UIImagePickerControllerDelegate, UINaviga
 //
 //
 //}
+
+extension ImageCollectionVCInCreateVC: ImageCellForCollectionDelegate {
+    
+    func didTapRemoveButtonOnImage(in cell: ImageCellForCollection) {
+        print("cell delegate")
+        guard let indexPath = collectionView.indexPath(for: cell) else { return }
+        collectionView.performBatchUpdates({
+            self.imagesToAdd.remove(at: indexPath.row)
+            self.collectionView.deleteItems(at: [indexPath])
+            self.checkImagesArrayEmpty()
+            self.collectionView.reloadData()
+            
+        }, completion: nil)
+    }
+    
+    
+}

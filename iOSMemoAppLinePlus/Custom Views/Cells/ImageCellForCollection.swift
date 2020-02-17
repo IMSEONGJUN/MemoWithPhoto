@@ -20,7 +20,8 @@ class ImageCellForCollection: UICollectionViewCell {
     var isImageFromURL = false
     let imageView = UIImageView()
     let removeButton = UIButton()
-    let buttonContainer = UIView()
+    
+    weak var delegate: ImageCellForCollectionDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -35,12 +36,19 @@ class ImageCellForCollection: UICollectionViewCell {
         imageView.contentMode = .scaleAspectFill
         contentView.addSubview(imageView)
         imageView.clipsToBounds = true
-        imageView.addSubview(buttonContainer)
-        buttonContainer.addSubview(removeButton)
-        buttonContainer.backgroundColor = .green
-        buttonContainer.alpha = 0.5
-        removeButton.setImage(UIImage(named: "remove"), for: .normal)
         imageView.addSubview(removeButton)
+        imageView.isUserInteractionEnabled = true
+        
+        
+        removeButton.setImage(UIImage(named: "remove"), for: .normal)
+        removeButton.addTarget(self, action: #selector(didTapRemoveButton), for: .touchUpInside)
+        removeButton.isEnabled = true
+        
+    }
+    
+    @objc private func didTapRemoveButton() {
+        print("removeButton Tap!!")
+        delegate?.didTapRemoveButtonOnImage(in: self)
     }
     
     override func layoutSubviews() {
@@ -48,8 +56,7 @@ class ImageCellForCollection: UICollectionViewCell {
         contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
         imageView.frame = contentView.bounds
         let removeButtonSize:CGFloat = imageView.frame.size.width * 0.2
-        buttonContainer.frame = CGRect(x: imageView.frame.size.width - removeButtonSize, y: 0, width: removeButtonSize, height: removeButtonSize)
-        removeButton.frame = buttonContainer.frame
-        imageView.bringSubviewToFront(removeButton)
+        removeButton.frame = CGRect(x: imageView.frame.size.width - removeButtonSize, y: 0, width: removeButtonSize, height: removeButtonSize)
+//        imageView.bringSubviewToFront(removeButton)
     }
 }

@@ -32,7 +32,7 @@ class ImageCollectionVCInDetailVC: UIViewController {
             return
         }
         self.memo = detailVC.memo
-        if self.memo.images?.isEmpty ?? true {
+        if self.memo.images?.imageArray()?.isEmpty ?? true {
             if self.children.count > 0{
                 self.children.forEach({ $0.willMove(toParent: nil); $0.view.removeFromSuperview(); $0.removeFromParent() })
             }
@@ -53,7 +53,9 @@ class ImageCollectionVCInDetailVC: UIViewController {
         setConstraints()
         
         collectionView.dataSource = self
+        collectionView.delegate = self
         collectionView.backgroundColor = .white
+        collectionView.allowsSelection = true
         collectionView.register(ImageCellForCollection.self, forCellWithReuseIdentifier: ImageCellForCollection.identifier)
         
     }
@@ -90,11 +92,16 @@ extension ImageCollectionVCInDetailVC: UICollectionViewDataSource {
             return cell
         }
         cell.imageView.image = images[indexPath.item]
-        cell.buttonContainer.isHidden = true
         cell.removeButton.isHidden = true
         
         return cell
     }
     
     
+}
+
+extension ImageCollectionVCInDetailVC: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+           print("didselect in detail")
+       }
 }

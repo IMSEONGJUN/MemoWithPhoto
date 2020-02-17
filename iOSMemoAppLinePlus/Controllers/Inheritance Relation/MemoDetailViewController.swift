@@ -75,7 +75,6 @@ class MemoDetailViewController: CreateNewMemoViewController {
 //            addImageViewContainer.subviews[addImageViewContainer.subviews.endIndex - 1].removeFromSuperview()
 //        }
 //        isContinuousEdit = true
-        addImageViewContainer.backgroundColor = .white
         
         
         if self.children.count > 0{
@@ -91,6 +90,7 @@ class MemoDetailViewController: CreateNewMemoViewController {
 //        addImageViewContainer.subviews.first?.removeFromSuperview()
         let collectionForDisplay = ImageCollectionVCInDetailVC()
         collectionForDisplay.memo = DataManager.shared.memoList.first
+
         if self.children.count > 0{
             self.children.forEach({ $0.willMove(toParent: nil); $0.view.removeFromSuperview(); $0.removeFromParent() })
         }
@@ -116,10 +116,20 @@ class MemoDetailViewController: CreateNewMemoViewController {
                 if let index = DataManager.shared.memoList.firstIndex(where: {$0.createdDate == memoDate}){
                     DataManager.shared.editMemo(index: index, title: title, memo: memo, images: imageForCoreData)
                     DataManager.shared.fetchMemo()
+                    self.memo.title = title
+                    self.memo.content = memo
+                    self.memo.recentlyModifyDate = Date()
+                    self.memo.isEdited = true
+                    self.memo.images = imageForCoreData
                 }
             } else {
                 DataManager.shared.editMemo(index: indexPath.row, title: title, memo: memo, images: imageForCoreData)
                 DataManager.shared.fetchMemo()
+                self.memo.title = title
+                self.memo.content = memo
+                self.memo.recentlyModifyDate = Date()
+                self.memo.isEdited = true
+                self.memo.images = imageForCoreData
             }
         } else {
             if isFilteredBefore {
@@ -127,10 +137,20 @@ class MemoDetailViewController: CreateNewMemoViewController {
                 if let index = DataManager.shared.memoList.firstIndex(where: {$0.createdDate == memoDate}){
                     DataManager.shared.editMemo(index: index, title: title, memo: memo, images: nil)
                     DataManager.shared.fetchMemo()
+                    self.memo.title = title
+                    self.memo.content = memo
+                    self.memo.recentlyModifyDate = Date()
+                    self.memo.isEdited = true
+                    self.memo.images = nil
                 }
             } else {
                 DataManager.shared.editMemo(index: indexPath.row, title: title, memo: memo, images: nil)
                 DataManager.shared.fetchMemo()
+                self.memo.title = title
+                self.memo.content = memo
+                self.memo.recentlyModifyDate = Date()
+                self.memo.isEdited = true
+                self.memo.images = nil
             }
         }
         
