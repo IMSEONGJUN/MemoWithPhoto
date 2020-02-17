@@ -23,8 +23,12 @@ class CreateNewMemoViewController: UIViewController {
         setupViews()
         setupNavigationBar()
         setConstraints()
-        add(childVC: imageCollectionVC, to: addImageViewContainer)
+        addChildViewController()
         createDismissKeyboardTapGesture()
+    }
+    
+    func addChildViewController() {
+        add(childVC: imageCollectionVC, to: addImageViewContainer)
     }
     
     private func setupViews() {

@@ -21,10 +21,16 @@ class ImageCollectionVCInCreateVC: ImageCollectionVCInDetailVC {
     var imagesToAdd: [UIImage]! {
         didSet{
             if imagesToAdd?.isEmpty ?? true {
+                if self.children.count > 0{
+                    self.children.forEach({ $0.willMove(toParent: nil); $0.view.removeFromSuperview(); $0.removeFromParent() })
+                }
                 DispatchQueue.main.async {
                     self.showEmptyStateView(with: "사진을 등록하실 수 있습니다.", in: self.view, imageName: EmptyStateViewImageName.picture, superViewType: .createNew)
                 }
             } else {
+                if self.children.count > 0{
+                    self.children.forEach({ $0.willMove(toParent: nil); $0.view.removeFromSuperview(); $0.removeFromParent() })
+                }
                 guard let createVC = self.parent as? CreateNewMemoViewController else {return}
                 guard let images = self.imagesToAdd else {return}
                 createVC.addedImages = images
@@ -57,6 +63,9 @@ class ImageCollectionVCInCreateVC: ImageCollectionVCInDetailVC {
     
     private func checkImagesArrayEmpty() {
         if imagesToAdd?.isEmpty ?? true {
+            if self.children.count > 0{
+                self.children.forEach({ $0.willMove(toParent: nil); $0.view.removeFromSuperview(); $0.removeFromParent() })
+            }
             DispatchQueue.main.async {
                 self.showEmptyStateView(with: "사진을 등록하실 수 있습니다.", in: self.view, imageName: EmptyStateViewImageName.picture,
                 superViewType: .createNew)

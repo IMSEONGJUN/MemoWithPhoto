@@ -14,20 +14,21 @@ class MemoDetailViewController: CreateNewMemoViewController {
     var indexPath: IndexPath!
     var isFilteredBefore = false
     let collectionForEdit = ImageCollectionVCInCreateVC()
-    var isContinuousEdit = false
+//    var isContinuousEdit = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let collectionForDisplay = ImageCollectionVCInDetailVC()
-        collectionForDisplay.memo = self.memo
-        add(childVC: collectionForDisplay, to: addImageViewContainer)
-        
         addImageViewContainer.backgroundColor = .white
         configure()
-        setupNavigationBar()
+//        setupNavigationBar()
         setTextEditingDisabled()
     }
     
+    override func addChildViewController() {
+        let collectionForDisplay = ImageCollectionVCInDetailVC()
+        collectionForDisplay.memo = self.memo
+        add(childVC: collectionForDisplay, to: addImageViewContainer)
+    }
     override func setupNavigationBar() {
         let backButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(didTapBackButton))
         let editButton = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(didTapEditButton(_:)))
@@ -69,13 +70,17 @@ class MemoDetailViewController: CreateNewMemoViewController {
     }
     
     func switchingImageAddingViewEditMode() {
-        if !isContinuousEdit {
-            addImageViewContainer.subviews.first?.removeFromSuperview()
-            addImageViewContainer.subviews[addImageViewContainer.subviews.endIndex - 1].removeFromSuperview()
-        }
-        isContinuousEdit = true
+//        if !isContinuousEdit {
+//            addImageViewContainer.subviews.first?.removeFromSuperview()
+//            addImageViewContainer.subviews[addImageViewContainer.subviews.endIndex - 1].removeFromSuperview()
+//        }
+//        isContinuousEdit = true
         addImageViewContainer.backgroundColor = .white
         
+        
+        if self.children.count > 0{
+            self.children.forEach({ $0.willMove(toParent: nil); $0.view.removeFromSuperview(); $0.removeFromParent() })
+        }
         collectionForEdit.imagesToAdd = memo.images?.imageArray()
         DispatchQueue.main.async {
             self.add(childVC: self.collectionForEdit, to: self.addImageViewContainer)
@@ -83,9 +88,12 @@ class MemoDetailViewController: CreateNewMemoViewController {
     }
     
     func switchingImageAddingViewDisplayMode() {
-        addImageViewContainer.subviews.first?.removeFromSuperview()
+//        addImageViewContainer.subviews.first?.removeFromSuperview()
         let collectionForDisplay = ImageCollectionVCInDetailVC()
         collectionForDisplay.memo = DataManager.shared.memoList.first
+        if self.children.count > 0{
+            self.children.forEach({ $0.willMove(toParent: nil); $0.view.removeFromSuperview(); $0.removeFromParent() })
+        }
         DispatchQueue.main.async {
             self.add(childVC: collectionForDisplay, to: self.addImageViewContainer)
         }

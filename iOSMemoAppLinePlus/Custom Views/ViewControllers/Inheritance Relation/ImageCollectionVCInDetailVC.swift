@@ -24,7 +24,7 @@ class ImageCollectionVCInDetailVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        fetchMemo()
+//        fetchMemo()
     }
     
     func fetchMemo() {
@@ -33,6 +33,9 @@ class ImageCollectionVCInDetailVC: UIViewController {
         }
         self.memo = detailVC.memo
         if self.memo.images?.isEmpty ?? true {
+            if self.children.count > 0{
+                self.children.forEach({ $0.willMove(toParent: nil); $0.view.removeFromSuperview(); $0.removeFromParent() })
+            }
             showEmptyStateView(with: "등록된 이미지가 없습니다", in: self.view, imageName: EmptyStateViewImageName.picture,
                                superViewType: .detail)
         }
