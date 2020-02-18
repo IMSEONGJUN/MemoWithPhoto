@@ -34,8 +34,27 @@ class MemoCell: UITableViewCell {
     }
     
     func reConfigureCell() {
-        if let retrievedImageArray = self.memoData.images?.imageArray(), retrievedImageArray.count != 0{
-            self.thumnailImageView.image = retrievedImageArray.first
+        if let retrievedImageArray = self.memoData.images?.imageArray(), retrievedImageArray.count != 0 {
+            
+            switch retrievedImageArray.first {
+            case .image(let val):
+                self.thumnailImageView.image = val
+            case .urlString(let val):
+                self.thumnailImageView.image = PlaceHolderImages.loading
+                NetworkManager.shared.downLoadImage(from: val) { (image) in
+                    if image == nil {
+                        DispatchQueue.main.async {
+                            self.thumnailImageView.image = PlaceHolderImages.noImage
+                        }
+                    } else {
+                        DispatchQueue.main.async {
+                            self.thumnailImageView.image = image
+                        }
+                    }
+                }
+            default:
+                break
+            }
         } else {
             self.thumnailImageView.image = PlaceHolderImages.addedImage
         }

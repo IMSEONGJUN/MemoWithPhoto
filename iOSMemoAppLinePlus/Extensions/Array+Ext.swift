@@ -8,18 +8,27 @@
 
 import UIKit
 
-extension Array where Element: UIImage {
+extension Array where Element == MyImageTypes {
     // Given an array of UIImages return a Data representation of the array suitable for storing in core data as binary data that allows external storage
     func coreDataRepresentation() -> Data? {
         let CDataArray = NSMutableArray()
 
         for img in self {
-            guard let imageRepresentation = img.jpegData(compressionQuality: 0.5) else {
-                print("Unable to represent image as JPEG")
-                return nil
+            switch img {
+            case .image(let val):
+                guard let imageRepresentation = val.jpegData(compressionQuality: 0.5) else {
+                    print("Unable to represent image as JPEG")
+                    return nil
+                }
+                let nsdata : NSData = NSData(data: imageRepresentation)
+                CDataArray.add(nsdata)
+            
+            case .urlString(let val):
+                let data = Data(val.utf8)
+                let nsdata : NSData = NSData(data: data)
+                CDataArray.add(nsdata)
+                
             }
-            let data : NSData = NSData(data: imageRepresentation)
-            CDataArray.add(data)
         }
 
         return NSKeyedArchiver.archivedData(withRootObject: CDataArray)
@@ -28,13 +37,26 @@ extension Array where Element: UIImage {
 
 extension Data {
 
-    func imageArray() -> [UIImage]? {
+    func imageArray() -> [MyImageTypes]? {
+        var myImageArray = [MyImageTypes]()
+        
         if let mySavedData = NSKeyedUnarchiver.unarchiveObject(with: self) as? NSArray {
-            // TODO: Use regular map and return nil if something can't be turned into a UIImage
-            let imgArray = mySavedData.compactMap({
-                return UIImage(data: $0 as! Data)
-            })
-            return imgArray
+            for data in mySavedData {
+                if let image = UIImage(data: data as! Data) {
+                    let type = MyImageTypes.image(image)
+                    myImageArray.append(type)
+                } else if let string = String(data: data as! Data, encoding: .utf8) {
+                    let type = MyImageTypes.urlString(string)
+                    myImageArray.append(type)
+                }
+            }
+            
+            
+//            let imgArray = mySavedData.compactMap({
+//                return UIImage(data: $0 as! Data)
+//            })
+//            return imgArray
+            return myImageArray
         }
         else {
             print("Unable to convert data to ImageArray")

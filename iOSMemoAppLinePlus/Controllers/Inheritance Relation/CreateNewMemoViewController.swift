@@ -17,7 +17,7 @@ class CreateNewMemoViewController: UIViewController {
     var isMemoEditing = true
     let noticeLabel = UILabel()
     
-    var addedImages = [UIImage]()
+    var addedImages = [MyImageTypes]()
     
     var addImageViewContainer = UIView()
     let imageCollectionVC = ImageCollectionVCInCreateVC()

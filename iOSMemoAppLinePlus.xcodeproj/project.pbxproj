@@ -34,6 +34,8 @@
 		CE49680F23F7CD1F0056E444 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE49680E23F7CD1F0056E444 /* UIViewController+Ext.swift */; };
 		CE49681223F7CDA50056E444 /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE49681123F7CDA50056E444 /* EmptyStateView.swift */; };
 		CE8CF70223F85D4A00B5DC67 /* NotiLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8CF70123F85D4A00B5DC67 /* NotiLabel.swift */; };
+		CEF0DE3523FBE8F700926400 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF0DE3423FBE8F700926400 /* NetworkManager.swift */; };
+		CEF0DE3723FC2BA700926400 /* LoadImageFromURLViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF0DE3623FC2BA700926400 /* LoadImageFromURLViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +70,8 @@
 		CE49680E23F7CD1F0056E444 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
 		CE49681123F7CDA50056E444 /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
 		CE8CF70123F85D4A00B5DC67 /* NotiLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotiLabel.swift; sourceTree = "<group>"; };
+		CEF0DE3423FBE8F700926400 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		CEF0DE3623FC2BA700926400 /* LoadImageFromURLViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadImageFromURLViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,6 +163,7 @@
 			isa = PBXGroup;
 			children = (
 				CE4967DE23F471C00056E444 /* MemoListViewController.swift */,
+				CEF0DE3623FC2BA700926400 /* LoadImageFromURLViewController.swift */,
 				CE0BFA2223F98E5300AABB62 /* Inheritance Relation */,
 			);
 			path = Controllers;
@@ -198,6 +203,7 @@
 			isa = PBXGroup;
 			children = (
 				CE4967EE23F486330056E444 /* DataManager.swift */,
+				CEF0DE3423FBE8F700926400 /* NetworkManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -382,6 +388,7 @@
 				CE4967C923F46FF50056E444 /* SceneDelegate.swift in Sources */,
 				CE49680A23F6AB4E0056E444 /* ImageCellForCollection.swift in Sources */,
 				CE49681223F7CDA50056E444 /* EmptyStateView.swift in Sources */,
+				CEF0DE3523FBE8F700926400 /* NetworkManager.swift in Sources */,
 				CE49680C23F6EC770056E444 /* ImageCollectionVCInCreateVC.swift in Sources */,
 				CE4967F623F5449B0056E444 /* AlertViewController.swift in Sources */,
 				CE49680023F546950056E444 /* BodyLabel.swift in Sources */,
@@ -393,6 +400,7 @@
 				CE49680823F6A03A0056E444 /* Array+Ext.swift in Sources */,
 				CE4967FE23F5465C0056E444 /* TitleLabel.swift in Sources */,
 				CE49680223F547EB0056E444 /* CustomButton.swift in Sources */,
+				CEF0DE3723FC2BA700926400 /* LoadImageFromURLViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

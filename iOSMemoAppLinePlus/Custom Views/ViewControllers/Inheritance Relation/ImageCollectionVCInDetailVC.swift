@@ -89,7 +89,16 @@ extension ImageCollectionVCInDetailVC: UICollectionViewDataSource {
         guard let images = memo.images?.imageArray() else {
             return cell
         }
-        cell.imageView.image = images[indexPath.item]
+        switch images[indexPath.item] {
+        case .image(let val):
+            cell.imageView.image = val
+        case .urlString(let val):
+            NetworkManager.shared.downLoadImage(from: val) { (image) in
+                if image == nil {cell.imageView.image = PlaceHolderImages.noImage}
+                else {cell.imageView.image = image}
+            }
+        }
+        
         cell.removeButton.isHidden = true
         
         return cell

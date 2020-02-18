@@ -17,6 +17,8 @@ let formatter: DateFormatter = {
 
 enum PlaceHolderImages {
     static let addedImage = UIImage(named: "photo")
+    static let noImage = UIImage(named: "noimage")
+    static let loading = UIImage(named: "loading")
 }
 
 enum MyColors {
@@ -34,6 +36,12 @@ enum VeryBottomViewTypeOfEmptyStateView {
     case detail
     case createNew
 }
+
+enum MyImageTypes {
+    case image(UIImage)
+    case urlString(String)
+}
+
 
 enum MainThumnailImageType : Int {
     case imageType = 0

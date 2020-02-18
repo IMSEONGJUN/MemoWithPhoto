@@ -18,7 +18,7 @@ class ImageCollectionVCInCreateVC: ImageCollectionVCInDetailVC {
     
     let addImagesButton = CustomButton(backgroundColor: MyColors.KeyColor, title: "이미지 추가하기")
     
-    var imagesToAdd: [UIImage]! {
+    var imagesToAdd: [MyImageTypes]! {
         didSet{
             if imagesToAdd?.isEmpty ?? true {
                 if self.children.count > 0{
@@ -42,7 +42,7 @@ class ImageCollectionVCInCreateVC: ImageCollectionVCInDetailVC {
         super.viewDidLoad()
         configure()
         setupLongPressGestureRecognizer()
- 
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -71,6 +71,8 @@ class ImageCollectionVCInCreateVC: ImageCollectionVCInDetailVC {
                 self.showEmptyStateView(with: "사진을 등록하실 수 있습니다.", in: self.view, imageName: EmptyStateViewImageName.picture,
                 superViewType: .createNew)
             }
+        } else {
+            collectionView.reloadData()
         }
     }
     
@@ -93,12 +95,19 @@ class ImageCollectionVCInCreateVC: ImageCollectionVCInDetailVC {
         }
         let album = UIAlertAction(title: "앨범에서 선택", style: .default) { (_) in
             self.imagePicker.sourceType = .savedPhotosAlbum
-            
             self.present(self.imagePicker, animated: true)
         }
+        let url = UIAlertAction(title: "URL로 가져오기", style: .default) { (_) in
+            let loadImageVC = LoadImageFromURLViewController()
+            loadImageVC.delegate = self
+            loadImageVC.modalPresentationStyle = .fullScreen
+            self.present(loadImageVC, animated: true)
+        }
+        
         let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
         alert.addAction(takePhoto)
         alert.addAction(album)
+        alert.addAction(url)
         alert.addAction(cancel)
         self.present(alert, animated: true)
         
@@ -138,7 +147,24 @@ class ImageCollectionVCInCreateVC: ImageCollectionVCInDetailVC {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImageCellForCollection.identifier, for: indexPath) as! ImageCellForCollection
         cell.delegate = self
         guard let image = imagesToAdd?[indexPath.item] else {return cell}
-        cell.imageView.image = image
+        
+        switch image {
+        case .image(let val):
+            cell.imageView.image = val
+        case .urlString(let val):
+            NetworkManager.shared.downLoadImage(from: val) { (image) in
+                if image == nil {
+                    DispatchQueue.main.async {
+                        cell.imageView.image = PlaceHolderImages.noImage
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        cell.imageView.image = image
+                    }
+                }
+            }
+        }
+        
         return cell
     }
     
@@ -170,23 +196,19 @@ extension ImageCollectionVCInCreateVC: UIImagePickerControllerDelegate, UINaviga
             let originalImage = info[.originalImage] as! UIImage
             let editedImage = info[.editedImage] as? UIImage
             let selectedImage = editedImage ?? originalImage
-            if self.imagesToAdd == nil {
-                let imageArr = [selectedImage]
-                self.imagesToAdd = imageArr
-                DispatchQueue.main.async {
-                    self.collectionView.reloadData()
-                }
-                
+            if imagesToAdd == nil {
+                let initialArray = [MyImageTypes.image(selectedImage)]
+                self.imagesToAdd = initialArray
             } else {
-                self.imagesToAdd.append(selectedImage)
+                self.imagesToAdd.append(MyImageTypes.image(selectedImage))
                 DispatchQueue.main.async {
                     self.collectionView.reloadData()
                 }
             }
             
-            if picker.sourceType == .camera {
-                UIImageWriteToSavedPhotosAlbum(selectedImage, nil, nil, nil)
-            }
+//            if picker.sourceType == .camera {
+//                UIImageWriteToSavedPhotosAlbum(selectedImage, nil, nil, nil)
+//            }
         }
         picker.dismiss(animated: true)
     }
@@ -203,5 +225,14 @@ extension ImageCollectionVCInCreateVC: ImageCellForCollectionDelegate {
             self.collectionView.reloadData()
         }, completion: nil)
     }
+    
+}
+
+extension ImageCollectionVCInCreateVC: LoadImageFromURLViewControllerDelegate {
+    func passUrlString(urlString: MyImageTypes) {
+        print("pass delegate")
+        self.imagesToAdd.append(urlString)
+    }
+    
     
 }
