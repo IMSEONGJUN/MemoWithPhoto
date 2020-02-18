@@ -142,32 +142,17 @@ extension MemoListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         guard editingStyle == .delete else {return}
-        let activeArray = isSearching ? DataManager.shared.filteredMemoList : DataManager.shared.memoList
-//        if isSearching {
-//            let memoDateForRemove = DataManager.shared.filteredMemoList[indexPath.row].createdDate
-//            if let index = DataManager.shared.memoList.firstIndex(where: {$0.createdDate == memoDateForRemove}) {
-//                let commit = DataManager.shared.memoList[index]
-//                DataManager.shared.mainContext.delete(commit)
-////                DataManager.shared.memoList.remove(at: index)
-//                activeArray.remove(at: activeArray.firstIndex(of: activeArray[index])!)
-//            }
-//        } else {
-            let commit = activeArray[indexPath.row]
-            DataManager.shared.mainContext.delete(commit)
-            DataManager.shared.fetchMemo()
-            DataManager.shared.saveContext()
-            
-            tableView.deleteRows(at: [indexPath], with: .left)
-            
-            
-//            let commit = activeArray[indexPath.row]
-//            DataManager.shared.mainContext.delete(commit)
-//            activeArray.remove(at: activeArray.firstIndex(of: activeArray[indexPath.row])!)
-//        }
-//        DataManager.shared.saveContext()
+        var activeArray = isSearching ? DataManager.shared.filteredMemoList : DataManager.shared.memoList
+        let commit = activeArray[indexPath.row]
+        activeArray.remove(at: indexPath.row)
+        DataManager.shared.mainContext.delete(commit)
         
+        DataManager.shared.fetchMemo()
+        DataManager.shared.saveContext()
+        tableView.deleteRows(at: [indexPath], with: .left)
+        self.isSearching = false
         
-//        DataManager.shared.fetchMemo()
+            
         DispatchQueue.main.async {
             tableView.reloadData()
         }
@@ -197,8 +182,9 @@ extension MemoListViewController: UISearchBarDelegate {
 }
 
 extension MemoListViewController: MemoDetailViewControllerDelegate {
-    func removeTableViewRow(indexPath: IndexPath) {
+    func removeTableViewRow(indexPath: IndexPath, isSearching: Bool) {
         self.tableView.deleteRows(at: [indexPath], with: .left)
+        self.isSearching = isSearching
         self.tableView.reloadData()
     }
     

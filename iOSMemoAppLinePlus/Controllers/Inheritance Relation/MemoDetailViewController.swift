@@ -9,7 +9,7 @@
 import UIKit
 
 protocol MemoDetailViewControllerDelegate: class {
-    func removeTableViewRow(indexPath: IndexPath)
+    func removeTableViewRow(indexPath: IndexPath, isSearching: Bool)
 }
 
 
@@ -160,6 +160,7 @@ class MemoDetailViewController: CreateNewMemoViewController {
         let ok = UIAlertAction(title: "네", style: .default) { (_) in
             if self.isFilteredBefore {
                 let commit = DataManager.shared.filteredMemoList[self.indexPath.row]
+                DataManager.shared.filteredMemoList.remove(at: self.indexPath.row)
                 DataManager.shared.mainContext.delete(commit)
             } else {
                 let commit = DataManager.shared.memoList[self.indexPath.row]
@@ -167,7 +168,7 @@ class MemoDetailViewController: CreateNewMemoViewController {
             }
             DataManager.shared.fetchMemo()
             DataManager.shared.saveContext()
-            self.delegate?.removeTableViewRow(indexPath: self.indexPath)
+            self.delegate?.removeTableViewRow(indexPath: self.indexPath, isSearching: false)
             self.navigationController?.popViewController(animated: true)
         }
         let no = UIAlertAction(title: "아니요", style: .cancel)
