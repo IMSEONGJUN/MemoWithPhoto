@@ -93,7 +93,6 @@ class ImageCollectionVCInCreateVC: ImageCollectionVCInDetailVC {
         }
         let album = UIAlertAction(title: "앨범에서 선택", style: .default) { (_) in
             self.imagePicker.sourceType = .savedPhotosAlbum
-            //imagePicker.sourceType = .photoLibrary
             
             self.present(self.imagePicker, animated: true)
         }
@@ -111,7 +110,7 @@ class ImageCollectionVCInCreateVC: ImageCollectionVCInDetailVC {
     
     @objc private func reorderCollectionViewItem(_ sender: UILongPressGestureRecognizer) {
         let location = sender.location(in: collectionView)
-        print(location)
+    
         switch sender.state {
         case .began:
             guard let indexPath = collectionView.indexPathForItem(at: location) else {break}

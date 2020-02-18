@@ -34,6 +34,12 @@ class MemoDetailViewController: CreateNewMemoViewController {
         navigationItem.rightBarButtonItem = editButton
     }
     
+    override func configureMemoTextView() {
+        memoTextView.backgroundColor = MyColors.titleAndContents
+        memoTextView.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
+        memoTextView.textColor = .black
+    }
+    
     private func configure() {
         titleTextField.text = self.memo.title
         memoTextView.text = self.memo.content
@@ -49,7 +55,6 @@ class MemoDetailViewController: CreateNewMemoViewController {
     }
     
     @objc private func didTapEditButton(_ sender: UIBarButtonItem) {
-        print("edit")
         if sender.title == "Edit" {
             titleTextField.isUserInteractionEnabled = true
             memoTextView.isEditable = true
@@ -64,7 +69,6 @@ class MemoDetailViewController: CreateNewMemoViewController {
             sender.title = "Edit"
             switchingImageAddingViewDisplayMode()
         }
-        
     }
     
     func switchingImageAddingViewEditMode() {
@@ -133,12 +137,6 @@ class MemoDetailViewController: CreateNewMemoViewController {
         }
         return true
         
-    }
-    
-    override func configureMemoTextView() {
-        memoTextView.backgroundColor = MyColors.titleAndContents
-        memoTextView.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
-        memoTextView.textColor = .black
     }
     
     deinit {
