@@ -8,12 +8,21 @@
 
 import UIKit
 
+protocol MemoDetailViewControllerDelegate: class {
+    func removeTableViewRow(indexPath: IndexPath)
+}
+
+
 class MemoDetailViewController: CreateNewMemoViewController {
 
     var memo: Memo!
     var indexPath: IndexPath!
     var isFilteredBefore = false
     let collectionForEdit = ImageCollectionVCInCreateVC()
+    
+    weak var delegate: MemoDetailViewControllerDelegate?
+    
+    var backButton = UIBarButtonItem()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,10 +37,11 @@ class MemoDetailViewController: CreateNewMemoViewController {
     }
     
     override func setupNavigationBar() {
-        let backButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(didTapBackButton))
+        backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(didTapBackButton))
         let editButton = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(didTapEditButton(_:)))
+        let removeButton = UIBarButtonItem(title: "delete", style: .plain, target: self, action: #selector(didTapRemoveButton))
         navigationItem.leftBarButtonItem = backButton
-        navigationItem.rightBarButtonItem = editButton
+        navigationItem.rightBarButtonItems = [editButton, removeButton]
     }
     
     override func configureMemoTextView() {
@@ -54,12 +64,17 @@ class MemoDetailViewController: CreateNewMemoViewController {
         navigationController?.popViewController(animated: true)
     }
     
+    @objc private func didTapRemoveButton() {
+        deleteOrNotAlert(title: "알림", message: "메모를 삭제하시겠습니까?")
+    }
+    
     @objc private func didTapEditButton(_ sender: UIBarButtonItem) {
         if sender.title == "Edit" {
             titleTextField.isUserInteractionEnabled = true
             memoTextView.isEditable = true
             titleTextField.becomeFirstResponder()
             sender.title = "Save"
+            backButton.title = "Cancel"
             switchingImageAddingViewEditMode()
             
         } else if sender.title == "Save" {
@@ -67,6 +82,7 @@ class MemoDetailViewController: CreateNewMemoViewController {
             guard success else {return}
             setTextEditingDisabled()
             sender.title = "Edit"
+            backButton.title = "Back"
             switchingImageAddingViewDisplayMode()
         }
     }
@@ -137,6 +153,27 @@ class MemoDetailViewController: CreateNewMemoViewController {
         }
         return true
         
+    }
+    
+    func deleteOrNotAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let ok = UIAlertAction(title: "네", style: .default) { (_) in
+            if self.isFilteredBefore {
+                let commit = DataManager.shared.filteredMemoList[self.indexPath.row]
+                DataManager.shared.mainContext.delete(commit)
+            } else {
+                let commit = DataManager.shared.memoList[self.indexPath.row]
+                DataManager.shared.mainContext.delete(commit)
+            }
+            DataManager.shared.fetchMemo()
+            DataManager.shared.saveContext()
+            self.delegate?.removeTableViewRow(indexPath: self.indexPath)
+            self.navigationController?.popViewController(animated: true)
+        }
+        let no = UIAlertAction(title: "아니요", style: .cancel)
+        alert.addAction(ok)
+        alert.addAction(no)
+        present(alert, animated: true)
     }
     
     deinit {

@@ -152,6 +152,7 @@ class ImageCollectionVCInCreateVC: ImageCollectionVCInDetailVC {
         case .image(let val):
             cell.imageView.image = val
         case .urlString(let val):
+            cell.imageView.image = PlaceHolderImages.loading
             NetworkManager.shared.downLoadImage(from: val) { (image) in
                 if image == nil {
                     DispatchQueue.main.async {
@@ -199,6 +200,9 @@ extension ImageCollectionVCInCreateVC: UIImagePickerControllerDelegate, UINaviga
             if imagesToAdd == nil {
                 let initialArray = [MyImageTypes.image(selectedImage)]
                 self.imagesToAdd = initialArray
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData()
+                }
             } else {
                 self.imagesToAdd.append(MyImageTypes.image(selectedImage))
                 DispatchQueue.main.async {

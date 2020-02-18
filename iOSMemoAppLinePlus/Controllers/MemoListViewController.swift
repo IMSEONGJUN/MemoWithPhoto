@@ -14,6 +14,7 @@ class MemoListViewController: UIViewController {
     
     var token: NSObjectProtocol?
     var isSearching = false
+    lazy var searchBar = UISearchBar(frame: .zero)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +22,7 @@ class MemoListViewController: UIViewController {
         configureTableView()
         setConstraints()
         setNotiToken()
+        configureSearchBar()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -74,6 +76,15 @@ class MemoListViewController: UIViewController {
         }
     }
     
+    func configureSearchBar() {
+        let searchBar = UISearchBar()
+        searchBar.delegate = self
+        searchBar.showsCancelButton = true
+        searchBar.placeholder = "Search for Keyword"
+        navigationItem.titleView = searchBar
+        
+    }
+    
     @objc func didTapAddNewMemoButton() {
         DispatchQueue.main.async {
             if self.children.count > 0{
@@ -96,7 +107,11 @@ class MemoListViewController: UIViewController {
 
 extension MemoListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return DataManager.shared.memoList.count
+        if isSearching {
+            return DataManager.shared.filteredMemoList.count
+        } else {
+            return DataManager.shared.memoList.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -117,6 +132,7 @@ extension MemoListViewController: UITableViewDelegate {
         let activeArray = isSearching ? DataManager.shared.filteredMemoList : DataManager.shared.memoList
         let memo = activeArray[indexPath.row]
         let memoDetailVC = MemoDetailViewController()
+        memoDetailVC.delegate = self
         memoDetailVC.memo = memo
         memoDetailVC.indexPath = indexPath
         memoDetailVC.isFilteredBefore = isSearching
@@ -159,7 +175,35 @@ extension MemoListViewController: UITableViewDelegate {
     }
 }
 
+extension MemoListViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        print("search")
+        let filterKey = searchText
+        guard !filterKey.isEmpty else { return }
+        DataManager.shared.filteredMemoList = DataManager.shared.memoList.filter({($0.title?.lowercased().contains(filterKey.lowercased()) ?? false) ||
+            $0.content?.lowercased().contains(filterKey.lowercased()) ?? false })
+        isSearching = true
+        tableView.reloadData()
+    }
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        print("cancel")
+        isSearching = false
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+        
+    }
 
+}
+
+extension MemoListViewController: MemoDetailViewControllerDelegate {
+    func removeTableViewRow(indexPath: IndexPath) {
+        self.tableView.deleteRows(at: [indexPath], with: .left)
+        self.tableView.reloadData()
+    }
+    
+    
+}
 //                let viewControllers:[UIViewController] = self.children
 //                for viewContoller in viewControllers{
 //                    viewContoller.willMove(toParent: nil)

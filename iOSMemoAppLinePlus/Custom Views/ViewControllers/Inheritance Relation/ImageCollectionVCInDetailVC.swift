@@ -93,6 +93,7 @@ extension ImageCollectionVCInDetailVC: UICollectionViewDataSource {
         case .image(let val):
             cell.imageView.image = val
         case .urlString(let val):
+            cell.imageView.image = PlaceHolderImages.loading
             NetworkManager.shared.downLoadImage(from: val) { (image) in
                 if image == nil {cell.imageView.image = PlaceHolderImages.noImage}
                 else {cell.imageView.image = image}
