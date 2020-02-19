@@ -15,6 +15,7 @@ class CreateNewMemoViewController: UIViewController {
     var memoTextView = UITextView()
     let placeholderTextForTextView = "메모 내용을 입력하세요."
     var isMemoEditing = true
+    
     let noticeLabel = UILabel()
     
     var addedImages = [MyImageTypes]()
@@ -60,7 +61,7 @@ class CreateNewMemoViewController: UIViewController {
         titleTextField.backgroundColor = MyColors.titleAndContents
         titleTextField.leftViewMode = .always
         titleTextField.autocorrectionType = .no
-        titleTextField.keyboardType = .alphabet
+        titleTextField.keyboardType = .default
         titleTextField.placeholder = "제목"
         titleTextField.becomeFirstResponder()
         titleTextField.delegate = self
@@ -71,6 +72,7 @@ class CreateNewMemoViewController: UIViewController {
         memoTextView.text = self.placeholderTextForTextView
         memoTextView.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
         memoTextView.textColor = .lightGray
+        memoTextView.autocorrectionType = .no
         memoTextView.delegate = self
     }
     
