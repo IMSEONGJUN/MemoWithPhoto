@@ -155,13 +155,9 @@ class ImageCollectionVCInCreateVC: ImageCollectionVCInDetailVC {
             cell.imageView.image = PlaceHolderImages.loading
             NetworkManager.shared.downLoadImage(from: val) { (image) in
                 if image == nil {
-//                    DispatchQueue.main.async {
-                        cell.imageView.image = PlaceHolderImages.noImage
-//                    }
+                    cell.imageView.image = PlaceHolderImages.noImage
                 } else {
-//                    DispatchQueue.main.async {
-                        cell.imageView.image = image
-//                    }
+                    cell.imageView.image = image
                 }
             }
         }
