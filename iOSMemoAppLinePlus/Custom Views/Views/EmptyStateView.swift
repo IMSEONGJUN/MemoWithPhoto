@@ -30,7 +30,6 @@ class EmptyStateView: UIViewController {
         view.backgroundColor = .white
         configure()
         setConstraints()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {

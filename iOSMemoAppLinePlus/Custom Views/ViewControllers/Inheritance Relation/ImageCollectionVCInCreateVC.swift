@@ -155,13 +155,13 @@ class ImageCollectionVCInCreateVC: ImageCollectionVCInDetailVC {
             cell.imageView.image = PlaceHolderImages.loading
             NetworkManager.shared.downLoadImage(from: val) { (image) in
                 if image == nil {
-                    DispatchQueue.main.async {
+//                    DispatchQueue.main.async {
                         cell.imageView.image = PlaceHolderImages.noImage
-                    }
+//                    }
                 } else {
-                    DispatchQueue.main.async {
+//                    DispatchQueue.main.async {
                         cell.imageView.image = image
-                    }
+//                    }
                 }
             }
         }
@@ -235,7 +235,11 @@ extension ImageCollectionVCInCreateVC: ImageCellForCollectionDelegate {
 extension ImageCollectionVCInCreateVC: LoadImageFromURLViewControllerDelegate {
     func passUrlString(urlString: MyImageTypes) {
         print("pass delegate")
-        self.imagesToAdd.append(urlString)
+        if self.imagesToAdd == nil {
+            self.imagesToAdd = [urlString]
+        } else {
+            self.imagesToAdd.append(urlString)
+        }
     }
     
     

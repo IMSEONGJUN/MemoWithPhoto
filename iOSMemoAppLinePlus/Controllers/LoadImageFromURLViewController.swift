@@ -19,7 +19,7 @@ class LoadImageFromURLViewController: UIViewController {
     let urlTextField = UITextField()
     var tempURLStorage = ""
     
-    weak var delegate: LoadImageFromURLViewControllerDelegate?
+    weak var delegate: LoadImageFromURLViewControllerDelegate!
     
     let loadButton = CustomButton(backgroundColor: .darkGray, title: "사진 불러오기")
     let deleteImageButton = CustomButton(backgroundColor: .darkGray, title: "사진 지우기")
@@ -59,7 +59,7 @@ class LoadImageFromURLViewController: UIViewController {
         urlTextField.snp.makeConstraints {
             $0.top.equalToSuperview().offset(topbarHeight + 30)
             $0.leading.trailing.equalToSuperview().inset(50)
-            $0.height.equalToSuperview().multipliedBy(0.04)
+            $0.height.equalToSuperview().multipliedBy(0.06)
         }
         tempImageView.snp.makeConstraints {
             $0.centerX.centerY.equalToSuperview()
@@ -100,8 +100,12 @@ class LoadImageFromURLViewController: UIViewController {
         case cancelButton:
             self.dismiss(animated: true, completion: nil)
         case useImageButton:
+            guard tempImageView.image != PlaceHolderImages.noImage else {presentAlertOnMainThread(title: "알림", message: "이미지를 불러오지 못했습니다. \n 다른 url을 입력하세요.")
+                return
+            }
+            
             let urlString = MyImageTypes.urlString(tempURLStorage)
-            self.delegate?.passUrlString(urlString: urlString)
+            self.delegate.passUrlString(urlString: urlString)
             
             self.dismiss(animated: true)
             

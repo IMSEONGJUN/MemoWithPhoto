@@ -183,6 +183,7 @@ extension MemoListViewController: UISearchBarDelegate {
         tableView.reloadData()
     }
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
         DataManager.shared.filteredMemoList.removeAll()
         isSearching = false
         DispatchQueue.main.async {
