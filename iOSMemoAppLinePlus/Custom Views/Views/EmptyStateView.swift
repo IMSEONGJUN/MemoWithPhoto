@@ -90,7 +90,8 @@ class EmptyStateView: UIViewController {
                                                            queue: OperationQueue.main,
                                                            using: { (noti) in
                                                             if let vc = self.parent as? ImageCollectionVCInCreateVC {
-                                                                self.view.removeFromSuperview()
+                                                                
+//                                                                self.view.removeFromSuperview()
                                                                 vc.presentActionSheetToSelectImageSource()
                                                             }
             })

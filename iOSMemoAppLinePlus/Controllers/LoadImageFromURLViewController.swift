@@ -44,7 +44,7 @@ class LoadImageFromURLViewController: UIViewController {
             $0.addTarget(self, action: #selector(didTapButton(_:)), for: .touchUpInside)
         })
         
-        tempImageView.backgroundColor = .yellow
+        tempImageView.backgroundColor = .lightGray
         urlTextField.placeholder = "URL 입력"
         urlTextField.clearsOnBeginEditing = true
         urlTextField.clearButtonMode = .always

@@ -77,7 +77,6 @@ class MemoListViewController: UIViewController {
     }
     
     func configureSearchBar() {
-        let searchBar = UISearchBar()
         searchBar.delegate = self
         searchBar.showsCancelButton = true
         searchBar.placeholder = "Search for Keyword"
@@ -142,20 +141,26 @@ extension MemoListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         guard editingStyle == .delete else {return}
-        var activeArray = isSearching ? DataManager.shared.filteredMemoList : DataManager.shared.memoList
+        self.searchBar.text?.removeAll()
+        var activeArray = isSearching ? DataManager.shared.filteredMemoList : DataManager.shared.memoList // 값의 복사가 일어난다 왜지???
         let commit = activeArray[indexPath.row]
-        activeArray.remove(at: indexPath.row)
-        DataManager.shared.mainContext.delete(commit)
         
+        activeArray.remove(at: indexPath.row)
+        if isSearching {DataManager.shared.filteredMemoList.remove(at: indexPath.row)}
+        
+        DataManager.shared.mainContext.delete(commit)
         DataManager.shared.fetchMemo()
         DataManager.shared.saveContext()
         tableView.deleteRows(at: [indexPath], with: .left)
+        
         self.isSearching = false
+        tableView.reloadData()
+        
         
             
-        DispatchQueue.main.async {
-            tableView.reloadData()
-        }
+//        DispatchQueue.main.async {
+//            tableView.reloadData()
+//        }
         checkCoreDataEmpty()
     }
 }
@@ -164,14 +169,21 @@ extension MemoListViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         print("search")
         let filterKey = searchText
-        guard !filterKey.isEmpty else { return }
+        guard !filterKey.isEmpty else {
+            isSearching = false
+            DataManager.shared.filteredMemoList.removeAll()
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+            return
+        }
         DataManager.shared.filteredMemoList = DataManager.shared.memoList.filter({($0.title?.lowercased().contains(filterKey.lowercased()) ?? false) ||
             $0.content?.lowercased().contains(filterKey.lowercased()) ?? false })
         isSearching = true
         tableView.reloadData()
     }
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        print("cancel")
+        DataManager.shared.filteredMemoList.removeAll()
         isSearching = false
         DispatchQueue.main.async {
             self.tableView.reloadData()

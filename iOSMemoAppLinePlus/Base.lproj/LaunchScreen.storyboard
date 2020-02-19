@@ -16,19 +16,27 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="memo" translatesAutoresizingMaskIntoConstraints="NO" id="O3L-dC-YJi">
-                                <rect key="frame" x="129" y="364" width="156" height="137"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="memo" translatesAutoresizingMaskIntoConstraints="NO" id="O3L-dC-YJi">
+                                <rect key="frame" x="157" y="403" width="100" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="hlk-HO-Cfd"/>
+                                    <constraint firstAttribute="width" constant="100" id="m53-Nn-7Ci"/>
+                                </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="SJMemo" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jLL-FM-N2E">
-                                <rect key="frame" x="124" y="517" width="167" height="55"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SJMemo" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jLL-FM-N2E">
+                                <rect key="frame" x="153" y="513" width="108" height="33.5"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="jLL-FM-N2E" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="8sl-lr-4Pz"/>
+                            <constraint firstItem="O3L-dC-YJi" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Pha-ea-Gyw"/>
+                            <constraint firstItem="O3L-dC-YJi" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="fRd-OV-dl2"/>
+                            <constraint firstItem="jLL-FM-N2E" firstAttribute="top" secondItem="O3L-dC-YJi" secondAttribute="bottom" constant="10" id="gb9-cy-qXj"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
