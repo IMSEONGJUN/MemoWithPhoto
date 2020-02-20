@@ -66,7 +66,11 @@ class MemoCell: UITableViewCell {
     private func setupUI() {
         [thumnailImageView, titleLabel, somePartsOfMemoLabel, dateLabel].forEach {contentView.addSubview($0)}
         accessoryType = .disclosureIndicator
+        let accView = UIView(frame: CGRect(x: 0, y: 0, width: accessoryView?.frame.size.width ?? 0, height: 100))
+        accView.backgroundColor = MyColors.content
         
+        accessoryView = accView
+        contentView.backgroundColor = MyColors.content
         thumnailImageView.layer.cornerRadius = 12
         thumnailImageView.clipsToBounds = true
         

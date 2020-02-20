@@ -45,9 +45,11 @@ class MemoDetailViewController: CreateNewMemoViewController {
     }
     
     override func configureMemoTextView() {
-        memoTextView.backgroundColor = MyColors.titleAndContents
+        memoTextView.backgroundColor = MyColors.content
         memoTextView.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
         memoTextView.textColor = .black
+        memoTextView.layer.cornerRadius = 5
+        memoTextView.clipsToBounds = true
     }
     
     private func configure() {

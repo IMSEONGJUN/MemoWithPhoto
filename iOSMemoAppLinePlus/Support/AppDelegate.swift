@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func configureNavigationBar() {
-        UINavigationBar.appearance().tintColor = MyColors.KeyColor
+        UINavigationBar.appearance().tintColor = MyColors.brown
     }
     
     // MARK: UISceneSession Lifecycle

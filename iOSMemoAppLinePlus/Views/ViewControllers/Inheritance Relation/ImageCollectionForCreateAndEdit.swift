@@ -25,7 +25,7 @@ class ImageCollectionForCreateAndEdit: ImageCollectionForDetail {
                     self.children.forEach({ $0.willMove(toParent: nil); $0.view.removeFromSuperview(); $0.removeFromParent() })
                 }
                 DispatchQueue.main.async {
-                    self.showEmptyStateView(with: "사진을 등록하실 수 있습니다.", in: self.view, imageName: EmptyStateViewImageName.picture, superViewType: .createNew)
+                    self.showEmptyStateView(with: "사진을 등록하실 수 있습니다.", in: self.view, imageName: EmptyStateViewImageName.offerImage, superViewType: .createNew)
                 }
             } else {
                 if self.children.count > 0{
@@ -68,7 +68,7 @@ class ImageCollectionForCreateAndEdit: ImageCollectionForDetail {
                 self.children.forEach({ $0.willMove(toParent: nil); $0.view.removeFromSuperview(); $0.removeFromParent() })
             }
             DispatchQueue.main.async {
-                self.showEmptyStateView(with: "사진을 등록하실 수 있습니다.", in: self.view, imageName: EmptyStateViewImageName.picture,
+                self.showEmptyStateView(with: "사진을 등록하실 수 있습니다.", in: self.view, imageName: EmptyStateViewImageName.offerImage,
                 superViewType: .createNew)
             }
         } else {

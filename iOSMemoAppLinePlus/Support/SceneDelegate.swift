@@ -24,7 +24,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func configureNavigationBar() {
-        UINavigationBar.appearance().tintColor = MyColors.KeyColor
+        UINavigationBar.appearance().tintColor = MyColors.brown
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {

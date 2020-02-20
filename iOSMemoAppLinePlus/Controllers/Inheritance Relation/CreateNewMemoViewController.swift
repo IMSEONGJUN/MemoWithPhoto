@@ -58,20 +58,24 @@ class CreateNewMemoViewController: UIViewController {
     private func configureTitleTextField() {
         let titleTextFieldPaddingView = UIView(frame: CGRect(x: 0, y: 0, width: 6, height: titleTextField.frame.height))
         titleTextField.leftView = titleTextFieldPaddingView
-        titleTextField.backgroundColor = MyColors.titleAndContents
+        titleTextField.backgroundColor = MyColors.content
         titleTextField.leftViewMode = .always
         titleTextField.autocorrectionType = .no
         titleTextField.keyboardType = .default
         titleTextField.placeholder = "제목"
+        titleTextField.layer.cornerRadius = 5
+        titleTextField.clipsToBounds = true
         titleTextField.becomeFirstResponder()
         titleTextField.delegate = self
     }
     
     func configureMemoTextView() {
-        memoTextView.backgroundColor = MyColors.titleAndContents
+        memoTextView.backgroundColor = MyColors.content
         memoTextView.text = self.placeholderTextForTextView
         memoTextView.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
         memoTextView.textColor = .lightGray
+        memoTextView.layer.cornerRadius = 5
+        memoTextView.clipsToBounds = true
         memoTextView.autocorrectionType = .no
         memoTextView.delegate = self
     }

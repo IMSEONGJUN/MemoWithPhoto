@@ -47,6 +47,8 @@ class MemoListViewController: UIViewController {
     
     private func setupNavigationBar() {
         view.backgroundColor = .white
+        navigationController?.navigationBar.tintColor = MyColors.brown
+        navigationController?.navigationBar.barTintColor = MyColors.barColor
         title = "SJMemo"
         let addNewMemoButton = UIBarButtonItem(barButtonSystemItem: .add, target: self,
                                                action: #selector(didTapAddNewMemoButton))
@@ -58,6 +60,7 @@ class MemoListViewController: UIViewController {
         tableView.delegate = self
         tableView.rowHeight = 100
         tableView.register(MemoCell.self, forCellReuseIdentifier: MemoCell.identifier)
+        tableView.backgroundColor = MyColors.content
         tableView.tableFooterView = UIView(frame: .zero)
         view.addSubview(tableView)
     }

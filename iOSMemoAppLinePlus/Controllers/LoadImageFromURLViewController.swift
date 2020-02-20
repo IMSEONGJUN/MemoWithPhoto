@@ -21,8 +21,8 @@ class LoadImageFromURLViewController: UIViewController {
     
     weak var delegate: LoadImageFromURLViewControllerDelegate!
     
-    let loadButton = CustomButton(backgroundColor: .darkGray, title: "사진 불러오기")
-    let deleteImageButton = CustomButton(backgroundColor: .darkGray, title: "사진 지우기")
+    let loadButton = CustomButton(backgroundColor: MyColors.brown, title: "사진 불러오기")
+    let deleteImageButton = CustomButton(backgroundColor: MyColors.brown, title: "사진 지우기")
     let tempImageView = UIImageView()
     
     let cancelButton = CustomButton(backgroundColor: .systemPurple, title: "취소")
@@ -45,7 +45,7 @@ class LoadImageFromURLViewController: UIViewController {
         })
         
         tempImageView.contentMode = .scaleAspectFit
-        tempImageView.backgroundColor = .lightGray
+        tempImageView.backgroundColor = MyColors.content
         
         urlTextField.placeholder = "URL 입력"
         urlTextField.clearsOnBeginEditing = true

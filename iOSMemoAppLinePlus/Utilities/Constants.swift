@@ -24,11 +24,15 @@ enum PlaceHolderImages {
 enum MyColors {
     static let KeyColor = UIColor(red: 0/255, green: 186/255, blue: 0/255, alpha: 1)
     static let titleAndContents = UIColor(red: 255/255, green: 252/255, blue: 201/255, alpha: 1)
+    static let brown = UIColor(red: 108/255, green: 71/255, blue: 57/255, alpha: 1)
+    static let barColor = UIColor(red: 224/255, green: 217/255, blue: 209/255, alpha: 1)
+    static let content = UIColor(red: 241/255, green: 236/255, blue: 230/255, alpha: 1)
 }
 
 enum EmptyStateViewImageName {
     static let list = "list"
-    static let picture = "picture"
+    static let noPicture = "picture"
+    static let offerImage = "offerPhoto"
 }
 
 enum VeryBottomViewTypeOfEmptyStateView {

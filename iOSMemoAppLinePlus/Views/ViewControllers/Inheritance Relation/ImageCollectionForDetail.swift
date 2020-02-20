@@ -36,8 +36,8 @@ class ImageCollectionForDetail: UIViewController {
     }
     
     func showEmptyStateViewOnDetailVC() {
-        showEmptyStateView(with: "등록된 이미지가 없습니다", in: self.view, imageName: EmptyStateViewImageName.picture,
-        superViewType: .detail)
+        showEmptyStateView(with: "등록된 이미지가 없습니다", in: self.view, imageName: EmptyStateViewImageName.noPicture,
+        superViewType: .detail) 
     }
     
     private func configureCollectionView() {

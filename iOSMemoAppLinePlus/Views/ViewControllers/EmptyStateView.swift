@@ -53,10 +53,10 @@ class EmptyStateView: UIViewController {
         view.addSubview(createNewButton)
         
         messageLabel.numberOfLines = 2
-        messageLabel.backgroundColor = .systemPurple
+        messageLabel.backgroundColor = MyColors.brown
         messageLabel.textColor = .white
         
-        
+        logoImageView.contentMode = .scaleAspectFit
         logoImageView.translatesAutoresizingMaskIntoConstraints = false
         
         createNewButton.setImage(UIImage(named: "plus"), for: .normal)
