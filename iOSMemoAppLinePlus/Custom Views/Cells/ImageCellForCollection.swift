@@ -33,7 +33,7 @@ class ImageCellForCollection: UICollectionViewCell {
     }
     
     private func configure() {
-        imageView.contentMode = .scaleAspectFill
+        imageView.contentMode = .scaleAspectFit
         contentView.addSubview(imageView)
         imageView.clipsToBounds = true
         imageView.addSubview(removeButton)

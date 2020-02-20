@@ -43,7 +43,7 @@ class LoadImageFromURLViewController: UIViewController {
         [loadButton, deleteImageButton, cancelButton, useImageButton].forEach({
             $0.addTarget(self, action: #selector(didTapButton(_:)), for: .touchUpInside)
         })
-        
+        tempImageView.contentMode = .scaleAspectFit
         tempImageView.backgroundColor = .lightGray
         urlTextField.placeholder = "URL 입력"
         urlTextField.clearsOnBeginEditing = true
@@ -115,20 +115,19 @@ class LoadImageFromURLViewController: UIViewController {
             break
         }
     }
-    
+
     func loadImage() {
         tempURLStorage = urlTextField.text ?? ""
         guard tempURLStorage.count > 0 else {presentAlertOnMainThread(title: "알림", message: "URL을 입력하세요"); return}
-        
+        showLoadingView()
         NetworkManager.shared.downLoadImage(from: tempURLStorage) { (image) in
-            if image == nil {
-                DispatchQueue.main.async {
+            DispatchQueue.main.async {
+                if image == nil{
                     self.tempImageView.image = PlaceHolderImages.noImage
-                }
-            }else {
-                DispatchQueue.main.async {
+                } else {
                     self.tempImageView.image = image
                 }
+                self.dismissLoadingView()
             }
         }
             

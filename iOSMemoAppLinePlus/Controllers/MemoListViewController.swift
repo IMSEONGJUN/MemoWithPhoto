@@ -142,12 +142,12 @@ extension MemoListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         guard editingStyle == .delete else {return}
         self.searchBar.text?.removeAll()
-        var activeArray = isSearching ? DataManager.shared.filteredMemoList : DataManager.shared.memoList // 값의 복사가 일어난다 왜지???
+        var activeArray = isSearching ? DataManager.shared.filteredMemoList : DataManager.shared.memoList // 값의 복사가 일어난다 왜지??? // DataManager.shared 를 먼저 받았으면 레퍼런스 타입으로 전달되는데 DataManager.shared.memoList 로 받으면 값으로 들어간다.
         let commit = activeArray[indexPath.row]
-        
+        // Network Manager 에 removeMemo() 함수 만드는것이 좋다.
         activeArray.remove(at: indexPath.row)
-        if isSearching {DataManager.shared.filteredMemoList.remove(at: indexPath.row)}
         
+        if isSearching {DataManager.shared.filteredMemoList.remove(at: indexPath.row)}
         DataManager.shared.mainContext.delete(commit)
         DataManager.shared.fetchMemo()
         DataManager.shared.saveContext()
@@ -184,6 +184,7 @@ extension MemoListViewController: UISearchBarDelegate {
     }
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
+        searchBar.text?.removeAll()
         DataManager.shared.filteredMemoList.removeAll()
         isSearching = false
         DispatchQueue.main.async {

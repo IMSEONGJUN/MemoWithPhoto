@@ -53,6 +53,11 @@ class DataManager {
         fetchMemo()
     }
     
+    func removeMemo(indexPath: IndexPath, isInFilteredMemoList: Bool) {
+        if isInFilteredMemoList {
+            let commit = 
+        }
+    }
     
     func addNewMemo(title: String?, memo: String?, images: Data?, at index:Int = 0) {
         let newMemo = Memo(context: mainContext)
