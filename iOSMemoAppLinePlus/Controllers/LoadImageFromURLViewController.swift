@@ -104,11 +104,12 @@ class LoadImageFromURLViewController: UIViewController {
         case cancelButton:
             self.dismiss(animated: true, completion: nil)
         case useImageButton:
+            guard tempImageView.image != nil else { return }
             guard tempImageView.image != PlaceHolderImages.noImage else {
                 presentAlertOnMainThread(title: "알림", message: "이미지를 불러오지 못했습니다. \n 다른 url을 입력하세요.")
                 return
             }
-
+            
             let urlString = MyImageTypes.urlString(tempURLStorage)
             self.delegate.passUrlString(urlString: urlString)
             self.dismiss(animated: true)
