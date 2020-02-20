@@ -19,8 +19,8 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="brown_launchscreen" translatesAutoresizingMaskIntoConstraints="NO" id="O3L-dC-YJi">
                                 <rect key="frame" x="132" y="378" width="150" height="150"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="150" id="hlk-HO-Cfd"/>
-                                    <constraint firstAttribute="width" constant="150" id="m53-Nn-7Ci"/>
+                                    <constraint firstAttribute="width" constant="150" id="QWo-3B-t2r"/>
+                                    <constraint firstAttribute="height" constant="150" id="X8j-h8-bEN"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Brown Memo" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jLL-FM-N2E">
@@ -32,10 +32,10 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="jLL-FM-N2E" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="8sl-lr-4Pz"/>
-                            <constraint firstItem="O3L-dC-YJi" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Pha-ea-Gyw"/>
-                            <constraint firstItem="O3L-dC-YJi" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="fRd-OV-dl2"/>
-                            <constraint firstItem="jLL-FM-N2E" firstAttribute="top" secondItem="O3L-dC-YJi" secondAttribute="bottom" constant="10" id="gb9-cy-qXj"/>
+                            <constraint firstItem="O3L-dC-YJi" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="AK5-qK-TUX"/>
+                            <constraint firstItem="jLL-FM-N2E" firstAttribute="top" secondItem="O3L-dC-YJi" secondAttribute="bottom" constant="10" id="bip-GT-m0Y"/>
+                            <constraint firstItem="O3L-dC-YJi" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="sFa-jF-kLl"/>
+                            <constraint firstItem="jLL-FM-N2E" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="zQU-qe-GOM"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -46,6 +46,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="brown_launchscreen" width="314" height="288"/>
+        <image name="brown_launchscreen" width="157" height="144"/>
     </resources>
 </document>
