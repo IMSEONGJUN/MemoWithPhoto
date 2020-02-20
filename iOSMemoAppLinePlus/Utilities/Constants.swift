@@ -10,7 +10,7 @@ import UIKit
 
 let formatter: DateFormatter = {
    let f = DateFormatter()
-    f.dateFormat = "yyyy-MM-dd HH:mm"
+    f.dateFormat = "yy-MM-dd HH:mm"
     f.locale = Locale(identifier: "Ko_kr")
     return f
 }()

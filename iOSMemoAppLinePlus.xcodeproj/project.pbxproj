@@ -10,27 +10,26 @@
 		634D1C3468B08D763EE9CF46 /* Pods_iOSMemoAppLinePlus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F2351EC150DD7477F8BE1FF /* Pods_iOSMemoAppLinePlus.framework */; };
 		CE4967C723F46FF50056E444 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4967C623F46FF50056E444 /* AppDelegate.swift */; };
 		CE4967C923F46FF50056E444 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4967C823F46FF50056E444 /* SceneDelegate.swift */; };
-		CE4967CB23F46FF50056E444 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4967CA23F46FF50056E444 /* ViewController.swift */; };
 		CE4967CE23F46FF50056E444 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE4967CC23F46FF50056E444 /* Main.storyboard */; };
 		CE4967D023F46FF60056E444 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE4967CF23F46FF60056E444 /* Assets.xcassets */; };
 		CE4967D323F46FF60056E444 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE4967D123F46FF60056E444 /* LaunchScreen.storyboard */; };
 		CE4967DC23F470C20056E444 /* Memo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4967DB23F470C20056E444 /* Memo.swift */; };
 		CE4967DF23F471C00056E444 /* MemoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4967DE23F471C00056E444 /* MemoListViewController.swift */; };
-		CE4967E223F474AB0056E444 /* MemoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4967E123F474AB0056E444 /* MemoCell.swift */; };
+		CE4967E223F474AB0056E444 /* MemoCellForTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4967E123F474AB0056E444 /* MemoCellForTableView.swift */; };
 		CE4967E823F476710056E444 /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4967E723F476710056E444 /* UIView+Ext.swift */; };
 		CE4967EA23F4826B0056E444 /* MemoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4967E923F4826B0056E444 /* MemoDetailViewController.swift */; };
 		CE4967EF23F486330056E444 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4967EE23F486330056E444 /* DataManager.swift */; };
 		CE4967F223F489350056E444 /* LinePlusMemo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CE4967F023F489340056E444 /* LinePlusMemo.xcdatamodeld */; };
 		CE4967F423F48A810056E444 /* CreateNewMemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4967F323F48A810056E444 /* CreateNewMemoViewController.swift */; };
-		CE4967F623F5449B0056E444 /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4967F523F5449B0056E444 /* AlertViewController.swift */; };
+		CE4967F623F5449B0056E444 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4967F523F5449B0056E444 /* AlertView.swift */; };
 		CE4967FE23F5465C0056E444 /* TitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4967FD23F5465C0056E444 /* TitleLabel.swift */; };
 		CE49680023F546950056E444 /* BodyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4967FF23F546950056E444 /* BodyLabel.swift */; };
 		CE49680223F547EB0056E444 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE49680123F547EB0056E444 /* CustomButton.swift */; };
-		CE49680423F5859B0056E444 /* ImageCollectionVCInDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE49680323F5859B0056E444 /* ImageCollectionVCInDetailVC.swift */; };
+		CE49680423F5859B0056E444 /* ImageCollectionForDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE49680323F5859B0056E444 /* ImageCollectionForDetail.swift */; };
 		CE49680623F58B7C0056E444 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE49680523F58B7C0056E444 /* Constants.swift */; };
-		CE49680823F6A03A0056E444 /* Array+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE49680723F6A03A0056E444 /* Array+Ext.swift */; };
+		CE49680823F6A03A0056E444 /* ImageToFromData+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE49680723F6A03A0056E444 /* ImageToFromData+Ext.swift */; };
 		CE49680A23F6AB4E0056E444 /* ImageCellForCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE49680923F6AB4E0056E444 /* ImageCellForCollection.swift */; };
-		CE49680C23F6EC770056E444 /* ImageCollectionVCInCreateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE49680B23F6EC770056E444 /* ImageCollectionVCInCreateVC.swift */; };
+		CE49680C23F6EC770056E444 /* ImageCollectionForCreateAndEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE49680B23F6EC770056E444 /* ImageCollectionForCreateAndEdit.swift */; };
 		CE49680F23F7CD1F0056E444 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE49680E23F7CD1F0056E444 /* UIViewController+Ext.swift */; };
 		CE49681223F7CDA50056E444 /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE49681123F7CDA50056E444 /* EmptyStateView.swift */; };
 		CE8CF70223F85D4A00B5DC67 /* NotiLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8CF70123F85D4A00B5DC67 /* NotiLabel.swift */; };
@@ -45,30 +44,30 @@
 		CE4967C323F46FF50056E444 /* iOSMemoAppLinePlus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSMemoAppLinePlus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE4967C623F46FF50056E444 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE4967C823F46FF50056E444 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		CE4967CA23F46FF50056E444 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		CE4967CD23F46FF50056E444 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CE4967CF23F46FF60056E444 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE4967D223F46FF60056E444 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE4967D423F46FF60056E444 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE4967DB23F470C20056E444 /* Memo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Memo.swift; sourceTree = "<group>"; };
 		CE4967DE23F471C00056E444 /* MemoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoListViewController.swift; sourceTree = "<group>"; };
-		CE4967E123F474AB0056E444 /* MemoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoCell.swift; sourceTree = "<group>"; };
+		CE4967E123F474AB0056E444 /* MemoCellForTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoCellForTableView.swift; sourceTree = "<group>"; };
 		CE4967E723F476710056E444 /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
 		CE4967E923F4826B0056E444 /* MemoDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoDetailViewController.swift; sourceTree = "<group>"; };
 		CE4967EE23F486330056E444 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		CE4967F123F489340056E444 /* LinePlusMemo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LinePlusMemo.xcdatamodel; sourceTree = "<group>"; };
 		CE4967F323F48A810056E444 /* CreateNewMemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewMemoViewController.swift; sourceTree = "<group>"; };
-		CE4967F523F5449B0056E444 /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
+		CE4967F523F5449B0056E444 /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		CE4967FD23F5465C0056E444 /* TitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleLabel.swift; sourceTree = "<group>"; };
 		CE4967FF23F546950056E444 /* BodyLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyLabel.swift; sourceTree = "<group>"; };
 		CE49680123F547EB0056E444 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
-		CE49680323F5859B0056E444 /* ImageCollectionVCInDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionVCInDetailVC.swift; sourceTree = "<group>"; };
+		CE49680323F5859B0056E444 /* ImageCollectionForDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionForDetail.swift; sourceTree = "<group>"; };
 		CE49680523F58B7C0056E444 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		CE49680723F6A03A0056E444 /* Array+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Ext.swift"; sourceTree = "<group>"; };
+		CE49680723F6A03A0056E444 /* ImageToFromData+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImageToFromData+Ext.swift"; sourceTree = "<group>"; };
 		CE49680923F6AB4E0056E444 /* ImageCellForCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCellForCollection.swift; sourceTree = "<group>"; };
-		CE49680B23F6EC770056E444 /* ImageCollectionVCInCreateVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionVCInCreateVC.swift; sourceTree = "<group>"; };
+		CE49680B23F6EC770056E444 /* ImageCollectionForCreateAndEdit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionForCreateAndEdit.swift; sourceTree = "<group>"; };
 		CE49680E23F7CD1F0056E444 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
 		CE49681123F7CDA50056E444 /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
+		CE8B910323FE9878005D0F84 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		CE8CF70123F85D4A00B5DC67 /* NotiLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotiLabel.swift; sourceTree = "<group>"; };
 		CEF0DE3423FBE8F700926400 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		CEF0DE3623FC2BA700926400 /* LoadImageFromURLViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadImageFromURLViewController.swift; sourceTree = "<group>"; };
@@ -133,15 +132,14 @@
 		CE4967C523F46FF50056E444 /* iOSMemoAppLinePlus */ = {
 			isa = PBXGroup;
 			children = (
+				CE8B910323FE9878005D0F84 /* README.md */,
+				CE8B910423FEA22B005D0F84 /* Support */,
 				CE4967ED23F486120056E444 /* Manager */,
 				CE4967E623F476500056E444 /* Extensions */,
 				CE4967E323F475F00056E444 /* Utilities */,
-				CE4967E023F474840056E444 /* Custom Views */,
+				CE4967E023F474840056E444 /* Views */,
 				CE4967DD23F471A80056E444 /* Controllers */,
 				CE4967DA23F470A40056E444 /* Model */,
-				CE4967C623F46FF50056E444 /* AppDelegate.swift */,
-				CE4967C823F46FF50056E444 /* SceneDelegate.swift */,
-				CE4967CA23F46FF50056E444 /* ViewController.swift */,
 				CE4967CC23F46FF50056E444 /* Main.storyboard */,
 				CE4967CF23F46FF60056E444 /* Assets.xcassets */,
 				CE4967D123F46FF60056E444 /* LaunchScreen.storyboard */,
@@ -169,16 +167,15 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
-		CE4967E023F474840056E444 /* Custom Views */ = {
+		CE4967E023F474840056E444 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				CE49681023F7CD620056E444 /* Views */,
 				CE4967FA23F546220056E444 /* Buttons */,
 				CE4967F923F546050056E444 /* Labels */,
 				CE4967F823F545EB0056E444 /* ViewControllers */,
 				CE4967F723F545DF0056E444 /* Cells */,
 			);
-			path = "Custom Views";
+			path = Views;
 			sourceTree = "<group>";
 		};
 		CE4967E323F475F00056E444 /* Utilities */ = {
@@ -193,7 +190,7 @@
 			isa = PBXGroup;
 			children = (
 				CE4967E723F476710056E444 /* UIView+Ext.swift */,
-				CE49680723F6A03A0056E444 /* Array+Ext.swift */,
+				CE49680723F6A03A0056E444 /* ImageToFromData+Ext.swift */,
 				CE49680E23F7CD1F0056E444 /* UIViewController+Ext.swift */,
 			);
 			path = Extensions;
@@ -211,7 +208,7 @@
 		CE4967F723F545DF0056E444 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				CE4967E123F474AB0056E444 /* MemoCell.swift */,
+				CE4967E123F474AB0056E444 /* MemoCellForTableView.swift */,
 				CE49680923F6AB4E0056E444 /* ImageCellForCollection.swift */,
 			);
 			path = Cells;
@@ -221,7 +218,8 @@
 			isa = PBXGroup;
 			children = (
 				CE49680D23F7C0070056E444 /* Inheritance Relation */,
-				CE4967F523F5449B0056E444 /* AlertViewController.swift */,
+				CE4967F523F5449B0056E444 /* AlertView.swift */,
+				CE49681123F7CDA50056E444 /* EmptyStateView.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -247,18 +245,19 @@
 		CE49680D23F7C0070056E444 /* Inheritance Relation */ = {
 			isa = PBXGroup;
 			children = (
-				CE49680323F5859B0056E444 /* ImageCollectionVCInDetailVC.swift */,
-				CE49680B23F6EC770056E444 /* ImageCollectionVCInCreateVC.swift */,
+				CE49680323F5859B0056E444 /* ImageCollectionForDetail.swift */,
+				CE49680B23F6EC770056E444 /* ImageCollectionForCreateAndEdit.swift */,
 			);
 			path = "Inheritance Relation";
 			sourceTree = "<group>";
 		};
-		CE49681023F7CD620056E444 /* Views */ = {
+		CE8B910423FEA22B005D0F84 /* Support */ = {
 			isa = PBXGroup;
 			children = (
-				CE49681123F7CDA50056E444 /* EmptyStateView.swift */,
+				CE4967C623F46FF50056E444 /* AppDelegate.swift */,
+				CE4967C823F46FF50056E444 /* SceneDelegate.swift */,
 			);
-			path = Views;
+			path = Support;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -380,7 +379,6 @@
 				CE8CF70223F85D4A00B5DC67 /* NotiLabel.swift in Sources */,
 				CE49680623F58B7C0056E444 /* Constants.swift in Sources */,
 				CE49680F23F7CD1F0056E444 /* UIViewController+Ext.swift in Sources */,
-				CE4967CB23F46FF50056E444 /* ViewController.swift in Sources */,
 				CE4967EA23F4826B0056E444 /* MemoDetailViewController.swift in Sources */,
 				CE4967DF23F471C00056E444 /* MemoListViewController.swift in Sources */,
 				CE4967C723F46FF50056E444 /* AppDelegate.swift in Sources */,
@@ -389,15 +387,15 @@
 				CE49680A23F6AB4E0056E444 /* ImageCellForCollection.swift in Sources */,
 				CE49681223F7CDA50056E444 /* EmptyStateView.swift in Sources */,
 				CEF0DE3523FBE8F700926400 /* NetworkManager.swift in Sources */,
-				CE49680C23F6EC770056E444 /* ImageCollectionVCInCreateVC.swift in Sources */,
-				CE4967F623F5449B0056E444 /* AlertViewController.swift in Sources */,
+				CE49680C23F6EC770056E444 /* ImageCollectionForCreateAndEdit.swift in Sources */,
+				CE4967F623F5449B0056E444 /* AlertView.swift in Sources */,
 				CE49680023F546950056E444 /* BodyLabel.swift in Sources */,
 				CE4967E823F476710056E444 /* UIView+Ext.swift in Sources */,
 				CE4967F423F48A810056E444 /* CreateNewMemoViewController.swift in Sources */,
 				CE4967DC23F470C20056E444 /* Memo.swift in Sources */,
-				CE49680423F5859B0056E444 /* ImageCollectionVCInDetailVC.swift in Sources */,
-				CE4967E223F474AB0056E444 /* MemoCell.swift in Sources */,
-				CE49680823F6A03A0056E444 /* Array+Ext.swift in Sources */,
+				CE49680423F5859B0056E444 /* ImageCollectionForDetail.swift in Sources */,
+				CE4967E223F474AB0056E444 /* MemoCellForTableView.swift in Sources */,
+				CE49680823F6A03A0056E444 /* ImageToFromData+Ext.swift in Sources */,
 				CE4967FE23F5465C0056E444 /* TitleLabel.swift in Sources */,
 				CE49680223F547EB0056E444 /* CustomButton.swift in Sources */,
 				CEF0DE3723FC2BA700926400 /* LoadImageFromURLViewController.swift in Sources */,

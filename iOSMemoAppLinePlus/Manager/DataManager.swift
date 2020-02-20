@@ -55,8 +55,15 @@ class DataManager {
     
     func removeMemo(indexPath: IndexPath, isInFilteredMemoList: Bool) {
         if isInFilteredMemoList {
-            let commit = 
+            let commit = filteredMemoList[indexPath.row]
+            mainContext.delete(commit)
+            filteredMemoList.remove(at: indexPath.row)
+        } else {
+            let commit = memoList[indexPath.row]
+            mainContext.delete(commit)
         }
+        fetchMemo()
+        saveContext()
     }
     
     func addNewMemo(title: String?, memo: String?, images: Data?, at index:Int = 0) {

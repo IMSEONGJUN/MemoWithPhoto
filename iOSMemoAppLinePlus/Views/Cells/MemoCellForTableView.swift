@@ -114,7 +114,7 @@ class MemoCell: UITableViewCell {
         dateLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             dateLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            dateLabel.leadingAnchor.constraint(equalTo: somePartsOfMemoLabel.trailingAnchor),
+            dateLabel.leadingAnchor.constraint(equalTo: somePartsOfMemoLabel.trailingAnchor, constant: 30),
         ])
     }
     

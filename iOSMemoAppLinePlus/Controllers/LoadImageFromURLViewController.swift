@@ -43,18 +43,22 @@ class LoadImageFromURLViewController: UIViewController {
         [loadButton, deleteImageButton, cancelButton, useImageButton].forEach({
             $0.addTarget(self, action: #selector(didTapButton(_:)), for: .touchUpInside)
         })
+        
         tempImageView.contentMode = .scaleAspectFit
         tempImageView.backgroundColor = .lightGray
+        
         urlTextField.placeholder = "URL 입력"
         urlTextField.clearsOnBeginEditing = true
         urlTextField.clearButtonMode = .always
         urlTextField.borderStyle = .roundedRect
-        urlTextField.translatesAutoresizingMaskIntoConstraints = false
-        tempImageView.translatesAutoresizingMaskIntoConstraints = false
     }
     
     private func setConstraints(){
         let padding: CGFloat = 30
+        let buttonHeight: CGFloat = 50
+        let imageViewSizeRatioToSuperView: CGFloat = 0.7
+        let buttonsWidthRatioToImageView: CGFloat = 0.4
+        
         
         urlTextField.snp.makeConstraints {
             $0.top.equalToSuperview().offset(topbarHeight + 30)
@@ -63,30 +67,30 @@ class LoadImageFromURLViewController: UIViewController {
         }
         tempImageView.snp.makeConstraints {
             $0.centerX.centerY.equalToSuperview()
-            $0.width.height.equalTo(view.snp.width).multipliedBy(0.7)
+            $0.width.height.equalTo(view.snp.width).multipliedBy(imageViewSizeRatioToSuperView)
         }
         loadButton.snp.makeConstraints {
             $0.leading.equalTo(tempImageView.snp.leading)
             $0.top.equalTo(urlTextField.snp.bottom).offset(padding)
-            $0.width.equalTo(tempImageView.snp.width).multipliedBy(0.4)
-            $0.height.equalTo(50)
+            $0.width.equalTo(tempImageView.snp.width).multipliedBy(buttonsWidthRatioToImageView)
+            $0.height.equalTo(buttonHeight)
         }
         deleteImageButton.snp.makeConstraints {
             $0.top.bottom.width.equalTo(loadButton)
             $0.trailing.equalTo(tempImageView.snp.trailing)
-            $0.height.equalTo(50)
+            $0.height.equalTo(buttonHeight)
         }
         cancelButton.snp.makeConstraints {
             $0.top.equalTo(tempImageView.snp.bottom).offset(padding)
             $0.leading.equalTo(tempImageView.snp.leading)
-            $0.width.equalTo(tempImageView.snp.width).multipliedBy(0.4)
-            $0.height.equalTo(50)
+            $0.width.equalTo(tempImageView.snp.width).multipliedBy(buttonsWidthRatioToImageView)
+            $0.height.equalTo(buttonHeight)
         }
         useImageButton.snp.makeConstraints {
             $0.top.equalTo(tempImageView.snp.bottom).offset(padding)
             $0.trailing.equalTo(tempImageView.snp.trailing)
-            $0.width.equalTo(tempImageView.snp.width).multipliedBy(0.4)
-            $0.height.equalTo(50)
+            $0.width.equalTo(tempImageView.snp.width).multipliedBy(buttonsWidthRatioToImageView)
+            $0.height.equalTo(buttonHeight)
         }
         
     }
@@ -104,13 +108,10 @@ class LoadImageFromURLViewController: UIViewController {
                 presentAlertOnMainThread(title: "알림", message: "이미지를 불러오지 못했습니다. \n 다른 url을 입력하세요.")
                 return
             }
-            
+
             let urlString = MyImageTypes.urlString(tempURLStorage)
             self.delegate.passUrlString(urlString: urlString)
-            
             self.dismiss(animated: true)
-            
-            
         default:
             break
         }
@@ -137,6 +138,10 @@ class LoadImageFromURLViewController: UIViewController {
     private func createDismissKeyboardTapGesture() {
         let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:)))
         view.addGestureRecognizer(tap)
+    }
+    
+    deinit{
+        print("LoadImageFromUrlVC Deinit")
     }
 
 }

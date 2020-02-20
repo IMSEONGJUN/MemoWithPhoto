@@ -11,7 +11,7 @@ import SnapKit // Third party Library
 import MobileCoreServices
 
 
-class ImageCollectionVCInCreateVC: ImageCollectionVCInDetailVC {
+class ImageCollectionForCreateAndEdit: ImageCollectionForDetail {
 
     
     let imagePicker = UIImagePickerController()
@@ -122,8 +122,7 @@ class ImageCollectionVCInCreateVC: ImageCollectionVCInDetailVC {
     
         switch sender.state {
         case .began:
-            guard let indexPath = collectionView.indexPathForItem(at: location) else {break}
-            print(indexPath)
+            guard let indexPath = collectionView.indexPathForItem(at: location) else { break }
             collectionView.beginInteractiveMovementForItem(at: indexPath)
         case .changed:
             collectionView.updateInteractiveMovementTargetPosition(location)
@@ -136,6 +135,9 @@ class ImageCollectionVCInCreateVC: ImageCollectionVCInDetailVC {
         }
     }
     
+    deinit{
+        print("Collection for Create&Edit Deinit")
+    }
     
     // MARK: - Overridden and Just UICollectionView DataSource Method
     
@@ -146,7 +148,10 @@ class ImageCollectionVCInCreateVC: ImageCollectionVCInDetailVC {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImageCellForCollection.identifier, for: indexPath) as! ImageCellForCollection
         cell.delegate = self
-        guard let image = imagesToAdd?[indexPath.item] else {return cell}
+        guard let image = imagesToAdd?[indexPath.item] else {
+            cell.imageView.image = PlaceHolderImages.noImage
+            return cell
+        }
         
         switch image {
         case .image(let val):
@@ -161,7 +166,6 @@ class ImageCollectionVCInCreateVC: ImageCollectionVCInDetailVC {
                 }
             }
         }
-        
         return cell
     }
     
@@ -184,7 +188,7 @@ class ImageCollectionVCInCreateVC: ImageCollectionVCInDetailVC {
 
 // MARK: - UIImagePickerController Delegate Method
 
-extension ImageCollectionVCInCreateVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension ImageCollectionForCreateAndEdit: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
         let mediaType = info[.mediaType] as! NSString
@@ -214,7 +218,7 @@ extension ImageCollectionVCInCreateVC: UIImagePickerControllerDelegate, UINaviga
     }
 }
 
-extension ImageCollectionVCInCreateVC: ImageCellForCollectionDelegate {
+extension ImageCollectionForCreateAndEdit: ImageCellForCollectionDelegate {
     
     func didTapRemoveButtonOnImage(in cell: ImageCellForCollection) {
         guard let indexPath = collectionView.indexPath(for: cell) else { return }
@@ -228,7 +232,7 @@ extension ImageCollectionVCInCreateVC: ImageCellForCollectionDelegate {
     
 }
 
-extension ImageCollectionVCInCreateVC: LoadImageFromURLViewControllerDelegate {
+extension ImageCollectionForCreateAndEdit: LoadImageFromURLViewControllerDelegate {
     func passUrlString(urlString: MyImageTypes) {
         print("pass delegate")
         if self.imagesToAdd == nil {

@@ -9,7 +9,7 @@
 import UIKit
 
 extension Array where Element == MyImageTypes {
-    // Given an array of UIImages return a Data representation of the array suitable for storing in core data as binary data that allows external storage
+    
     func coreDataRepresentation() -> Data? {
         let CDataArray = NSMutableArray()
 
@@ -27,10 +27,8 @@ extension Array where Element == MyImageTypes {
                 let data = Data(val.utf8)
                 let nsdata : NSData = NSData(data: data)
                 CDataArray.add(nsdata)
-                
             }
         }
-
         return NSKeyedArchiver.archivedData(withRootObject: CDataArray)
     }
 }
@@ -50,12 +48,6 @@ extension Data {
                     myImageArray.append(type)
                 }
             }
-            
-            
-//            let imgArray = mySavedData.compactMap({
-//                return UIImage(data: $0 as! Data)
-//            })
-//            return imgArray
             return myImageArray
         }
         else {
@@ -64,3 +56,8 @@ extension Data {
         }
     }
 }
+
+//            let imgArray = mySavedData.compactMap({
+//                return UIImage(data: $0 as! Data)
+//            })
+//            return imgArray

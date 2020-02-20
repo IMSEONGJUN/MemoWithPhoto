@@ -18,7 +18,7 @@ class MemoDetailViewController: CreateNewMemoViewController {
     var memo: Memo!
     var indexPath: IndexPath!
     var isFilteredBefore = false
-    let collectionForEdit = ImageCollectionVCInCreateVC()
+    let collectionForEdit = ImageCollectionForCreateAndEdit()
     
     weak var delegate: MemoDetailViewControllerDelegate?
     
@@ -32,7 +32,7 @@ class MemoDetailViewController: CreateNewMemoViewController {
     }
     
     override func addChildViewController() {
-        let collectionForDisplay = ImageCollectionVCInDetailVC()
+        let collectionForDisplay = ImageCollectionForDetail()
         add(childVC: collectionForDisplay, to: addImageViewContainer)
     }
     
@@ -98,7 +98,7 @@ class MemoDetailViewController: CreateNewMemoViewController {
     }
     
     func switchingImageAddingViewDisplayMode() {
-        let collectionForDisplay = ImageCollectionVCInDetailVC()
+        let collectionForDisplay = ImageCollectionForDetail()
         collectionForDisplay.memo = DataManager.shared.memoList.first
 
         if self.children.count > 0{

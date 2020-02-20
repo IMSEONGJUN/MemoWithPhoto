@@ -21,7 +21,7 @@ class CreateNewMemoViewController: UIViewController {
     var addedImages = [MyImageTypes]()
     
     var addImageViewContainer = UIView()
-    let imageCollectionVC = ImageCollectionVCInCreateVC()
+    let imageCollectionVC = ImageCollectionForCreateAndEdit()
     
     
     // MARK:  - LifeCycle
@@ -106,6 +106,10 @@ class CreateNewMemoViewController: UIViewController {
     private func createDismissKeyboardTapGesture() {
         let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:)))
         view.addGestureRecognizer(tap)
+    }
+    
+    deinit{
+        print("CreateNewMemoVC Deinit")
     }
     
     

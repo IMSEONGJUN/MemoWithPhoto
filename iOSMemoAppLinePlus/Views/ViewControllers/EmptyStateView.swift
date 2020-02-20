@@ -88,7 +88,7 @@ class EmptyStateView: UIViewController {
                                                            object: nil,
                                                            queue: OperationQueue.main,
                                                            using: { (noti) in
-                                                            if let vc = self.parent as? ImageCollectionVCInCreateVC {
+                                                            if let vc = self.parent as? ImageCollectionForCreateAndEdit{
                                                                 
 //                                                                self.view.removeFromSuperview()
                                                                 vc.presentActionSheetToSelectImageSource()
@@ -120,6 +120,7 @@ class EmptyStateView: UIViewController {
         if let token = token {
             NotificationCenter.default.removeObserver(token)
         }
+        print("EmptyStateView Deinit")
     }
 }
 

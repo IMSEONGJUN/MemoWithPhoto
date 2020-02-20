@@ -9,7 +9,7 @@
 import UIKit
 import SnapKit
 
-class ImageCollectionVCInDetailVC: UIViewController {
+class ImageCollectionForDetail: UIViewController {
     
     var layout: UICollectionViewFlowLayout!
     var collectionView: UICollectionView!
@@ -76,10 +76,14 @@ class ImageCollectionVCInDetailVC: UIViewController {
             $0.height.equalToSuperview().multipliedBy(0.8)
         }
     }
+    
+    deinit{
+        print("Collection for Detail Deinit")
+    }
 
 }
 
-extension ImageCollectionVCInDetailVC: UICollectionViewDataSource {
+extension ImageCollectionForDetail: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return memo.images?.imageArray()?.count ?? 0
     }
@@ -108,7 +112,7 @@ extension ImageCollectionVCInDetailVC: UICollectionViewDataSource {
     
 }
 
-extension ImageCollectionVCInDetailVC: UICollectionViewDelegateFlowLayout {
+extension ImageCollectionForDetail: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
            print("didselect in detail")
        }
