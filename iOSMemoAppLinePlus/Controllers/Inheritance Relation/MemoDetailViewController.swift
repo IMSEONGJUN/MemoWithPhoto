@@ -31,15 +31,20 @@ class MemoDetailViewController: CreateNewMemoViewController {
         setTextEditingDisabled()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        backButton.title = "나가기"
+    }
+    
     override func addChildViewController() {
         let collectionForDisplay = ImageCollectionForDetail()
         add(childVC: collectionForDisplay, to: addImageViewContainer)
     }
     
     override func setupNavigationBar() {
-        backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(didTapBackButton))
-        let editButton = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(didTapEditButton(_:)))
-        let removeButton = UIBarButtonItem(title: "delete", style: .plain, target: self, action: #selector(didTapRemoveButton))
+        backButton = UIBarButtonItem(title: "나가기", style: .plain, target: self, action: #selector(didTapBackButton))
+        let editButton = UIBarButtonItem(title: "수정", style: .plain, target: self, action: #selector(didTapEditButton(_:)))
+        let removeButton = UIBarButtonItem(title: "삭제", style: .plain, target: self, action: #selector(didTapRemoveButton))
         navigationItem.leftBarButtonItem = backButton
         navigationItem.rightBarButtonItems = [editButton, removeButton]
     }
@@ -71,20 +76,20 @@ class MemoDetailViewController: CreateNewMemoViewController {
     }
     
     @objc private func didTapEditButton(_ sender: UIBarButtonItem) {
-        if sender.title == "Edit" {
+        if sender.title == "수정" {
             titleTextField.isUserInteractionEnabled = true
             memoTextView.isEditable = true
             titleTextField.becomeFirstResponder()
-            sender.title = "Save"
-            backButton.title = "Cancel"
+            sender.title = "저장"
+            backButton.title = "취소"
             switchingImageAddingViewEditMode()
             
-        } else if sender.title == "Save" {
+        } else if sender.title == "저장" {
             let success = saveEditedMemo()
             guard success else {return}
             setTextEditingDisabled()
-            sender.title = "Edit"
-            backButton.title = "Back"
+            sender.title = "수정"
+            backButton.title = "나가기"
             switchingImageAddingViewDisplayMode()
         }
     }
