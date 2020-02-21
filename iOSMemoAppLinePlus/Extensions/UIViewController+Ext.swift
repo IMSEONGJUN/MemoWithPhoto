@@ -29,7 +29,7 @@ extension UIViewController {
     func showEmptyStateView(with message: String, in view: UIView, imageName: String, superViewType: VeryBottomViewTypeOfEmptyStateView) {
         let emptyStateView = EmptyStateView(message: message, imageName: imageName)
         if imageName == EmptyStateViewImageName.offerImage || imageName == EmptyStateViewImageName.noPicture {
-            emptyStateView.isOnTheCreateVC = true
+            emptyStateView.isOnTheCreateNewOrDetailVC = true
             if superViewType == .detail {
                 emptyStateView.createNewButton.isHidden = true
             }

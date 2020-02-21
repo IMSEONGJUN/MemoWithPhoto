@@ -13,7 +13,6 @@ final class NetworkManager {
     private init() {}
     let cache = NSCache<NSString, UIImage>()
     
-    
     func downLoadImage(from urlString: String, completed: @escaping (Result<UIImage, ImageLoadError>) -> Void) {
         let cacheKey = NSString(string: urlString)
         

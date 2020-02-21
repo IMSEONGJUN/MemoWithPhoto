@@ -91,6 +91,10 @@ class MemoDetailViewController: CreateNewMemoViewController {
             sender.title = "수정"
             backButton.title = "나가기"
             switchingImageAddingViewDisplayMode()
+            UIView.animate(withDuration: 0.5) {
+                self.noticeLabel.transform = .identity
+                self.noticeLabel.alpha = 0.0
+            }
         }
     }
     
@@ -98,7 +102,8 @@ class MemoDetailViewController: CreateNewMemoViewController {
         if self.children.count > 0{
             self.children.forEach({ $0.willMove(toParent: nil); $0.view.removeFromSuperview(); $0.removeFromParent() })
         }
-        collectionForEdit.imagesToAdd = memo.images?.imageArray()
+        collectionForEdit.delegate = self
+        collectionForEdit.imagesToAdd = memo.images?.convertToMyImageTypeArray()
         DispatchQueue.main.async {
             self.add(childVC: self.collectionForEdit, to: self.addImageViewContainer)
         }
@@ -113,7 +118,7 @@ class MemoDetailViewController: CreateNewMemoViewController {
         }
         DispatchQueue.main.async {
             self.add(childVC: collectionForDisplay, to: self.addImageViewContainer)
-            if self.memo.images?.imageArray() == nil{
+            if self.memo.images?.convertToMyImageTypeArray() == nil{
                 collectionForDisplay.showEmptyStateViewOnDetailVC()
             }
         }
@@ -126,22 +131,20 @@ class MemoDetailViewController: CreateNewMemoViewController {
             return false
         }
         guard let memo = memoTextView.text,
-              memo.count > 0 else{
+              memo.count > 0, memo != placeholderTextForTextView else{
             presentAlertOnMainThread(title: "메모가 없습니다.", message: "메모를 입력하세요")
             return false
         }
         
-        if let imageForCoreData = collectionForEdit.imagesToAdd?.coreDataRepresentation() {
+        if let imageForCoreData = collectionForEdit.imagesToAdd?.convertToCoreDataRepresentation() {
             if isFilteredBefore {
                 let memoDateInfilteredList = DataManager.shared.filteredMemoList[indexPath.row].createdDate
                 if let index = DataManager.shared.memoList.firstIndex(where: {$0.createdDate == memoDateInfilteredList}){
                     DataManager.shared.editMemo(index: index, title: title, memo: memo, images: imageForCoreData)
-//                    DataManager.shared.fetchMemo()
                     self.memo = DataManager.shared.memoList.first
                 }
             } else {
                 DataManager.shared.editMemo(index: indexPath.row, title: title, memo: memo, images: imageForCoreData)
-//                DataManager.shared.fetchMemo()
                 self.memo = DataManager.shared.memoList.first
             }
         } else {
@@ -149,12 +152,10 @@ class MemoDetailViewController: CreateNewMemoViewController {
                 let memoDate = DataManager.shared.filteredMemoList[indexPath.row].createdDate
                 if let index = DataManager.shared.memoList.firstIndex(where: {$0.createdDate == memoDate}){
                     DataManager.shared.editMemo(index: index, title: title, memo: memo, images: nil)
-//                    DataManager.shared.fetchMemo()
                     self.memo = DataManager.shared.memoList.first
                 }
             } else {
                 DataManager.shared.editMemo(index: indexPath.row, title: title, memo: memo, images: nil)
-//                DataManager.shared.fetchMemo()
                 self.memo = DataManager.shared.memoList.first
             }
         }
@@ -188,5 +189,18 @@ class MemoDetailViewController: CreateNewMemoViewController {
         print("DetailVC Deinit")
     }
     
+    override func collectionViewHaveImageMoreThanOne(isHave: Bool) {
+        if isHave {
+            UIView.animate(withDuration: 0.5) {
+                self.noticeLabel.transform = CGAffineTransform(translationX: 0, y: -self.noticeLabel.frame.size.height)
+                self.noticeLabel.alpha = 1.0
+            }
+        } else {
+            UIView.animate(withDuration: 0.5) {
+                self.noticeLabel.transform = .identity
+                self.noticeLabel.alpha = 0.0
+            }
+        }
+    }
 
 }

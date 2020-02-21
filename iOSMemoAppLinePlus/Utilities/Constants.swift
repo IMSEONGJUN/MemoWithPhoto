@@ -24,7 +24,7 @@ enum ImageLoadError: String, Error {
 
 enum PlaceHolderImages {
     static let defaultImage = UIImage(named: "noImageThumnail")
-    static let noImage = UIImage(named: "noimage")
+    static let imageLoadFail = UIImage(named: "noimage")
     static let loading = UIImage(named: "loading")
     static let removeImage = UIImage(named: "remove")
     static let next = UIImage(named: "goNext")

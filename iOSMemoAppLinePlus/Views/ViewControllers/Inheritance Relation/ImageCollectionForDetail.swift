@@ -27,7 +27,7 @@ class ImageCollectionForDetail: UIViewController {
             return
         }
         self.memo = detailVC.memo
-        if self.memo.images?.imageArray()?.isEmpty ?? true {
+        if self.memo.images?.convertToMyImageTypeArray()?.isEmpty ?? true {
             if self.children.count > 0{
                 self.children.forEach({ $0.willMove(toParent: nil); $0.view.removeFromSuperview(); $0.removeFromParent() })
             }
@@ -83,12 +83,12 @@ class ImageCollectionForDetail: UIViewController {
 
 extension ImageCollectionForDetail: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return memo.images?.imageArray()?.count ?? 0
+        return memo.images?.convertToMyImageTypeArray()?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImageCellForCollection.identifier, for: indexPath) as! ImageCellForCollection
-        guard let images = memo.images?.imageArray() else {
+        guard let images = memo.images?.convertToMyImageTypeArray() else {
             cell.imageView.image = PlaceHolderImages.defaultImage
             return cell
         }
@@ -102,7 +102,7 @@ extension ImageCollectionForDetail: UICollectionViewDataSource {
             NetworkManager.shared.downLoadImage(from: val) { (result) in
                 switch result {
                 case .failure(_):
-                    cell.imageView.image = PlaceHolderImages.noImage
+                    cell.imageView.image = PlaceHolderImages.imageLoadFail
                 case .success(let image):
                     cell.imageView.image = image
                 }

@@ -28,8 +28,8 @@ class BodyLabel: UILabel {
         textColor = MyColors.body
         font = UIFont.preferredFont(forTextStyle: .body)
         adjustsFontSizeToFitWidth = true
-        minimumScaleFactor = 0.75
-        lineBreakMode = .byWordWrapping
+        minimumScaleFactor = 0.9
+        lineBreakMode = .byCharWrapping
         translatesAutoresizingMaskIntoConstraints = false
     }
 }

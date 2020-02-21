@@ -8,19 +8,13 @@
 
 import UIKit
 
-//protocol EmptyStateViewDelegate: class {
-//    func presentImageSourceSelection(view: EmptyStateView) // 여기부터
-//}
-
-class EmptyStateView: UIViewController {
+final class EmptyStateView: UIViewController {
     
     let messageLabel = NotiLabel(textAlignment: .center, fontSize: 18)
     let logoImageView = UIImageView()
     let createNewButton = UIButton()
     
-    var isOnTheCreateVC = false
-    
-//    weak var delegate: EmptyStateViewDelegate?
+    var isOnTheCreateNewOrDetailVC = false
     
     var token: NSObjectProtocol?
     
@@ -67,7 +61,7 @@ class EmptyStateView: UIViewController {
     
     private func setConstraints() {
         NSLayoutConstraint.activate([
-            logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -10),
+            logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             logoImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             logoImageView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.2),
             logoImageView.heightAnchor.constraint(equalTo: logoImageView.widthAnchor),
@@ -83,14 +77,14 @@ class EmptyStateView: UIViewController {
     }
     
     private func setNotiObserver() {
-        if isOnTheCreateVC {
+        if isOnTheCreateNewOrDetailVC {
             token = NotificationCenter.default.addObserver(forName: EmptyStateView.didTapNewImageAddedButton,
                                                            object: nil,
                                                            queue: OperationQueue.main,
                                                            using: { (noti) in
                                                             if let vc = self.parent as? ImageCollectionForCreateAndEdit{
                                                                 
-//                                                                self.view.removeFromSuperview()
+                                                                self.view.removeFromSuperview()
                                                                 vc.presentActionSheetToSelectImageSource()
                                                             }
             })
@@ -107,7 +101,7 @@ class EmptyStateView: UIViewController {
     }
     
     @objc private func didTapCreateNewButton() {
-        if isOnTheCreateVC {
+        if isOnTheCreateNewOrDetailVC {
             print("add image")
             NotificationCenter.default.post(name: EmptyStateView.didTapNewImageAddedButton, object: nil)
         } else {

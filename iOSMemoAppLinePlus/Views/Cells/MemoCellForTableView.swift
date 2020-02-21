@@ -36,7 +36,7 @@ class MemoCell: UITableViewCell {
     }
     
     private func reConfigureCell() {
-        if let retrievedImageArray = self.memoData.images?.imageArray(), retrievedImageArray.count != 0 {
+        if let retrievedImageArray = self.memoData.images?.convertToMyImageTypeArray(), retrievedImageArray.count != 0 {
             switch retrievedImageArray.first {
             case .image(let image):
                 self.thumnailImageView.image = image
@@ -63,7 +63,7 @@ class MemoCell: UITableViewCell {
                 case .success(let image):
                     self.thumnailImageView.image = image
                 case .failure(_):
-                    self.thumnailImageView.image = PlaceHolderImages.noImage
+                    self.thumnailImageView.image = PlaceHolderImages.imageLoadFail
                 }
             }
         }

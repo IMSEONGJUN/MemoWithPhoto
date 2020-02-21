@@ -10,13 +10,15 @@ import UIKit
 import SnapKit // Third party Library
 import MobileCoreServices
 
-protocol ImageCollectionForCreateAndEditDelegate: class {
+@objc protocol ImageCollectionForCreateAndEditDelegate: class {
     func collectionViewHaveImageMoreThanOne(isHave: Bool)
 }
 
 
 class ImageCollectionForCreateAndEdit: ImageCollectionForDetail {
 
+    // MARK: Properties
+    
     weak var delegate: ImageCollectionForCreateAndEditDelegate?
     
     let imagePicker = UIImagePickerController()
@@ -29,6 +31,7 @@ class ImageCollectionForCreateAndEdit: ImageCollectionForDetail {
                 if self.children.count > 0{
                     self.children.forEach({ $0.willMove(toParent: nil); $0.view.removeFromSuperview(); $0.removeFromParent() })
                 }
+                delegate?.collectionViewHaveImageMoreThanOne(isHave: false)
                 DispatchQueue.main.async {
                     self.showEmptyStateView(with: "사진을 등록하실 수 있습니다.", in: self.view, imageName: EmptyStateViewImageName.offerImage, superViewType: .createNew)
                 }
@@ -36,12 +39,16 @@ class ImageCollectionForCreateAndEdit: ImageCollectionForDetail {
                 if self.children.count > 0{
                     self.children.forEach({ $0.willMove(toParent: nil); $0.view.removeFromSuperview(); $0.removeFromParent() })
                 }
+                delegate?.collectionViewHaveImageMoreThanOne(isHave: true)
                 guard let createVC = self.parent as? CreateNewMemoViewController else {return}
                 guard let images = self.imagesToAdd else {return}
                 createVC.addedImages = images
             }
         }
     }
+    
+    
+    // MARK: Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,6 +63,9 @@ class ImageCollectionForCreateAndEdit: ImageCollectionForDetail {
         imagePicker.allowsEditing = true
         checkImagesArrayEmpty()
     }
+    
+    
+    // MARK: - Setup
     
     private func configure() {
         view.addSubview(addImagesButton)
@@ -87,15 +97,14 @@ class ImageCollectionForCreateAndEdit: ImageCollectionForDetail {
         collectionView.addGestureRecognizer(gesture)
     }
     
+    // MARK: - Action Handle
+    
     func presentActionSheetToSelectImageSource() {
         let alert = UIAlertController(title: "선택", message: "", preferredStyle: .actionSheet)
         let takePhoto = UIAlertAction(title: "사진 찍기", style: .default) { (_) in
             guard UIImagePickerController.isSourceTypeAvailable(.camera) else {return}
-            
             self.imagePicker.sourceType = .camera
-            self.imagePicker.mediaTypes = [kUTTypeImage, kUTTypeMovie] as [String]
             self.imagePicker.videoQuality = .typeHigh
-            
             self.present(self.imagePicker, animated: true)
         }
         let album = UIAlertAction(title: "앨범에서 선택", style: .default) { (_) in
@@ -140,8 +149,8 @@ class ImageCollectionForCreateAndEdit: ImageCollectionForDetail {
         }
     }
     
-    func checkImageSourceTypeAndSetValue(checkObject: MyImageTypes, for cell: ImageCellForCollection)
-     {
+    
+    func checkImageSourceTypeAndSetValue(checkObject: MyImageTypes, for cell: ImageCellForCollection) {
         switch checkObject {
         case .image(let image):
             cell.imageView.image = image
@@ -150,20 +159,19 @@ class ImageCollectionForCreateAndEdit: ImageCollectionForDetail {
             NetworkManager.shared.downLoadImage(from: urlString) { (result) in
                 switch result {
                 case .failure(_):
-                    cell.imageView.image = PlaceHolderImages.noImage
+                    cell.imageView.image = PlaceHolderImages.imageLoadFail
                 case .success(let image):
                     cell.imageView.image = image
                 }
             }
         }
-//        return cell
     }
     
     deinit{
         print("Collection for Create&Edit Deinit")
     }
     
-    // MARK: - Overridden and Just UICollectionView DataSource Method
+    // MARK: - Overridden and Just UICollectionViewDataSource Method
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return imagesToAdd?.count ?? 0
@@ -190,7 +198,7 @@ class ImageCollectionForCreateAndEdit: ImageCollectionForDetail {
         imagesToAdd.insert(element, at: destination)
     }
     
-    // MARK: - Overridden UICollectionView Delegate Method
+    // MARK: - Overridden UICollectionViewDelegate Method
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("select in createVC")
@@ -198,7 +206,7 @@ class ImageCollectionForCreateAndEdit: ImageCollectionForDetail {
 }
 
 
-// MARK: - UIImagePickerController Delegate Method
+    // MARK: - UIImagePickerControllerDelegate
 
 extension ImageCollectionForCreateAndEdit: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -225,6 +233,8 @@ extension ImageCollectionForCreateAndEdit: UIImagePickerControllerDelegate, UINa
     }
 }
 
+    // MARK: - ImageCellForCollectionDelegate
+
 extension ImageCollectionForCreateAndEdit: ImageCellForCollectionDelegate {
     
     func didTapRemoveButtonOnImage(in cell: ImageCellForCollection) {
@@ -238,6 +248,8 @@ extension ImageCollectionForCreateAndEdit: ImageCellForCollectionDelegate {
     }
     
 }
+
+    // MARK: - LoadImageFromURLViewControllerDelegate
 
 extension ImageCollectionForCreateAndEdit: LoadImageFromURLViewControllerDelegate {
     func passUrlString(urlString: MyImageTypes) {

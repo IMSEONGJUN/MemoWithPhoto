@@ -16,7 +16,7 @@ class CreateNewMemoViewController: UIViewController {
     let placeholderTextForTextView = "메모 내용을 입력하세요."
     var isMemoEditing = true
     
-    let noticeLabel = UILabel()
+    let noticeLabel = TitleLabel(textAlignment: .left, fontSize: 15)
     
     var addedImages = [MyImageTypes]()
     
@@ -36,14 +36,16 @@ class CreateNewMemoViewController: UIViewController {
     }
     
     func addChildViewController() {
+        imageCollectionVC.delegate = self
         add(childVC: imageCollectionVC, to: addImageViewContainer)
     }
     
     private func setupViews() {
         view.backgroundColor = .white
-        [titleTextField, memoTextView, addImageViewContainer].forEach({view.addSubview($0)})
+        [titleTextField, memoTextView, noticeLabel, addImageViewContainer].forEach({view.addSubview($0)})
         configureTitleTextField()
         configureMemoTextView()
+        configureNoticeLabel()
     }
     
     func setupNavigationBar() {
@@ -79,6 +81,11 @@ class CreateNewMemoViewController: UIViewController {
         memoTextView.delegate = self
     }
     
+    func configureNoticeLabel() {
+        noticeLabel.text = " 사진을 꾹 누르면 이동이 가능합니다."
+        noticeLabel.alpha = 0
+    }
+    
     private func setConstraints() {
         let topInset:CGFloat = topbarHeight + 10
         let bottomInset:CGFloat = 10
@@ -104,6 +111,11 @@ class CreateNewMemoViewController: UIViewController {
             $0.top.equalTo(memoTextView.snp.bottom).offset(memoAndImagePadding)
             $0.bottom.equalToSuperview().offset(-bottomInset)
         }
+        
+        noticeLabel.snp.makeConstraints {
+            $0.top.leading.equalTo(addImageViewContainer)
+        }
+        
     }
     
     private func createDismissKeyboardTapGesture() {
@@ -133,7 +145,7 @@ class CreateNewMemoViewController: UIViewController {
         if addedImages.isEmpty {
             DataManager.shared.addNewMemo(title: title, memo: memo, images: nil)
         } else {
-            guard let coreDataObjectArray = addedImages.coreDataRepresentation() else {return}
+            guard let coreDataObjectArray = addedImages.convertToCoreDataRepresentation() else {return}
             DataManager.shared.addNewMemo(title: title, memo: memo, images: coreDataObjectArray)
         }
         
@@ -192,4 +204,24 @@ extension CreateNewMemoViewController: UITextViewDelegate {
             textView.textColor = .lightGray
         }
     }
+}
+
+extension CreateNewMemoViewController: ImageCollectionForCreateAndEditDelegate {
+    func collectionViewHaveImageMoreThanOne(isHave: Bool) {
+        if isHave {
+            UIView.animate(withDuration: 0.5) {
+                self.noticeLabel.transform = CGAffineTransform(translationX: 0, y: -self.noticeLabel.frame.size.height)
+                self.noticeLabel.alpha = 1.0
+            }
+        } else {
+            UIView.animate(withDuration: 0.5) {
+                self.noticeLabel.transform = .identity
+                self.noticeLabel.alpha = 0.0
+            }
+        }
+    }
+    
+    
+    
+    
 }

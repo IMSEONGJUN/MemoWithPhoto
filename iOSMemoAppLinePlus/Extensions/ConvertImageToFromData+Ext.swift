@@ -10,7 +10,7 @@ import UIKit
 
 extension Array where Element == MyImageTypes {
     
-    func coreDataRepresentation() -> Data? {
+    func convertToCoreDataRepresentation() -> Data? {
         let CDataArray = NSMutableArray()
 
         for img in self {
@@ -35,7 +35,7 @@ extension Array where Element == MyImageTypes {
 
 extension Data {
 
-    func imageArray() -> [MyImageTypes]? {
+    func convertToMyImageTypeArray() -> [MyImageTypes]? {
         var myImageArray = [MyImageTypes]()
         
         if let mySavedData = NSKeyedUnarchiver.unarchiveObject(with: self) as? NSArray {

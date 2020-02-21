@@ -127,14 +127,14 @@ class LoadImageFromURLViewController: UIViewController {
                 }
             case .failure(let error):
                 self.presentAlertOnMainThread(title: "에러", message: error.rawValue)
-                DispatchQueue.main.async { self.tempImageView.image = PlaceHolderImages.noImage }
+                DispatchQueue.main.async { self.tempImageView.image = PlaceHolderImages.imageLoadFail }
             }
         }
     }
     
     private func passDataToParentVC() {
         guard tempImageView.image != nil else { return }
-        guard tempImageView.image != PlaceHolderImages.noImage else {
+        guard tempImageView.image != PlaceHolderImages.imageLoadFail else {
             presentAlertOnMainThread(title: "알림", message: "이미지를 불러오지 못했습니다. \n 다시 시도해주세요.")
             return
         }

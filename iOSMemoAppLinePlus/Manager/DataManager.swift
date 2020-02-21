@@ -44,7 +44,6 @@ final class DataManager {
         memoToEdit.recentlyEditedDate = Date()
         
         memoList.remove(at: index)
-        
         memoList.insert(memoToEdit, at: 0)
         
         saveContext()
