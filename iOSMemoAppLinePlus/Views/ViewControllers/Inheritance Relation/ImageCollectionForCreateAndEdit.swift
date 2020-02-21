@@ -36,9 +36,7 @@ class ImageCollectionForCreateAndEdit: ImageCollectionForDetail {
                     self.showEmptyStateView(with: "사진을 등록하실 수 있습니다.", in: self.view, imageName: EmptyStateViewImageName.offerImage, superViewType: .createNew)
                 }
             } else {
-                if self.children.count > 0{
-                    self.children.forEach({ $0.willMove(toParent: nil); $0.view.removeFromSuperview(); $0.removeFromParent() })
-                }
+                checkSelfHaveChildrenVC(on: self)
                 delegate?.collectionViewHaveImageMoreThanOne(isHave: true)
                 guard let createVC = self.parent as? CreateNewMemoViewController else {return}
                 guard let images = self.imagesToAdd else {return}
@@ -79,9 +77,7 @@ class ImageCollectionForCreateAndEdit: ImageCollectionForDetail {
     
     private func checkImagesArrayEmpty() {
         if imagesToAdd?.isEmpty ?? true {
-            if self.children.count > 0{
-                self.children.forEach({ $0.willMove(toParent: nil); $0.view.removeFromSuperview(); $0.removeFromParent() })
-            }
+            checkSelfHaveChildrenVC(on: self)
             DispatchQueue.main.async {
                 self.showEmptyStateView(with: "사진을 등록하실 수 있습니다.", in: self.view, imageName: EmptyStateViewImageName.offerImage,
                 superViewType: .createNew)

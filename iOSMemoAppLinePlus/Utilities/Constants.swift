@@ -39,6 +39,19 @@ enum MyColors {
     static let body = UIColor(red: 151/255, green: 134/255, blue: 125/255, alpha: 1)
 }
 
+enum MyImageTypes {
+    case image(UIImage)
+    case urlString(String)
+}
+
+enum ButtonsNameOnNavigationBar {
+    static let save = "저장"
+    static let cancel = "취소"
+    static let edit = "수정"
+    static let remove = "삭제"
+    static let back = "나가기"
+}
+
 enum EmptyStateViewImageName {
     static let list = "list"
     static let noPicture = "noPicture"
@@ -51,16 +64,6 @@ enum VeryBottomViewTypeOfEmptyStateView {
     case createNew
 }
 
-enum MyImageTypes {
-    case image(UIImage)
-    case urlString(String)
-}
-
-
-enum MainThumnailImageType : Int {
-    case imageType = 0
-    case urlType = 1
-}
 
 enum ScreenSize {
     static let width        = UIScreen.main.bounds.size.width

@@ -36,6 +36,7 @@ class CreateNewMemoViewController: UIViewController {
     }
     
     func addChildViewController() {
+        checkSelfHaveChildrenVC(on: self)
         imageCollectionVC.delegate = self
         add(childVC: imageCollectionVC, to: addImageViewContainer)
     }
@@ -50,8 +51,8 @@ class CreateNewMemoViewController: UIViewController {
     
     func setupNavigationBar() {
         title = "새 메모"
-        let cancelButton = UIBarButtonItem(title: "취소", style: .plain, target: self, action: #selector(didTapCancelButton))
-        let saveButton = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(didTapSaveButton))
+        let cancelButton = UIBarButtonItem(title: ButtonsNameOnNavigationBar.cancel, style: .plain, target: self, action: #selector(didTapCancelButton))
+        let saveButton = UIBarButtonItem(title: ButtonsNameOnNavigationBar.save, style: .plain, target: self, action: #selector(didTapSaveButton))
         
         navigationItem.leftBarButtonItem = cancelButton
         navigationItem.rightBarButtonItem = saveButton
@@ -208,15 +209,17 @@ extension CreateNewMemoViewController: UITextViewDelegate {
 
 extension CreateNewMemoViewController: ImageCollectionForCreateAndEditDelegate {
     func collectionViewHaveImageMoreThanOne(isHave: Bool) {
-        if isHave {
-            UIView.animate(withDuration: 0.5) {
-                self.noticeLabel.transform = CGAffineTransform(translationX: 0, y: -self.noticeLabel.frame.size.height)
-                self.noticeLabel.alpha = 1.0
-            }
-        } else {
-            UIView.animate(withDuration: 0.5) {
-                self.noticeLabel.transform = .identity
-                self.noticeLabel.alpha = 0.0
+        DispatchQueue.main.async {
+            if isHave {
+                UIView.animate(withDuration: 0.5) {
+                    self.noticeLabel.transform = CGAffineTransform(translationX: 0, y: -self.noticeLabel.frame.size.height)
+                    self.noticeLabel.alpha = 1.0
+                }
+            } else {
+                UIView.animate(withDuration: 0.5) {
+                    self.noticeLabel.transform = .identity
+                    self.noticeLabel.alpha = 0.0
+                }
             }
         }
     }

@@ -38,9 +38,7 @@ class MemoListViewController: UIViewController {
                                         imageName: EmptyStateViewImageName.list, superViewType: .memoList)
             }
         } else {
-            if self.children.count > 0{
-                self.children.forEach({ $0.willMove(toParent: nil); $0.view.removeFromSuperview(); $0.removeFromParent() })
-            }
+            checkSelfHaveChildrenVC(on: self)
             tableView.reloadData()
         }
     }
@@ -89,9 +87,7 @@ class MemoListViewController: UIViewController {
     
     @objc func didTapAddNewMemoButton() {
         DispatchQueue.main.async {
-            if self.children.count > 0{
-                self.children.forEach({ $0.willMove(toParent: nil); $0.view.removeFromSuperview(); $0.removeFromParent() })
-            }
+            self.checkSelfHaveChildrenVC(on: self)
         }
         let createNewMemoVC = UINavigationController(rootViewController: CreateNewMemoViewController())
         createNewMemoVC.modalPresentationStyle = .fullScreen
@@ -204,6 +200,8 @@ extension MemoListViewController: MemoDetailViewControllerDelegate {
         self.tableView.deleteRows(at: [indexPath], with: .left)
         self.isSearching = isSearching
         self.tableView.reloadData()
+        self.searchBar.text?.removeAll()
+        self.searchBar.resignFirstResponder()
     }
     
     

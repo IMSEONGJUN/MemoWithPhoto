@@ -23,7 +23,7 @@ class MemoDetailViewController: CreateNewMemoViewController {
     weak var delegate: MemoDetailViewControllerDelegate?
     
     var backButton = UIBarButtonItem()
-    
+    var editButton = UIBarButtonItem()
     override func viewDidLoad() {
         super.viewDidLoad()
         addImageViewContainer.backgroundColor = .white
@@ -37,14 +37,19 @@ class MemoDetailViewController: CreateNewMemoViewController {
     }
     
     override func addChildViewController() {
-        let collectionForDisplay = ImageCollectionForDetail()
-        add(childVC: collectionForDisplay, to: addImageViewContainer)
+        addChildToSelf()
+    }
+    
+    func addChildToSelf() {
+        checkSelfHaveChildrenVC(on: self)
+        let collectionForDetail = ImageCollectionForDetail()
+        add(childVC: collectionForDetail, to: addImageViewContainer)
     }
     
     override func setupNavigationBar() {
-        backButton = UIBarButtonItem(title: "나가기", style: .plain, target: self, action: #selector(didTapBackButton))
-        let editButton = UIBarButtonItem(title: "수정", style: .plain, target: self, action: #selector(didTapEditButton(_:)))
-        let removeButton = UIBarButtonItem(title: "삭제", style: .plain, target: self, action: #selector(didTapRemoveButton))
+        backButton = UIBarButtonItem(title: ButtonsNameOnNavigationBar.back, style: .plain, target: self, action: #selector(didTapBackButton(_:)))
+        editButton = UIBarButtonItem(title: ButtonsNameOnNavigationBar.edit, style: .plain, target: self, action: #selector(didTapEditButton(_:)))
+        let removeButton = UIBarButtonItem(title: ButtonsNameOnNavigationBar.remove, style: .plain, target: self, action: #selector(didTapRemoveButton))
         navigationItem.leftBarButtonItem = backButton
         navigationItem.rightBarButtonItems = [editButton, removeButton]
     }
@@ -67,8 +72,27 @@ class MemoDetailViewController: CreateNewMemoViewController {
         memoTextView.isEditable = false
     }
     
-    @objc private func didTapBackButton() {
-        navigationController?.popViewController(animated: true)
+    @objc private func didTapBackButton(_ sender: UIBarButtonItem) {
+        switch sender.title {
+        case ButtonsNameOnNavigationBar.back:
+             navigationController?.popViewController(animated: true)
+        case ButtonsNameOnNavigationBar.cancel:
+            configure()
+            setTextEditingDisabled()
+            addChildToSelf()
+            DispatchQueue.main.async {
+                self.editButton.title = ButtonsNameOnNavigationBar.edit
+                self.backButton.title = ButtonsNameOnNavigationBar.back
+                UIView.animate(withDuration: 0.5) {
+                    self.noticeLabel.transform = .identity
+                    self.noticeLabel.alpha = 0.0
+                }
+            }
+            print("취소")
+        default:
+            break
+        }
+        
     }
     
     @objc private func didTapRemoveButton() {
@@ -76,20 +100,20 @@ class MemoDetailViewController: CreateNewMemoViewController {
     }
     
     @objc private func didTapEditButton(_ sender: UIBarButtonItem) {
-        if sender.title == "수정" {
+        if sender.title == ButtonsNameOnNavigationBar.edit {
             titleTextField.isUserInteractionEnabled = true
             memoTextView.isEditable = true
             titleTextField.becomeFirstResponder()
-            sender.title = "저장"
-            backButton.title = "취소"
+            sender.title = ButtonsNameOnNavigationBar.save
+            backButton.title = ButtonsNameOnNavigationBar.cancel
             switchingImageAddingViewEditMode()
             
-        } else if sender.title == "저장" {
+        } else if sender.title == ButtonsNameOnNavigationBar.save {
             let success = saveEditedMemo()
             guard success else {return}
             setTextEditingDisabled()
-            sender.title = "수정"
-            backButton.title = "나가기"
+            sender.title = ButtonsNameOnNavigationBar.edit
+            backButton.title = ButtonsNameOnNavigationBar.back
             switchingImageAddingViewDisplayMode()
             UIView.animate(withDuration: 0.5) {
                 self.noticeLabel.transform = .identity
@@ -99,9 +123,7 @@ class MemoDetailViewController: CreateNewMemoViewController {
     }
     
     func switchingImageAddingViewEditMode() {
-        if self.children.count > 0{
-            self.children.forEach({ $0.willMove(toParent: nil); $0.view.removeFromSuperview(); $0.removeFromParent() })
-        }
+        checkSelfHaveChildrenVC(on: self)
         collectionForEdit.delegate = self
         collectionForEdit.imagesToAdd = memo.images?.convertToMyImageTypeArray()
         DispatchQueue.main.async {
@@ -113,9 +135,7 @@ class MemoDetailViewController: CreateNewMemoViewController {
         let collectionForDisplay = ImageCollectionForDetail()
         collectionForDisplay.memo = DataManager.shared.memoList.first
 
-        if self.children.count > 0{
-            self.children.forEach({ $0.willMove(toParent: nil); $0.view.removeFromSuperview(); $0.removeFromParent() })
-        }
+        checkSelfHaveChildrenVC(on: self)
         DispatchQueue.main.async {
             self.add(childVC: collectionForDisplay, to: self.addImageViewContainer)
             if self.memo.images?.convertToMyImageTypeArray() == nil{
@@ -141,24 +161,25 @@ class MemoDetailViewController: CreateNewMemoViewController {
                 let memoDateInfilteredList = DataManager.shared.filteredMemoList[indexPath.row].createdDate
                 if let index = DataManager.shared.memoList.firstIndex(where: {$0.createdDate == memoDateInfilteredList}){
                     DataManager.shared.editMemo(index: index, title: title, memo: memo, images: imageForCoreData)
-                    self.memo = DataManager.shared.memoList.first
+//                    self.memo = DataManager.shared.memoList.first
                 }
             } else {
                 DataManager.shared.editMemo(index: indexPath.row, title: title, memo: memo, images: imageForCoreData)
-                self.memo = DataManager.shared.memoList.first
+//                self.memo = DataManager.shared.memoList.first
             }
         } else {
             if isFilteredBefore {
-                let memoDate = DataManager.shared.filteredMemoList[indexPath.row].createdDate
-                if let index = DataManager.shared.memoList.firstIndex(where: {$0.createdDate == memoDate}){
+                let memoDateInfilteredList = DataManager.shared.filteredMemoList[indexPath.row].createdDate
+                if let index = DataManager.shared.memoList.firstIndex(where: {$0.createdDate == memoDateInfilteredList}){
                     DataManager.shared.editMemo(index: index, title: title, memo: memo, images: nil)
-                    self.memo = DataManager.shared.memoList.first
+//                    self.memo = DataManager.shared.memoList.first
                 }
             } else {
                 DataManager.shared.editMemo(index: indexPath.row, title: title, memo: memo, images: nil)
-                self.memo = DataManager.shared.memoList.first
+                
             }
         }
+        self.memo = DataManager.shared.memoList.first
         return true
         
     }
@@ -166,16 +187,19 @@ class MemoDetailViewController: CreateNewMemoViewController {
     func deleteOrNotAlert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let ok = UIAlertAction(title: "네", style: .default) { (_) in
-            if self.isFilteredBefore {
-                let commit = DataManager.shared.filteredMemoList[self.indexPath.row]
-                DataManager.shared.filteredMemoList.remove(at: self.indexPath.row)
-                DataManager.shared.mainContext.delete(commit)
-            } else {
-                let commit = DataManager.shared.memoList[self.indexPath.row]
-                DataManager.shared.mainContext.delete(commit)
-            }
-            DataManager.shared.fetchMemo()
-            DataManager.shared.saveContext()
+//            if self.isFilteredBefore {
+                DataManager.shared.removeMemo(indexPath: self.indexPath, isInFilteredMemoList: self.isFilteredBefore)
+//                let commit = DataManager.shared.filteredMemoList[self.indexPath.row]
+//                DataManager.shared.filteredMemoList.remove(at: self.indexPath.row)
+//                DataManager.shared.mainContext.delete(commit)
+//            } else {
+//                DataManager.shared.removeMemo(indexPath: self.indexPath, isInFilteredMemoList: false)
+//                let commit = DataManager.shared.memoList[self.indexPath.row]
+//                DataManager.shared.mainContext.delete(commit)
+//            }
+//            DataManager.shared.fetchMemo()
+//            DataManager.shared.saveContext()
+
             self.delegate?.removeTableViewRow(indexPath: self.indexPath, isSearching: false)
             self.navigationController?.popViewController(animated: true)
         }
@@ -190,17 +214,20 @@ class MemoDetailViewController: CreateNewMemoViewController {
     }
     
     override func collectionViewHaveImageMoreThanOne(isHave: Bool) {
-        if isHave {
-            UIView.animate(withDuration: 0.5) {
-                self.noticeLabel.transform = CGAffineTransform(translationX: 0, y: -self.noticeLabel.frame.size.height)
-                self.noticeLabel.alpha = 1.0
-            }
-        } else {
-            UIView.animate(withDuration: 0.5) {
-                self.noticeLabel.transform = .identity
-                self.noticeLabel.alpha = 0.0
+        DispatchQueue.main.async {
+            if isHave {
+                UIView.animate(withDuration: 0.5) {
+                    self.noticeLabel.transform = CGAffineTransform(translationX: 0, y: -self.noticeLabel.frame.size.height)
+                    self.noticeLabel.alpha = 1.0
+                }
+            } else {
+                UIView.animate(withDuration: 0.5) {
+                    self.noticeLabel.transform = .identity
+                    self.noticeLabel.alpha = 0.0
+                }
             }
         }
+        
     }
 
 }

@@ -41,6 +41,12 @@ extension UIViewController {
         emptyStateView.didMove(toParent: self)
     }
     
+    func checkSelfHaveChildrenVC(on selfView: UIViewController ) {
+        if selfView.children.count > 0{
+            selfView.children.forEach({ $0.willMove(toParent: nil); $0.view.removeFromSuperview(); $0.removeFromParent() })
+        }
+    }
+    
     func showLoadingView() {
         containerView = UIView(frame: view.bounds)
         view.addSubview(containerView)
