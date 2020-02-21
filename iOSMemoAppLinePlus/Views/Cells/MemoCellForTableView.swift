@@ -118,12 +118,6 @@ class MemoCell: UITableViewCell {
             somePartsOfMemoLabel.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: somePartsOfMemoLabelHeightRatio)
         ])
         
-        dateLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            dateLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            dateLabel.leadingAnchor.constraint(equalTo: somePartsOfMemoLabel.trailingAnchor, constant: 30),
-        ])
-        
         nextImage.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             nextImage.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
@@ -131,6 +125,14 @@ class MemoCell: UITableViewCell {
             nextImage.widthAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.1),
             nextImage.heightAnchor.constraint(equalTo: nextImage.widthAnchor)
         ])
+        
+        dateLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            dateLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            dateLabel.trailingAnchor.constraint(equalTo: nextImage.leadingAnchor, constant: -15),
+        ])
+        
+        
     }
     
     func set(memo: Memo) {

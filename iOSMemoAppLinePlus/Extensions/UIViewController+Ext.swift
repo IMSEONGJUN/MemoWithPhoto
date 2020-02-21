@@ -12,6 +12,10 @@ fileprivate var containerView: UIView!
 
 extension UIViewController {
     
+    var topbarHeight: CGFloat {
+       return UIApplication.shared.statusBarFrame.size.height +
+                (self.navigationController?.navigationBar.frame.height ?? 0.0)
+    }
     
     func presentAlertOnMainThread(title: String, message: String, buttonTitle: String = "확인") {
         DispatchQueue.main.async {
@@ -37,16 +41,6 @@ extension UIViewController {
         emptyStateView.didMove(toParent: self)
     }
     
-    var topbarHeight: CGFloat {
-//        if #available(iOS 13.0, *) {
-//           return UIApplication.shared.statusBarFrame.size.height + (self.navigationController?.navigationBar.frame.height ?? 0.0)
-//        } else {
-       return UIApplication.shared.statusBarFrame.size.height +
-                (self.navigationController?.navigationBar.frame.height ?? 0.0)
-//        }
-        
-    }
-    
     func showLoadingView() {
         containerView = UIView(frame: view.bounds)
         view.addSubview(containerView)
@@ -62,7 +56,6 @@ extension UIViewController {
         containerView.addSubview(activityIndicator)
         
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
-        
         NSLayoutConstraint.activate([
             activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -70),
             activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor)

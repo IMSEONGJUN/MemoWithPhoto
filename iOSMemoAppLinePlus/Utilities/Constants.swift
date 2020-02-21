@@ -23,7 +23,7 @@ enum ImageLoadError: String, Error {
 }
 
 enum PlaceHolderImages {
-    static let defaultImage = UIImage(named: "photo")
+    static let defaultImage = UIImage(named: "noImageThumnail")
     static let noImage = UIImage(named: "noimage")
     static let loading = UIImage(named: "loading")
     static let removeImage = UIImage(named: "remove")
@@ -41,7 +41,7 @@ enum MyColors {
 
 enum EmptyStateViewImageName {
     static let list = "list"
-    static let noPicture = "picture"
+    static let noPicture = "noPicture"
     static let offerImage = "offerPhoto"
 }
 

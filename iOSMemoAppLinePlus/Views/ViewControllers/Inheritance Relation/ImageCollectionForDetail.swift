@@ -45,9 +45,7 @@ class ImageCollectionForDetail: UIViewController {
         configureFlowlayout()
         
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        
         view.addSubview(collectionView)
-        
         setConstraints()
         
         collectionView.dataSource = self

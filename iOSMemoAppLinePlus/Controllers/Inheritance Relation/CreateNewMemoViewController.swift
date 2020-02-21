@@ -125,7 +125,7 @@ class CreateNewMemoViewController: UIViewController {
             return
         }
         guard let memo = memoTextView.text,
-              memo.count > 0 else{
+              memo.count > 0, memo != placeholderTextForTextView else{
             presentAlertOnMainThread(title: "메모가 없습니다.", message: "메모를 입력하세요")
             memoTextView.becomeFirstResponder()
             return

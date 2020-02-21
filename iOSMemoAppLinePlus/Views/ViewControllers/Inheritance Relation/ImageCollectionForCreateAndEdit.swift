@@ -10,9 +10,14 @@ import UIKit
 import SnapKit // Third party Library
 import MobileCoreServices
 
+protocol ImageCollectionForCreateAndEditDelegate: class {
+    func collectionViewHaveImageMoreThanOne(isHave: Bool)
+}
+
 
 class ImageCollectionForCreateAndEdit: ImageCollectionForDetail {
 
+    weak var delegate: ImageCollectionForCreateAndEditDelegate?
     
     let imagePicker = UIImagePickerController()
     
@@ -135,6 +140,25 @@ class ImageCollectionForCreateAndEdit: ImageCollectionForDetail {
         }
     }
     
+    func checkImageSourceTypeAndSetValue(checkObject: MyImageTypes, for cell: ImageCellForCollection)
+     {
+        switch checkObject {
+        case .image(let image):
+            cell.imageView.image = image
+        case .urlString(let urlString):
+            cell.imageView.image = PlaceHolderImages.loading
+            NetworkManager.shared.downLoadImage(from: urlString) { (result) in
+                switch result {
+                case .failure(_):
+                    cell.imageView.image = PlaceHolderImages.noImage
+                case .success(let image):
+                    cell.imageView.image = image
+                }
+            }
+        }
+//        return cell
+    }
+    
     deinit{
         print("Collection for Create&Edit Deinit")
     }
@@ -152,21 +176,8 @@ class ImageCollectionForCreateAndEdit: ImageCollectionForDetail {
             cell.imageView.image = PlaceHolderImages.defaultImage
             return cell
         }
+        checkImageSourceTypeAndSetValue(checkObject: image, for: cell)
         
-        switch image {
-        case .image(let image):
-            cell.imageView.image = image
-        case .urlString(let urlString):
-            cell.imageView.image = PlaceHolderImages.loading
-            NetworkManager.shared.downLoadImage(from: urlString) { (result) in
-                switch result {
-                case .failure(_):
-                    cell.imageView.image = PlaceHolderImages.noImage
-                case .success(let image):
-                    cell.imageView.image = image
-                }
-            }
-        }
         return cell
     }
     
@@ -198,22 +209,17 @@ extension ImageCollectionForCreateAndEdit: UIImagePickerControllerDelegate, UINa
             let originalImage = info[.originalImage] as! UIImage
             let editedImage = info[.editedImage] as? UIImage
             let selectedImage = editedImage ?? originalImage
+            
             if imagesToAdd == nil {
                 let initialArray = [MyImageTypes.image(selectedImage)]
                 self.imagesToAdd = initialArray
-                DispatchQueue.main.async {
-                    self.collectionView.reloadData()
-                }
             } else {
                 self.imagesToAdd.append(MyImageTypes.image(selectedImage))
-                DispatchQueue.main.async {
-                    self.collectionView.reloadData()
-                }
             }
             
-//            if picker.sourceType == .camera {
-//                UIImageWriteToSavedPhotosAlbum(selectedImage, nil, nil, nil)
-//            }
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
         }
         picker.dismiss(animated: true)
     }

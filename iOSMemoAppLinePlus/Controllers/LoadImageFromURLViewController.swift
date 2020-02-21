@@ -44,6 +44,8 @@ class LoadImageFromURLViewController: UIViewController {
             $0.addTarget(self, action: #selector(didTapButton(_:)), for: .touchUpInside)
         })
         
+        urlTextField.keyboardType = .URL
+        
         tempImageView.contentMode = .scaleAspectFit
         tempImageView.backgroundColor = MyColors.content
         
