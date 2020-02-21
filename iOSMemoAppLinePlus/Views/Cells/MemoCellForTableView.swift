@@ -17,6 +17,7 @@ class MemoCell: UITableViewCell {
     private let titleLabel = TitleLabel()
     private let somePartsOfMemoLabel = BodyLabel()
     private let dateLabel = UILabel()
+    private let nextImage = UIImageView(image: PlaceHolderImages.next)
     
     private var memoData: Memo! {
         didSet {
@@ -69,12 +70,8 @@ class MemoCell: UITableViewCell {
     }
     
     private func setupUI() {
-        [thumnailImageView, titleLabel, somePartsOfMemoLabel, dateLabel].forEach {contentView.addSubview($0)}
-        accessoryType = .disclosureIndicator
-        let accView = UIView(frame: CGRect(x: 0, y: 0, width: accessoryView?.frame.size.width ?? 0, height: 100))
-        accView.backgroundColor = MyColors.content
-        
-        accessoryView = accView
+        [thumnailImageView, titleLabel, somePartsOfMemoLabel, dateLabel, nextImage].forEach {contentView.addSubview($0)}
+
         contentView.backgroundColor = MyColors.content
         thumnailImageView.layer.cornerRadius = 12
         thumnailImageView.clipsToBounds = true
@@ -83,6 +80,7 @@ class MemoCell: UITableViewCell {
         somePartsOfMemoLabel.lineBreakMode = .byTruncatingTail
         
         dateLabel.font = UIFont.systemFont(ofSize: 12)
+        nextImage.backgroundColor = MyColors.content
     }
     
     private func setConstraints() {
@@ -124,6 +122,14 @@ class MemoCell: UITableViewCell {
         NSLayoutConstraint.activate([
             dateLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             dateLabel.leadingAnchor.constraint(equalTo: somePartsOfMemoLabel.trailingAnchor, constant: 30),
+        ])
+        
+        nextImage.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            nextImage.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            nextImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+            nextImage.widthAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.1),
+            nextImage.heightAnchor.constraint(equalTo: nextImage.widthAnchor)
         ])
     }
     

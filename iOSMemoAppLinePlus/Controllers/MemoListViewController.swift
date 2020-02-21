@@ -82,7 +82,7 @@ class MemoListViewController: UIViewController {
     func configureSearchBar() {
         searchBar.delegate = self
         searchBar.showsCancelButton = true
-        searchBar.placeholder = "Search for Keyword"
+        searchBar.placeholder = "검색"
         navigationItem.titleView = searchBar
         
     }

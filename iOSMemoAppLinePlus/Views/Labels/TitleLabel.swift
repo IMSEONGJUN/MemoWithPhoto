@@ -26,7 +26,7 @@ class TitleLabel: UILabel {
     }
     
     private func configure() {
-        textColor = .black
+        textColor = MyColors.title
         adjustsFontSizeToFitWidth = true
         minimumScaleFactor = 0.9
         lineBreakMode = .byTruncatingTail

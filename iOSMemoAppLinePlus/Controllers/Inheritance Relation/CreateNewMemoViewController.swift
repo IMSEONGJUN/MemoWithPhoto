@@ -65,7 +65,6 @@ class CreateNewMemoViewController: UIViewController {
         titleTextField.placeholder = "제목"
         titleTextField.layer.cornerRadius = 5
         titleTextField.clipsToBounds = true
-        titleTextField.becomeFirstResponder()
         titleTextField.delegate = self
     }
     
