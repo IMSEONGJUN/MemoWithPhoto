@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		634D1C3468B08D763EE9CF46 /* Pods_iOSMemoAppLinePlus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F2351EC150DD7477F8BE1FF /* Pods_iOSMemoAppLinePlus.framework */; };
+		CE45B7BB23FF53D400444371 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE45B7BA23FF53D400444371 /* ViewController.swift */; };
 		CE4967C723F46FF50056E444 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4967C623F46FF50056E444 /* AppDelegate.swift */; };
 		CE4967C923F46FF50056E444 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4967C823F46FF50056E444 /* SceneDelegate.swift */; };
 		CE4967CE23F46FF50056E444 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE4967CC23F46FF50056E444 /* Main.storyboard */; };
@@ -41,6 +42,7 @@
 		4C680145DA2140FB39CE9FDD /* Pods-iOSMemoAppLinePlus.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSMemoAppLinePlus.debug.xcconfig"; path = "Target Support Files/Pods-iOSMemoAppLinePlus/Pods-iOSMemoAppLinePlus.debug.xcconfig"; sourceTree = "<group>"; };
 		64078FE8859187D5ABB905B3 /* Pods-iOSMemoAppLinePlus.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSMemoAppLinePlus.release.xcconfig"; path = "Target Support Files/Pods-iOSMemoAppLinePlus/Pods-iOSMemoAppLinePlus.release.xcconfig"; sourceTree = "<group>"; };
 		6F2351EC150DD7477F8BE1FF /* Pods_iOSMemoAppLinePlus.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOSMemoAppLinePlus.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE45B7BA23FF53D400444371 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		CE4967C323F46FF50056E444 /* iOSMemoAppLinePlus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSMemoAppLinePlus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE4967C623F46FF50056E444 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE4967C823F46FF50056E444 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 				CE4967CC23F46FF50056E444 /* Main.storyboard */,
 				CE4967CF23F46FF60056E444 /* Assets.xcassets */,
 				CE4967D123F46FF60056E444 /* LaunchScreen.storyboard */,
+				CE45B7BA23FF53D400444371 /* ViewController.swift */,
 				CE4967D423F46FF60056E444 /* Info.plist */,
 			);
 			path = iOSMemoAppLinePlus;
@@ -375,6 +378,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE45B7BB23FF53D400444371 /* ViewController.swift in Sources */,
 				CE4967EF23F486330056E444 /* DataManager.swift in Sources */,
 				CE8CF70223F85D4A00B5DC67 /* NotiLabel.swift in Sources */,
 				CE49680623F58B7C0056E444 /* Constants.swift in Sources */,

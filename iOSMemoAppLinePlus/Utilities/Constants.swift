@@ -15,10 +15,19 @@ let formatter: DateFormatter = {
     return f
 }()
 
+enum ImageLoadError: String, Error {
+    case invalidUrl = "잘못된 URL입니다. 다시 입력해주세요."
+    case invalidResponse = "서버로부터의 응답이 잘못되었습니다. 다시 시도해주세요."
+    case unableToComplete = "이미지를 불러올 수 없습니다. 인터넷 연결상태를 체크해주세요."
+    case invaildData = "해당 URL의 이미지가 없습니다. 다시 시도해주세요."
+}
+
 enum PlaceHolderImages {
-    static let addedImage = UIImage(named: "photo")
+    static let defaultImage = UIImage(named: "photo")
     static let noImage = UIImage(named: "noimage")
     static let loading = UIImage(named: "loading")
+    static let removeImage = UIImage(named: "remove")
+    static let next = UIImage(named: "next")
 }
 
 enum MyColors {

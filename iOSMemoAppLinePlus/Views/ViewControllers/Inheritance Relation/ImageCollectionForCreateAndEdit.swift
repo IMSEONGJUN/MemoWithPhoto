@@ -149,19 +149,20 @@ class ImageCollectionForCreateAndEdit: ImageCollectionForDetail {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImageCellForCollection.identifier, for: indexPath) as! ImageCellForCollection
         cell.delegate = self
         guard let image = imagesToAdd?[indexPath.item] else {
-            cell.imageView.image = PlaceHolderImages.noImage
+            cell.imageView.image = PlaceHolderImages.defaultImage
             return cell
         }
         
         switch image {
-        case .image(let val):
-            cell.imageView.image = val
-        case .urlString(let val):
+        case .image(let image):
+            cell.imageView.image = image
+        case .urlString(let urlString):
             cell.imageView.image = PlaceHolderImages.loading
-            NetworkManager.shared.downLoadImage(from: val) { (image) in
-                if image == nil {
+            NetworkManager.shared.downLoadImage(from: urlString) { (result) in
+                switch result {
+                case .failure(_):
                     cell.imageView.image = PlaceHolderImages.noImage
-                } else {
+                case .success(let image):
                     cell.imageView.image = image
                 }
             }

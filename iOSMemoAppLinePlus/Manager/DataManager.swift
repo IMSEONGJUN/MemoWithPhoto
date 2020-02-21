@@ -12,9 +12,7 @@ import CoreData
 class DataManager {
     
     static let shared = DataManager()
-    private init() {
-        
-    }
+    private init() {}
     
     var mainContext: NSManagedObjectContext{
         return persistentContainer.viewContext
@@ -26,7 +24,7 @@ class DataManager {
     func fetchMemo() {
         let request: NSFetchRequest<Memo> = Memo.fetchRequest()
         
-        let sortByDateDesc = NSSortDescriptor(key: "recentlyModifyDate", ascending: false)
+        let sortByDateDesc = NSSortDescriptor(key: "recentlyEditedDate", ascending: false)
         request.sortDescriptors = [sortByDateDesc]
         
         do{
@@ -43,7 +41,7 @@ class DataManager {
         memoToEdit.content = memo
         memoToEdit.images = images
         memoToEdit.isEdited = isEdited
-        memoToEdit.recentlyModifyDate = Date()
+        memoToEdit.recentlyEditedDate = Date()
         
         memoList.remove(at: index)
         
@@ -73,7 +71,7 @@ class DataManager {
         newMemo.images = images
         newMemo.isEdited = false
         newMemo.createdDate = Date()
-        newMemo.recentlyModifyDate = Date()
+        newMemo.recentlyEditedDate = Date()
         
         memoList.insert(newMemo, at: index)
         
@@ -88,7 +86,6 @@ class DataManager {
           let container = NSPersistentContainer(name: "LinePlusMemo")
           container.loadPersistentStores(completionHandler: { (storeDescription, error) in
               if let error = error as NSError? {
-            
                   fatalError("Unresolved error \(error), \(error.userInfo)")
               }
           })

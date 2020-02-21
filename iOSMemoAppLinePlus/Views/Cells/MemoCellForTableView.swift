@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class MemoCell: UITableViewCell {
 
@@ -17,7 +18,7 @@ class MemoCell: UITableViewCell {
     private let somePartsOfMemoLabel = BodyLabel()
     private let dateLabel = UILabel()
     
-    var memoData: Memo! {
+    private var memoData: Memo! {
         didSet {
             reConfigureCell()
         }
@@ -33,34 +34,38 @@ class MemoCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func reConfigureCell() {
+    private func reConfigureCell() {
         if let retrievedImageArray = self.memoData.images?.imageArray(), retrievedImageArray.count != 0 {
-            
             switch retrievedImageArray.first {
-            case .image(let val):
-                self.thumnailImageView.image = val
-            case .urlString(let val):
-                self.thumnailImageView.image = PlaceHolderImages.loading
-                NetworkManager.shared.downLoadImage(from: val) { (image) in
-                    if image == nil {
-                        DispatchQueue.main.async {
-                            self.thumnailImageView.image = PlaceHolderImages.noImage
-                        }
-                    } else {
-                        DispatchQueue.main.async {
-                            self.thumnailImageView.image = image
-                        }
-                    }
-                }
+            case .image(let image):
+                self.thumnailImageView.image = image
+            case .urlString(let urlString):
+                getImageFromURL(urlString: urlString)
             default:
                 break
             }
         } else {
-            self.thumnailImageView.image = PlaceHolderImages.addedImage
+            self.thumnailImageView.image = PlaceHolderImages.defaultImage
         }
+        
         self.titleLabel.text = self.memoData.title
         self.somePartsOfMemoLabel.text = self.memoData.content
-        self.dateLabel.text = formatter.string(for: self.memoData.recentlyModifyDate)
+        self.dateLabel.text = formatter.string(for: self.memoData.recentlyEditedDate)
+    }
+    
+    private func getImageFromURL(urlString: String) {
+        self.thumnailImageView.image = PlaceHolderImages.loading
+        NetworkManager.shared.downLoadImage(from: urlString) { [weak self] result in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let image):
+                    self.thumnailImageView.image = image
+                case .failure(_):
+                    self.thumnailImageView.image = PlaceHolderImages.noImage
+                }
+            }
+        }
     }
     
     private func setupUI() {

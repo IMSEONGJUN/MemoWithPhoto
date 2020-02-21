@@ -91,21 +91,25 @@ extension ImageCollectionForDetail: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImageCellForCollection.identifier, for: indexPath) as! ImageCellForCollection
         guard let images = memo.images?.imageArray() else {
+            cell.imageView.image = PlaceHolderImages.defaultImage
             return cell
         }
+        cell.removeButton.isHidden = true
+        
         switch images[indexPath.item] {
         case .image(let val):
             cell.imageView.image = val
         case .urlString(let val):
             cell.imageView.image = PlaceHolderImages.loading
-            NetworkManager.shared.downLoadImage(from: val) { (image) in
-                if image == nil {cell.imageView.image = PlaceHolderImages.noImage}
-                else {cell.imageView.image = image}
+            NetworkManager.shared.downLoadImage(from: val) { (result) in
+                switch result {
+                case .failure(_):
+                    cell.imageView.image = PlaceHolderImages.noImage
+                case .success(let image):
+                    cell.imageView.image = image
+                }
             }
         }
-        
-        cell.removeButton.isHidden = true
-        
         return cell
     }
     

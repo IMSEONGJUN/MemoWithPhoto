@@ -33,14 +33,13 @@ class ImageCellForCollection: UICollectionViewCell {
     }
     
     private func configure() {
-        imageView.contentMode = .scaleAspectFit
         contentView.addSubview(imageView)
+        imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
         imageView.addSubview(removeButton)
         imageView.isUserInteractionEnabled = true
         
-        
-        removeButton.setImage(UIImage(named: "remove"), for: .normal)
+        removeButton.setImage(PlaceHolderImages.removeImage, for: .normal)
         removeButton.addTarget(self, action: #selector(didTapRemoveButton), for: .touchUpInside)
         removeButton.isEnabled = true
         
@@ -60,6 +59,5 @@ class ImageCellForCollection: UICollectionViewCell {
         imageView.frame = contentView.bounds
         let removeButtonSize:CGFloat = imageView.frame.size.width * removeButtonSizeRatioToImageView
         removeButton.frame = CGRect(x: imageView.frame.size.width - removeButtonSize, y: 0, width: removeButtonSize, height: removeButtonSize)
-//        imageView.bringSubviewToFront(removeButton)
     }
 }

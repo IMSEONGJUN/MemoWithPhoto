@@ -17,7 +17,7 @@ protocol LoadImageFromURLViewControllerDelegate: class {
 class LoadImageFromURLViewController: UIViewController {
 
     let urlTextField = UITextField()
-    var tempURLStorage = ""
+    private var tempURLStorage = ""
     
     weak var delegate: LoadImageFromURLViewControllerDelegate!
     
@@ -104,36 +104,42 @@ class LoadImageFromURLViewController: UIViewController {
         case cancelButton:
             self.dismiss(animated: true, completion: nil)
         case useImageButton:
-            guard tempImageView.image != nil else { return }
-            guard tempImageView.image != PlaceHolderImages.noImage else {
-                presentAlertOnMainThread(title: "알림", message: "이미지를 불러오지 못했습니다. \n 다른 url을 입력하세요.")
-                return
-            }
-            
-            let urlString = MyImageTypes.urlString(tempURLStorage)
-            self.delegate.passUrlString(urlString: urlString)
-            self.dismiss(animated: true)
+            passDataToParentVC()
         default:
             break
         }
     }
 
-    func loadImage() {
+    private func loadImage() {
         tempURLStorage = urlTextField.text ?? ""
         guard tempURLStorage.count > 0 else {presentAlertOnMainThread(title: "알림", message: "URL을 입력하세요"); return}
         showLoadingView()
-        NetworkManager.shared.downLoadImage(from: tempURLStorage) { (image) in
-            DispatchQueue.main.async {
-                if image == nil{
-                    self.tempImageView.image = PlaceHolderImages.noImage
-                } else {
+        NetworkManager.shared.downLoadImage(from: tempURLStorage) { [weak self] result in
+            guard let self = self else {return}
+            self.dismissLoadingView()
+            
+            switch result {
+            case .success(let image):
+                DispatchQueue.main.async {
                     self.tempImageView.image = image
                 }
-                self.dismissLoadingView()
+            case .failure(let error):
+                self.presentAlertOnMainThread(title: "에러", message: error.rawValue)
+                DispatchQueue.main.async { self.tempImageView.image = PlaceHolderImages.noImage }
             }
         }
-            
+    }
+    
+    private func passDataToParentVC() {
+        guard tempImageView.image != nil else { return }
+        guard tempImageView.image != PlaceHolderImages.noImage else {
+            presentAlertOnMainThread(title: "알림", message: "이미지를 불러오지 못했습니다. \n 다시 시도해주세요.")
+            return
+        }
         
+        let urlString = MyImageTypes.urlString(tempURLStorage)
+        self.delegate.passUrlString(urlString: urlString)
+        self.dismiss(animated: true)
     }
     
     private func createDismissKeyboardTapGesture() {
