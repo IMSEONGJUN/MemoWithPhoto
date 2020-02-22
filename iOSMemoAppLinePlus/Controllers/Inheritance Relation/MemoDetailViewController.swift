@@ -127,9 +127,7 @@ class MemoDetailViewController: CreateNewMemoViewController {
         checkSelfHaveChildrenVC(on: self)
         collectionForEdit.delegate = self
         collectionForEdit.imagesToAdd = memo.images?.convertToMyImageTypeArray()
-        DispatchQueue.main.async {
-            self.add(childVC: self.collectionForEdit, to: self.addImageViewContainer)
-        }
+        self.add(childVC: self.collectionForEdit, to: self.addImageViewContainer)
     }
     
     func switchingImageAddingViewDisplayMode() {
@@ -199,21 +197,19 @@ class MemoDetailViewController: CreateNewMemoViewController {
         print("DetailVC Deinit")
     }
     
-    override func collectionViewHaveImageMoreThanOne(isHave: Bool) {
-        DispatchQueue.main.async {
-            if isHave {
-                UIView.animate(withDuration: 0.5) {
-                    self.noticeLabel.transform = CGAffineTransform(translationX: 0, y: -self.noticeLabel.frame.size.height)
-                    self.noticeLabel.alpha = 1.0
-                }
-            } else {
-                UIView.animate(withDuration: 0.5) {
-                    self.noticeLabel.transform = .identity
-                    self.noticeLabel.alpha = 0.0
-                }
+    override func collectionViewHasImageMoreThanOne(hasImage: Bool) {
+        if hasImage {
+            UIView.animate(withDuration: 0.5) {
+                self.noticeLabel.transform = CGAffineTransform(translationX: 0,
+                                                               y: -self.noticeLabel.frame.size.height)
+                self.noticeLabel.alpha = 1.0
+            }
+        } else {
+            UIView.animate(withDuration: 0.5) {
+                self.noticeLabel.transform = .identity
+                self.noticeLabel.alpha = 0.0
             }
         }
-        
     }
 
 }

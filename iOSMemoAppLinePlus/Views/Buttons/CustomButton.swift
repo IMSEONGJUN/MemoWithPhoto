@@ -36,5 +36,4 @@ class CustomButton: UIButton {
         self.backgroundColor = backgroundColor
         self.setTitle(title, for: .normal)
     }
-    
 }

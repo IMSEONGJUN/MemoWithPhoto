@@ -13,7 +13,7 @@ final class NetworkManager {
     private init() {}
     let cache = NSCache<NSString, UIImage>()
     
-    func downLoadImage(from urlString: String, completed: @escaping (Result<UIImage, ImageLoadError>) -> Void) {
+    func downloadImage(from urlString: String, completed: @escaping (Result<UIImage, ImageLoadError>) -> Void) {
         let cacheKey = NSString(string: urlString)
         
         if let image = cache.object(forKey: cacheKey) {
@@ -23,7 +23,6 @@ final class NetworkManager {
         guard let url = URL(string: urlString) else {
             completed(.failure(.invalidUrl))
             return
-            
         }
         
         let task = URLSession.shared.dataTask(with: url) { [weak self] data, response, error in

@@ -62,7 +62,6 @@ class AlertViewController: UIViewController {
             containerView.widthAnchor.constraint(equalToConstant: 280),
             containerView.heightAnchor.constraint(equalToConstant: 220)
         ])
-        
     }
     
     func configureTitleLabel() {

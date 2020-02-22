@@ -21,12 +21,12 @@ class LoadImageFromURLViewController: UIViewController {
     
     weak var delegate: LoadImageFromURLViewControllerDelegate!
     
-    let loadButton = CustomButton(backgroundColor: MyColors.brown, title: "사진 불러오기")
-    let deleteImageButton = CustomButton(backgroundColor: MyColors.brown, title: "사진 지우기")
+    let loadButton = CustomButton(backgroundColor: MyColors.brown, title: ButtonNames.loadPicture)
+    let deleteImageButton = CustomButton(backgroundColor: MyColors.brown, title: ButtonNames.deletePicture)
     let tempImageView = UIImageView()
     
-    let cancelButton = CustomButton(backgroundColor: .systemPurple, title: "취소")
-    let useImageButton = CustomButton(backgroundColor: MyColors.KeyColor, title: "사진 사용하기")
+    let cancelButton = CustomButton(backgroundColor: .systemPurple, title: ButtonNames.cancel)
+    let useImageButton = CustomButton(backgroundColor: MyColors.KeyColor, title: ButtonNames.usePicture)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,23 +44,21 @@ class LoadImageFromURLViewController: UIViewController {
             $0.addTarget(self, action: #selector(didTapButton(_:)), for: .touchUpInside)
         })
         
-        urlTextField.keyboardType = .URL
-        
         tempImageView.contentMode = .scaleAspectFit
         tempImageView.backgroundColor = MyColors.content
-        
-        urlTextField.placeholder = "URL 입력"
+
+        urlTextField.keyboardType = .URL
+        urlTextField.placeholder = ButtonNames.urlInput
         urlTextField.clearsOnBeginEditing = true
         urlTextField.clearButtonMode = .always
         urlTextField.borderStyle = .roundedRect
     }
     
-    private func setConstraints(){
+    private func setConstraints() {
         let padding: CGFloat = 30
         let buttonHeight: CGFloat = 50
         let imageViewSizeRatioToSuperView: CGFloat = 0.7
         let buttonsWidthRatioToImageView: CGFloat = 0.4
-        
         
         urlTextField.snp.makeConstraints {
             $0.top.equalToSuperview().offset(topbarHeight + 30)
@@ -94,7 +92,6 @@ class LoadImageFromURLViewController: UIViewController {
             $0.width.equalTo(tempImageView.snp.width).multipliedBy(buttonsWidthRatioToImageView)
             $0.height.equalTo(buttonHeight)
         }
-        
     }
     
     @objc private func didTapButton(_ sender: UIButton) {
@@ -114,10 +111,13 @@ class LoadImageFromURLViewController: UIViewController {
 
     private func loadImage() {
         tempURLStorage = urlTextField.text ?? ""
-        guard tempURLStorage.count > 0 else {presentAlertOnMainThread(title: "알림", message: "URL을 입력하세요"); return}
+        guard tempURLStorage.count > 0 else {
+            presentAlertOnMainThread(title: Titles.info, message: TextMessages.inputUrl)
+            return
+        }
         showLoadingView()
-        NetworkManager.shared.downLoadImage(from: tempURLStorage) { [weak self] result in
-            guard let self = self else {return}
+        NetworkManager.shared.downloadImage(from: tempURLStorage) { [weak self] result in
+            guard let self = self else { return }
             self.dismissLoadingView()
             
             switch result {
@@ -126,8 +126,10 @@ class LoadImageFromURLViewController: UIViewController {
                     self.tempImageView.image = image
                 }
             case .failure(let error):
-                self.presentAlertOnMainThread(title: "에러", message: error.rawValue)
-                DispatchQueue.main.async { self.tempImageView.image = PlaceHolderImages.imageLoadFail }
+                self.presentAlertOnMainThread(title: Titles.error, message: error.rawValue)
+                DispatchQueue.main.async {
+                    self.tempImageView.image = PlaceHolderImages.imageLoadFail
+                }
             }
         }
     }
@@ -135,7 +137,7 @@ class LoadImageFromURLViewController: UIViewController {
     private func passDataToParentVC() {
         guard tempImageView.image != nil else { return }
         guard tempImageView.image != PlaceHolderImages.imageLoadFail else {
-            presentAlertOnMainThread(title: "알림", message: "이미지를 불러오지 못했습니다. \n 다시 시도해주세요.")
+            presentAlertOnMainThread(title: Titles.error, message: TextMessages.failedToLoad)
             return
         }
         
@@ -149,8 +151,7 @@ class LoadImageFromURLViewController: UIViewController {
         view.addGestureRecognizer(tap)
     }
     
-    deinit{
+    deinit {
         print("LoadImageFromUrlVC Deinit")
     }
-
 }

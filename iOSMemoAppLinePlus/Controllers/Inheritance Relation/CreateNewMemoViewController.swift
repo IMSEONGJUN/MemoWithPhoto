@@ -15,16 +15,12 @@ class CreateNewMemoViewController: UIViewController {
     
     var titleTextField = UITextField()
     var memoTextView = UITextView()
-    let placeholderTextForTextView = "메모 내용을 입력하세요."
+    let placeholderTextForTextView = TextMessages.inputMemoDetail
     var isMemoEditing = true
-    
     let noticeLabel = TitleLabel(textAlignment: .left, fontSize: 15)
-    
     var addedImages = [MyImageTypes]()
-    
     var addImageViewContainer = UIView()
     let imageCollectionVC = ImageCollectionForCreateAndEdit()
-    
     
     // MARK:  - LifeCycle
     
@@ -51,29 +47,42 @@ class CreateNewMemoViewController: UIViewController {
     
     private func setupViews() {
         view.backgroundColor = .white
-        [titleTextField, memoTextView, noticeLabel, addImageViewContainer].forEach({view.addSubview($0)})
+        [titleTextField, memoTextView, noticeLabel, addImageViewContainer].forEach({
+            view.addSubview($0)
+        })
         configureTitleTextField()
         configureMemoTextView()
         configureNoticeLabel()
     }
     
     func setupNavigationBar() {
-        title = "새 메모"
-        let cancelButton = UIBarButtonItem(title: ButtonsNameOnNavigationBar.cancel, style: .plain, target: self, action: #selector(didTapCancelButton))
-        let saveButton = UIBarButtonItem(title: ButtonsNameOnNavigationBar.save, style: .plain, target: self, action: #selector(didTapSaveButton))
+        title = ButtonNames.confirm
+        let cancelButton = UIBarButtonItem(title: ButtonNames.cancel,
+                                           style: .plain,
+                                           target: self,
+                                           action: #selector(didTapCancelButton))
+        let saveButton = UIBarButtonItem(title: ButtonNames.save,
+                                         style: .plain,
+                                         target: self,
+                                         action: #selector(didTapSaveButton))
         
         navigationItem.leftBarButtonItem = cancelButton
         navigationItem.rightBarButtonItem = saveButton
     }
     
     private func configureTitleTextField() {
-        let titleTextFieldPaddingView = UIView(frame: CGRect(x: 0, y: 0, width: 6, height: titleTextField.frame.height))
+        let titleTextFieldPaddingView = UIView(frame: CGRect(x: 0,
+                                                             y: 0,
+                                                             width: 6,
+                                                             height: titleTextField.frame.height))
         titleTextField.leftView = titleTextFieldPaddingView
         titleTextField.backgroundColor = MyColors.content
         titleTextField.leftViewMode = .always
         titleTextField.autocorrectionType = .no
         titleTextField.keyboardType = .default
-        titleTextField.placeholder = "제목"
+        titleTextField.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
+        titleTextField.textColor = .black
+        titleTextField.placeholder = Titles.title
         titleTextField.layer.cornerRadius = 5
         titleTextField.clipsToBounds = true
         titleTextField.delegate = self
@@ -91,7 +100,7 @@ class CreateNewMemoViewController: UIViewController {
     }
     
     func configureNoticeLabel() {
-        noticeLabel.text = " 사진을 꾹 누르면 이동이 가능합니다."
+        noticeLabel.text = TextMessages.dragSupport
         noticeLabel.alpha = 0
     }
     
@@ -101,7 +110,6 @@ class CreateNewMemoViewController: UIViewController {
         let sideInset:CGFloat = 10
         let titleAndMemoPadding:CGFloat = 12
         let memoAndImagePadding:CGFloat = 50
-        
         
         titleTextField.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(sideInset)
@@ -124,7 +132,6 @@ class CreateNewMemoViewController: UIViewController {
         noticeLabel.snp.makeConstraints {
             $0.top.leading.equalTo(addImageViewContainer)
         }
-        
     }
     
     private func createDismissKeyboardTapGesture() {
@@ -134,25 +141,24 @@ class CreateNewMemoViewController: UIViewController {
     
    
     
-    
     // MARK: - Action
     
     func saveMemo() {
         guard let title = titleTextField.text, title.count > 0 else {
-            presentAlertOnMainThread(title: "제목이 없습니다.", message: "제목을 입력하세요")
+            presentAlertOnMainThread(title: TextMessages.noTitle, message: TextMessages.enterTitle)
             titleTextField.becomeFirstResponder()
             return
         }
         guard let memo = memoTextView.text,
               memo.count > 0, memo != placeholderTextForTextView else{
-            presentAlertOnMainThread(title: "메모가 없습니다.", message: "메모를 입력하세요")
+                presentAlertOnMainThread(title: TextMessages.noMemoDetail, message: TextMessages.enterMemoDetail)
             memoTextView.becomeFirstResponder()
             return
         }
         if addedImages.isEmpty {
             DataManager.shared.addNewMemo(title: title, memo: memo, images: nil)
         } else {
-            guard let coreDataObjectArray = addedImages.convertToCoreDataRepresentation() else {return}
+            guard let coreDataObjectArray = addedImages.convertToCoreDataRepresentation() else { return }
             DataManager.shared.addNewMemo(title: title, memo: memo, images: coreDataObjectArray)
         }
         
@@ -175,7 +181,6 @@ class CreateNewMemoViewController: UIViewController {
         childVC.view.frame = containerView.bounds
         childVC.didMove(toParent: self)
     }
-    
 }
 
 
@@ -186,15 +191,15 @@ extension CreateNewMemoViewController {
 
 extension CreateNewMemoViewController: UITextFieldDelegate {
     
-        func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-            guard let text = textField.text, let range = Range(range, in: text) else {return true}
-            let replacedText = text.replacingCharacters(in: range, with: string)
-            
-            guard replacedText.count <= 20 else { return false }
-            
-            return true
-        }
+    func textField(_ textField: UITextField,
+                   shouldChangeCharactersIn range: NSRange,
+                   replacementString string: String) -> Bool {
+        guard let text = textField.text, let range = Range(range, in: text) else { return true }
         
+        let replacedText = text.replacingCharacters(in: range, with: string)
+        guard replacedText.count <= 20 else { return false }
+        return true
+    }
 }
 
 extension CreateNewMemoViewController: UITextViewDelegate {
@@ -214,23 +219,19 @@ extension CreateNewMemoViewController: UITextViewDelegate {
 }
 
 extension CreateNewMemoViewController: ImageCollectionForCreateAndEditDelegate {
-    func collectionViewHaveImageMoreThanOne(isHave: Bool) {
-        DispatchQueue.main.async {
-            if isHave {
-                UIView.animate(withDuration: 0.5) {
-                    self.noticeLabel.transform = CGAffineTransform(translationX: 0, y: -self.noticeLabel.frame.size.height)
-                    self.noticeLabel.alpha = 1.0
-                }
-            } else {
-                UIView.animate(withDuration: 0.5) {
-                    self.noticeLabel.transform = .identity
-                    self.noticeLabel.alpha = 0.0
-                }
+    func collectionViewHasImageMoreThanOne(hasImage: Bool) {
+        if hasImage {
+            UIView.animate(withDuration: 0.5) {
+                self.noticeLabel.transform = CGAffineTransform(translationX: 0,
+                                                               y: -self.noticeLabel.frame.size.height)
+                self.noticeLabel.alpha = 1.0
+            }
+        } else {
+            UIView.animate(withDuration: 0.5) {
+                self.noticeLabel.transform = .identity
+                self.noticeLabel.alpha = 0.0
             }
         }
     }
-    
-    
-    
     
 }

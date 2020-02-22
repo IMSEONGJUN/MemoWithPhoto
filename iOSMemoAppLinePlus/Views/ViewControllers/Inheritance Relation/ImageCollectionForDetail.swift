@@ -50,8 +50,8 @@ class ImageCollectionForDetail: UIViewController {
         collectionView.delegate = self
         collectionView.backgroundColor = .white
         collectionView.allowsSelection = true
-        collectionView.register(ImageCellForCollection.self, forCellWithReuseIdentifier: ImageCellForCollection.identifier)
-        
+        collectionView.register(ImageCellForCollection.self,
+                                forCellWithReuseIdentifier: ImageCellForCollection.identifier)
     }
     
     private func configureFlowlayout() {
@@ -63,7 +63,6 @@ class ImageCollectionForDetail: UIViewController {
         let availableWidth: CGFloat = view.frame.width - 20
         let itemSizeWidth = availableWidth / 2
         layout.itemSize = CGSize(width: itemSizeWidth, height: itemSizeWidth)
-        
     }
     
     private func setConstraints() {
@@ -76,7 +75,6 @@ class ImageCollectionForDetail: UIViewController {
     deinit{
         print("Collection for Detail Deinit")
     }
-
 }
 
 extension ImageCollectionForDetail: UICollectionViewDataSource {
@@ -84,12 +82,16 @@ extension ImageCollectionForDetail: UICollectionViewDataSource {
         return memo.images?.convertToMyImageTypeArray()?.count ?? 0
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImageCellForCollection.identifier, for: indexPath) as! ImageCellForCollection
+    func collectionView(_ collectionView: UICollectionView,
+                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImageCellForCollection.identifier,
+                                                      for: indexPath) as! ImageCellForCollection
+        
         guard let images = memo.images?.convertToMyImageTypeArray() else {
             cell.imageView.image = PlaceHolderImages.defaultImage
             return cell
         }
+        
         cell.removeButton.isHidden = true
         
         switch images[indexPath.item] {
@@ -97,23 +99,23 @@ extension ImageCollectionForDetail: UICollectionViewDataSource {
             cell.imageView.image = val
         case .urlString(let val):
             cell.imageView.image = PlaceHolderImages.loading
-            NetworkManager.shared.downLoadImage(from: val) { (result) in
-                switch result {
-                case .failure(_):
-                    cell.imageView.image = PlaceHolderImages.imageLoadFail
-                case .success(let image):
-                    cell.imageView.image = image
+            NetworkManager.shared.downloadImage(from: val) { (result) in
+                DispatchQueue.main.async {
+                    switch result {
+                    case .failure(_):
+                        cell.imageView.image = PlaceHolderImages.imageLoadFail
+                    case .success(let image):
+                        cell.imageView.image = image
+                    }
                 }
             }
         }
         return cell
     }
-    
-    
 }
 
 extension ImageCollectionForDetail: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-           print("didselect in detail")
-       }
+        print("didselect in detail")
+    }
 }

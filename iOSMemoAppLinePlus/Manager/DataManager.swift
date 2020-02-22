@@ -23,16 +23,14 @@ final class DataManager {
     
     func fetchMemo() {
         let request: NSFetchRequest<Memo> = Memo.fetchRequest()
-        
         let sortByDateDesc = NSSortDescriptor(key: "recentlyEditedDate", ascending: false)
         request.sortDescriptors = [sortByDateDesc]
         
-        do{
+        do {
             memoList = try mainContext.fetch(request)
-        }catch{
+        } catch {
             print(error)
         }
-        
     }
     
     func editMemo(index: Int,title: String?, memo: String?, images: Data?, isEdited: Bool = true) {

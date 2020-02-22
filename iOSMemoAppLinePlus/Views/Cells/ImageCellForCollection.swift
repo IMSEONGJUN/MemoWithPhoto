@@ -42,7 +42,6 @@ class ImageCellForCollection: UICollectionViewCell {
         removeButton.setImage(PlaceHolderImages.removeImage, for: .normal)
         removeButton.addTarget(self, action: #selector(didTapRemoveButton), for: .touchUpInside)
         removeButton.isEnabled = true
-        
     }
     
     @objc private func didTapRemoveButton() {

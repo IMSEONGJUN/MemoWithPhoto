@@ -17,7 +17,7 @@ extension UIViewController {
                 (self.navigationController?.navigationBar.frame.height ?? 0.0)
     }
     
-    func presentAlertOnMainThread(title: String, message: String, buttonTitle: String = "확인") {
+    func presentAlertOnMainThread(title: String, message: String, buttonTitle: String = ButtonNames.confirm) {
         DispatchQueue.main.async {
             let alertVC = AlertViewController(title: title, message: message, buttonTitle: buttonTitle)
             alertVC.modalPresentationStyle = .overFullScreen
@@ -26,7 +26,8 @@ extension UIViewController {
         }
     }
     
-    func showEmptyStateView(with message: String, in view: UIView, imageName: String, superViewType: VeryBottomViewTypeOfEmptyStateView) {
+    func showEmptyStateView(with message: String, in view: UIView, imageName: String,
+                            superViewType: VeryBottomViewTypeOfEmptyStateView) {
         let emptyStateView = EmptyStateView(message: message, imageName: imageName)
         if imageName == EmptyStateViewImageName.offerImage || imageName == EmptyStateViewImageName.noPicture {
             emptyStateView.isOnTheCreateNewOrDetailVC = true
@@ -43,7 +44,11 @@ extension UIViewController {
     
     func checkSelfHaveChildrenVC(on selfView: UIViewController ) {
         if selfView.children.count > 0{
-            selfView.children.forEach({ $0.willMove(toParent: nil); $0.view.removeFromSuperview(); $0.removeFromParent() })
+            selfView.children.forEach({
+                $0.willMove(toParent: nil);
+                $0.view.removeFromSuperview();
+                $0.removeFromParent()
+            })
         }
     }
     

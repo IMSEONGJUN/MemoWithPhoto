@@ -11,7 +11,7 @@ import SnapKit // Third party Library
 import MobileCoreServices
 
 @objc protocol ImageCollectionForCreateAndEditDelegate: class {
-    func collectionViewHaveImageMoreThanOne(isHave: Bool)
+    func collectionViewHasImageMoreThanOne(hasImage: Bool)
 }
 
 
@@ -23,28 +23,33 @@ class ImageCollectionForCreateAndEdit: ImageCollectionForDetail {
     
     let imagePicker = UIImagePickerController()
     
-    let addImagesButton = CustomButton(backgroundColor: MyColors.KeyColor, title: "이미지 추가하기")
+    let addImagesButton = CustomButton(backgroundColor: MyColors.KeyColor,
+                                       title: ButtonNames.addImage)
     
     var imagesToAdd: [MyImageTypes]! {
         didSet{
             if imagesToAdd?.isEmpty ?? true {
-                if self.children.count > 0{
-                    self.children.forEach({ $0.willMove(toParent: nil); $0.view.removeFromSuperview(); $0.removeFromParent() })
+                if self.children.count > 0 {
+                    self.children.forEach({
+                        $0.willMove(toParent: nil)
+                        $0.view.removeFromSuperview()
+                        $0.removeFromParent()
+                    })
                 }
-                delegate?.collectionViewHaveImageMoreThanOne(isHave: false)
-                DispatchQueue.main.async {
-                    self.showEmptyStateView(with: "사진을 등록하실 수 있습니다.", in: self.view, imageName: EmptyStateViewImageName.offerImage, superViewType: .createNew)
-                }
+                delegate?.collectionViewHasImageMoreThanOne(hasImage: false)
+                self.showEmptyStateView(with: TextMessages.attachPicture,
+                                        in: self.view,
+                                        imageName: EmptyStateViewImageName.offerImage,
+                                        superViewType: .createNew)
             } else {
                 checkSelfHaveChildrenVC(on: self)
-                delegate?.collectionViewHaveImageMoreThanOne(isHave: true)
+                delegate?.collectionViewHasImageMoreThanOne(hasImage: true)
                 guard let createVC = self.parent as? CreateNewMemoViewController else {return}
                 guard let images = self.imagesToAdd else {return}
                 createVC.addedImages = images
             }
         }
     }
-    
     
     // MARK: Lifecycle
     
@@ -81,17 +86,18 @@ class ImageCollectionForCreateAndEdit: ImageCollectionForDetail {
     private func checkImagesArrayEmpty() {
         if imagesToAdd?.isEmpty ?? true {
             checkSelfHaveChildrenVC(on: self)
-            DispatchQueue.main.async {
-                self.showEmptyStateView(with: "사진을 등록하실 수 있습니다.", in: self.view, imageName: EmptyStateViewImageName.offerImage,
-                superViewType: .createNew)
-            }
+            self.showEmptyStateView(with: TextMessages.attachPicture,
+                                    in: self.view,
+                                    imageName: EmptyStateViewImageName.offerImage,
+                                    superViewType: .createNew)
         } else {
             collectionView.reloadData()
         }
     }
     
     func setupLongPressGestureRecognizer() {
-        let gesture = UILongPressGestureRecognizer(target: self, action: #selector(reorderCollectionViewItem(_:)))
+        let gesture = UILongPressGestureRecognizer(target: self,
+                                                   action: #selector(reorderCollectionViewItem(_:)))
         gesture.minimumPressDuration = 0.5
         collectionView.addGestureRecognizer(gesture)
     }
@@ -99,25 +105,29 @@ class ImageCollectionForCreateAndEdit: ImageCollectionForDetail {
     // MARK: - Action Handle
     
     func presentActionSheetToSelectImageSource() {
-        let alert = UIAlertController(title: "선택", message: "", preferredStyle: .actionSheet)
-        let takePhoto = UIAlertAction(title: "사진 찍기", style: .default) { (_) in
-            guard UIImagePickerController.isSourceTypeAvailable(.camera) else {return}
+        let alert = UIAlertController(title: Titles.select, message: "", preferredStyle: .actionSheet)
+        
+        let takePhoto = UIAlertAction(title: ButtonNames.takePicture, style: .default) { (_) in
+            guard UIImagePickerController.isSourceTypeAvailable(.camera) else { return }
             self.imagePicker.sourceType = .camera
             self.imagePicker.videoQuality = .typeHigh
             self.present(self.imagePicker, animated: true)
         }
-        let album = UIAlertAction(title: "앨범에서 선택", style: .default) { (_) in
+        
+        let album = UIAlertAction(title: ButtonNames.fromAlbum, style: .default) { (_) in
             self.imagePicker.sourceType = .savedPhotosAlbum
             self.present(self.imagePicker, animated: true)
         }
-        let url = UIAlertAction(title: "URL로 가져오기", style: .default) { (_) in
+        
+        let url = UIAlertAction(title: ButtonNames.fromUrl, style: .default) { (_) in
             let loadImageVC = LoadImageFromURLViewController()
             loadImageVC.delegate = self
             loadImageVC.modalPresentationStyle = .fullScreen
             self.present(loadImageVC, animated: true)
         }
         
-        let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        let cancel = UIAlertAction(title: ButtonNames.cancel, style: .cancel)
+        
         alert.addAction(takePhoto)
         alert.addAction(album)
         alert.addAction(url)
@@ -147,34 +157,37 @@ class ImageCollectionForCreateAndEdit: ImageCollectionForDetail {
         }
     }
     
-    
-    func checkImageSourceTypeAndSetValue(checkObject: MyImageTypes, for cell: ImageCellForCollection) {
+    func checkImageSourceTypeAndSetValue(checkObject: MyImageTypes,
+                                         for cell: ImageCellForCollection) {
         switch checkObject {
         case .image(let image):
             cell.imageView.image = image
         case .urlString(let urlString):
             cell.imageView.image = PlaceHolderImages.loading
-            NetworkManager.shared.downLoadImage(from: urlString) { (result) in
-                switch result {
-                case .failure(_):
-                    cell.imageView.image = PlaceHolderImages.imageLoadFail
-                case .success(let image):
-                    cell.imageView.image = image
+            NetworkManager.shared.downloadImage(from: urlString) { (result) in
+                DispatchQueue.main.async {
+                    switch result {
+                    case .failure(_):
+                        cell.imageView.image = PlaceHolderImages.imageLoadFail
+                    case .success(let image):
+                        cell.imageView.image = image
+                    }
                 }
             }
         }
     }
     
-    
-    
     // MARK: - Overridden and Just UICollectionViewDataSource Method
     
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    override func collectionView(_ collectionView: UICollectionView,
+                                 numberOfItemsInSection section: Int) -> Int {
         return imagesToAdd?.count ?? 0
     }
     
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImageCellForCollection.identifier, for: indexPath) as! ImageCellForCollection
+    override func collectionView(_ collectionView: UICollectionView,
+                                 cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImageCellForCollection.identifier,
+                                                      for: indexPath) as! ImageCellForCollection
         cell.delegate = self
         guard let image = imagesToAdd?[indexPath.item] else {
             cell.imageView.image = PlaceHolderImages.defaultImage
@@ -185,8 +198,10 @@ class ImageCollectionForCreateAndEdit: ImageCollectionForDetail {
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        guard sourceIndexPath != destinationIndexPath else {return}
+    func collectionView(_ collectionView: UICollectionView,
+                        moveItemAt sourceIndexPath: IndexPath,
+                        to destinationIndexPath: IndexPath) {
+        guard sourceIndexPath != destinationIndexPath else { return }
         let source = sourceIndexPath.item
         let destination = destinationIndexPath.item
         
@@ -202,10 +217,11 @@ class ImageCollectionForCreateAndEdit: ImageCollectionForDetail {
 }
 
 
-    // MARK: - UIImagePickerControllerDelegate
+// MARK: - UIImagePickerControllerDelegate
 
 extension ImageCollectionForCreateAndEdit: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController,
+                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
         let mediaType = info[.mediaType] as! NSString
 
@@ -221,15 +237,13 @@ extension ImageCollectionForCreateAndEdit: UIImagePickerControllerDelegate, UINa
                 self.imagesToAdd.append(MyImageTypes.image(selectedImage))
             }
             
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
-            }
+            self.collectionView.reloadData()
         }
         picker.dismiss(animated: true)
     }
 }
 
-    // MARK: - ImageCellForCollectionDelegate
+// MARK: - ImageCellForCollectionDelegate
 
 extension ImageCollectionForCreateAndEdit: ImageCellForCollectionDelegate {
     
@@ -242,10 +256,9 @@ extension ImageCollectionForCreateAndEdit: ImageCellForCollectionDelegate {
             self.collectionView.reloadData()
         }, completion: nil)
     }
-    
 }
 
-    // MARK: - LoadImageFromURLViewControllerDelegate
+// MARK: - LoadImageFromURLViewControllerDelegate
 
 extension ImageCollectionForCreateAndEdit: LoadImageFromURLViewControllerDelegate {
     func passUrlString(urlString: MyImageTypes) {
@@ -256,6 +269,4 @@ extension ImageCollectionForCreateAndEdit: LoadImageFromURLViewControllerDelegat
             self.imagesToAdd.append(urlString)
         }
     }
-    
-    
 }

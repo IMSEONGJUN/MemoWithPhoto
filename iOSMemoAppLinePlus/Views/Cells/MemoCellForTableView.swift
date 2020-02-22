@@ -56,7 +56,7 @@ class MemoCell: UITableViewCell {
     
     private func getImageFromURL(urlString: String) {
         self.thumnailImageView.image = PlaceHolderImages.loading
-        NetworkManager.shared.downLoadImage(from: urlString) { [weak self] result in
+        NetworkManager.shared.downloadImage(from: urlString) { [weak self] result in
             guard let self = self else { return }
             DispatchQueue.main.async {
                 switch result {
@@ -131,8 +131,6 @@ class MemoCell: UITableViewCell {
             dateLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             dateLabel.trailingAnchor.constraint(equalTo: nextImage.leadingAnchor, constant: -15),
         ])
-        
-        
     }
     
     func set(memo: Memo) {

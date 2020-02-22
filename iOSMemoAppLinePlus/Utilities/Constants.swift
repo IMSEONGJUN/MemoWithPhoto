@@ -48,12 +48,46 @@ enum MyImageTypes : Equatable {
     }
 }
 
-enum ButtonsNameOnNavigationBar {
+enum Titles {
+    static let select = "선택"
+    static let info = "알림"
+    static let error = "에러"
+    static let title = "제목"
+}
+
+enum ButtonNames {
     static let save = "저장"
     static let cancel = "취소"
     static let edit = "수정"
     static let remove = "삭제"
     static let back = "나가기"
+    static let confirm = "확인"
+    static let yes = "예"
+    static let no = "아니오"
+    static let addImage = "이미지 추가"
+    static let takePicture = "사진 찍기"
+    static let fromAlbum = "앨범에서 선택"
+    static let fromUrl = "URL로 가져오기"
+    static let search = "검색"
+    static let loadPicture = "사진 불러오기"
+    static let deletePicture = "사진 지우기"
+    static let usePicture = "사진 사용하기"
+    static let urlInput = "URL 입력"
+}
+
+enum TextMessages {
+    static let attachPicture = "사진을 등록하실 수 있습니다."
+    static let noImages = "등록된 이미지가 없습니다."
+    static let noMemos = "메모가 없습니다.\n 새 메모를 만들어보세요!"
+    static let inputUrl = "URL을 입력하세요"
+    static let inputMemoDetail = "메모 내용을 입력하세요."
+    static let failedToLoad = "이미지를 불러오지 못했습니다. \n 다시 시도해주세요."
+    static let dragSupport = "사진을 꾹 누르면 이동이 가능합니다."
+    static let noTitle = "제목이 없습니다."
+    static let enterTitle = "제목을 입력하세요."
+    static let noMemoDetail = "메모가 없습니다."
+    static let enterMemoDetail = "메모를 입력하세요."
+    static let confirmDeleteMemo = "메모를 삭제하시겠습니까?"
 }
 
 enum EmptyStateViewImageName {
@@ -68,14 +102,12 @@ enum VeryBottomViewTypeOfEmptyStateView {
     case createNew
 }
 
-
 enum ScreenSize {
     static let width        = UIScreen.main.bounds.size.width
     static let height       = UIScreen.main.bounds.size.height
     static let maxLength    = max(ScreenSize.width, ScreenSize.height)
     static let minLength    = min(ScreenSize.width, ScreenSize.height)
 }
-
 
 enum DeviceTypes {
     static let idiom                    = UIDevice.current.userInterfaceIdiom

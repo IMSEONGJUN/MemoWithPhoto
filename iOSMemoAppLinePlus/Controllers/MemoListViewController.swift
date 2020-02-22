@@ -33,10 +33,8 @@ class MemoListViewController: UIViewController {
     
     func checkCoreDataEmpty() {
         if DataManager.shared.memoList.isEmpty {
-            DispatchQueue.main.async {
-                self.showEmptyStateView(with: "메모가 없습니다.\n 새 메모를 만들어보세요!", in: self.view,
-                                        imageName: EmptyStateViewImageName.list, superViewType: .memoList)
-            }
+            self.showEmptyStateView(with: TextMessages.noMemos, in: self.view,
+                                    imageName: EmptyStateViewImageName.list, superViewType: .memoList)
         } else {
             checkSelfHaveChildrenVC(on: self)
             tableView.reloadData()
@@ -47,7 +45,6 @@ class MemoListViewController: UIViewController {
         view.backgroundColor = .white
         navigationController?.navigationBar.tintColor = MyColors.brown
         navigationController?.navigationBar.barTintColor = MyColors.barColor
-        title = "SJMemo"
         let addNewMemoButton = UIBarButtonItem(barButtonSystemItem: .add, target: self,
                                                action: #selector(didTapAddNewMemoButton))
         navigationItem.rightBarButtonItem = addNewMemoButton
@@ -80,15 +77,12 @@ class MemoListViewController: UIViewController {
     func configureSearchBar() {
         searchBar.delegate = self
         searchBar.showsCancelButton = true
-        searchBar.placeholder = "검색"
+        searchBar.placeholder = ButtonNames.search
         navigationItem.titleView = searchBar
-        
     }
     
     @objc func didTapAddNewMemoButton() {
-        DispatchQueue.main.async {
-            self.checkSelfHaveChildrenVC(on: self)
-        }
+        self.checkSelfHaveChildrenVC(on: self)
         let createNewMemoVC = UINavigationController(rootViewController: CreateNewMemoViewController())
         createNewMemoVC.modalPresentationStyle = .fullScreen
         present(createNewMemoVC, animated: true)
@@ -99,7 +93,6 @@ class MemoListViewController: UIViewController {
             NotificationCenter.default.removeObserver(token)
         }
     }
-
 }
 
 
@@ -121,8 +114,6 @@ extension MemoListViewController: UITableViewDataSource {
         }
         return cell
     }
-    
-    
 }
 
 extension MemoListViewController: UITableViewDelegate {
@@ -130,6 +121,7 @@ extension MemoListViewController: UITableViewDelegate {
         let activeArray = isSearching ? DataManager.shared.filteredMemoList : DataManager.shared.memoList
         let memo = activeArray[indexPath.row]
         let memoDetailVC = MemoDetailViewController()
+        
         memoDetailVC.delegate = self
         memoDetailVC.memo = memo
         memoDetailVC.indexPath = indexPath
