@@ -56,9 +56,3 @@ extension Data {
         }
     }
 }
-
-
-//            let imgArray = mySavedData.compactMap({
-//                return UIImage(data: $0 as! Data)
-//            })
-//            return imgArray

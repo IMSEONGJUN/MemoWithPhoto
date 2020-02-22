@@ -27,22 +27,15 @@ class ImageCollectionForCreateAndEdit: ImageCollectionForDetail {
                                        title: ButtonNames.addImage)
     
     var imagesToAdd: [MyImageTypes]! {
-        didSet{
+        didSet {
+            checkSelfHaveChildrenVC(on: self)
             if imagesToAdd?.isEmpty ?? true {
-                if self.children.count > 0 {
-                    self.children.forEach({
-                        $0.willMove(toParent: nil)
-                        $0.view.removeFromSuperview()
-                        $0.removeFromParent()
-                    })
-                }
                 delegate?.collectionViewHasImageMoreThanOne(hasImage: false)
                 self.showEmptyStateView(with: TextMessages.attachPicture,
                                         in: self.view,
                                         imageName: EmptyStateViewImageName.offerImage,
                                         superViewType: .createNew)
             } else {
-                checkSelfHaveChildrenVC(on: self)
                 delegate?.collectionViewHasImageMoreThanOne(hasImage: true)
                 guard let createVC = self.parent as? CreateNewMemoViewController else {return}
                 guard let images = self.imagesToAdd else {return}
@@ -157,26 +150,6 @@ class ImageCollectionForCreateAndEdit: ImageCollectionForDetail {
         }
     }
     
-    func checkImageSourceTypeAndSetValue(checkObject: MyImageTypes,
-                                         for cell: ImageCellForCollection) {
-        switch checkObject {
-        case .image(let image):
-            cell.imageView.image = image
-        case .urlString(let urlString):
-            cell.imageView.image = PlaceHolderImages.loading
-            NetworkManager.shared.downloadImage(from: urlString) { (result) in
-                DispatchQueue.main.async {
-                    switch result {
-                    case .failure(_):
-                        cell.imageView.image = PlaceHolderImages.imageLoadFail
-                    case .success(let image):
-                        cell.imageView.image = image
-                    }
-                }
-            }
-        }
-    }
-    
     // MARK: - Overridden and Just UICollectionViewDataSource Method
     
     override func collectionView(_ collectionView: UICollectionView,
@@ -193,7 +166,7 @@ class ImageCollectionForCreateAndEdit: ImageCollectionForDetail {
             cell.imageView.image = PlaceHolderImages.defaultImage
             return cell
         }
-        checkImageSourceTypeAndSetValue(checkObject: image, for: cell)
+        checkImageSourceTypeAndSetValueOnCell(checkObject: image, for: cell)
         
         return cell
     }
@@ -213,6 +186,7 @@ class ImageCollectionForCreateAndEdit: ImageCollectionForDetail {
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("select in createVC")
+        // TODO: 선택시 디테일 뷰 띄우기
     }
 }
 

@@ -42,10 +42,6 @@ enum MyColors {
 enum MyImageTypes : Equatable {
     case image(UIImage)
     case urlString(String)
-    
-    static func ==(lhs: MyImageTypes, rhs: MyImageTypes) {
-        return lhs == rhs
-    }
 }
 
 enum Titles {

@@ -47,9 +47,7 @@ class CreateNewMemoViewController: UIViewController {
     
     private func setupViews() {
         view.backgroundColor = .white
-        [titleTextField, memoTextView, noticeLabel, addImageViewContainer].forEach({
-            view.addSubview($0)
-        })
+        [titleTextField, memoTextView, noticeLabel, addImageViewContainer].forEach({ view.addSubview($0) })
         configureTitleTextField()
         configureMemoTextView()
         configureNoticeLabel()

@@ -15,7 +15,7 @@ class ImageCollectionForDetail: UIViewController {
     var collectionView: UICollectionView!
     
     var memo: Memo!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollectionView()
@@ -35,7 +35,7 @@ class ImageCollectionForDetail: UIViewController {
     
     func showEmptyStateViewOnDetailVC() {
         showEmptyStateView(with: "등록된 이미지가 없습니다", in: self.view, imageName: EmptyStateViewImageName.noPicture,
-        superViewType: .detail) 
+                           superViewType: .detail)
     }
     
     private func configureCollectionView() {
@@ -55,13 +55,17 @@ class ImageCollectionForDetail: UIViewController {
     }
     
     private func configureFlowlayout() {
+        let collectionViewSideInset: CGFloat = 20
+        let itemsInLine: CGFloat = 2
+        
         layout = UICollectionViewFlowLayout()
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
         layout.scrollDirection = .vertical
         layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        let availableWidth: CGFloat = view.frame.width - 20
-        let itemSizeWidth = availableWidth / 2
+        
+        let availableWidth: CGFloat = view.frame.width - collectionViewSideInset
+        let itemSizeWidth = availableWidth / itemsInLine
         layout.itemSize = CGSize(width: itemSizeWidth, height: itemSizeWidth)
     }
     
@@ -69,6 +73,26 @@ class ImageCollectionForDetail: UIViewController {
         collectionView.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview()
             $0.height.equalToSuperview().multipliedBy(0.8)
+        }
+    }
+    
+    func checkImageSourceTypeAndSetValueOnCell(checkObject: MyImageTypes,
+                                               for cell: ImageCellForCollection) {
+        switch checkObject {
+        case .image(let image):
+            cell.imageView.image = image
+        case .urlString(let urlString):
+            cell.imageView.image = PlaceHolderImages.loading
+            NetworkManager.shared.downloadImage(from: urlString) { (result) in
+                DispatchQueue.main.async {
+                    switch result {
+                    case .failure(_):
+                        cell.imageView.image = PlaceHolderImages.imageLoadFail
+                    case .success(let image):
+                        cell.imageView.image = image
+                    }
+                }
+            }
         }
     }
     
@@ -87,29 +111,15 @@ extension ImageCollectionForDetail: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImageCellForCollection.identifier,
                                                       for: indexPath) as! ImageCellForCollection
         
+        
         guard let images = memo.images?.convertToMyImageTypeArray() else {
             cell.imageView.image = PlaceHolderImages.defaultImage
             return cell
         }
-        
+      
         cell.removeButton.isHidden = true
-        
-        switch images[indexPath.item] {
-        case .image(let val):
-            cell.imageView.image = val
-        case .urlString(let val):
-            cell.imageView.image = PlaceHolderImages.loading
-            NetworkManager.shared.downloadImage(from: val) { (result) in
-                DispatchQueue.main.async {
-                    switch result {
-                    case .failure(_):
-                        cell.imageView.image = PlaceHolderImages.imageLoadFail
-                    case .success(let image):
-                        cell.imageView.image = image
-                    }
-                }
-            }
-        }
+        let image = images[indexPath.item]
+        checkImageSourceTypeAndSetValueOnCell(checkObject: image, for: cell)
         return cell
     }
 }

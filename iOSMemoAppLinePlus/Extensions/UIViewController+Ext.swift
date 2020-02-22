@@ -45,8 +45,8 @@ extension UIViewController {
     func checkSelfHaveChildrenVC(on selfView: UIViewController ) {
         if selfView.children.count > 0{
             selfView.children.forEach({
-                $0.willMove(toParent: nil);
-                $0.view.removeFromSuperview();
+                $0.willMove(toParent: nil)
+                $0.view.removeFromSuperview()
                 $0.removeFromParent()
             })
         }

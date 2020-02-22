@@ -49,9 +49,9 @@ class MemoDetailViewController: CreateNewMemoViewController {
     }
     
     override func setupNavigationBar() {
-        backOrCancelButton = UIBarButtonItem(title: ButtonsNameOnNavigationBar.back, style: .plain, target: self, action: #selector(didTapBackOrCancelButton(_:)))
-        editOrSaveButton = UIBarButtonItem(title: ButtonsNameOnNavigationBar.edit, style: .plain, target: self, action: #selector(didTapEditOrSaveButton(_:)))
-        let removeButton = UIBarButtonItem(title: ButtonsNameOnNavigationBar.remove, style: .plain, target: self, action: #selector(didTapRemoveButton))
+        backOrCancelButton = UIBarButtonItem(title: ButtonNames.back, style: .plain, target: self, action: #selector(didTapBackOrCancelButton(_:)))
+        editOrSaveButton = UIBarButtonItem(title: ButtonNames.edit, style: .plain, target: self, action: #selector(didTapEditOrSaveButton(_:)))
+        let removeButton = UIBarButtonItem(title: ButtonNames.remove, style: .plain, target: self, action: #selector(didTapRemoveButton))
         navigationItem.leftBarButtonItem = backOrCancelButton
         navigationItem.rightBarButtonItems = [editOrSaveButton, removeButton]
     }
@@ -76,15 +76,15 @@ class MemoDetailViewController: CreateNewMemoViewController {
     
     @objc private func didTapBackOrCancelButton(_ sender: UIBarButtonItem) {
         switch sender.title {
-        case ButtonsNameOnNavigationBar.back:
+        case ButtonNames.back:
              navigationController?.popViewController(animated: true)
-        case ButtonsNameOnNavigationBar.cancel:
+        case ButtonNames.cancel:
             configure()
             setTextEditingDisabled()
             addChildToSelf()
             DispatchQueue.main.async {
-                self.editOrSaveButton.title = ButtonsNameOnNavigationBar.edit
-                self.backOrCancelButton.title = ButtonsNameOnNavigationBar.back
+                self.editOrSaveButton.title = ButtonNames.edit
+                self.backOrCancelButton.title = ButtonNames.back
                 UIView.animate(withDuration: 0.5) {
                     self.noticeLabel.transform = .identity
                     self.noticeLabel.alpha = 0.0
@@ -101,20 +101,20 @@ class MemoDetailViewController: CreateNewMemoViewController {
     }
     
     @objc private func didTapEditOrSaveButton(_ sender: UIBarButtonItem) {
-        if sender.title == ButtonsNameOnNavigationBar.edit {
+        if sender.title == ButtonNames.edit {
             titleTextField.isUserInteractionEnabled = true
             memoTextView.isEditable = true
             titleTextField.becomeFirstResponder()
-            sender.title = ButtonsNameOnNavigationBar.save
-            backOrCancelButton.title = ButtonsNameOnNavigationBar.cancel
+            sender.title = ButtonNames.save
+            backOrCancelButton.title = ButtonNames.cancel
             switchingImageAddingViewEditMode()
             
-        } else if sender.title == ButtonsNameOnNavigationBar.save {
+        } else if sender.title == ButtonNames.save {
             let success = saveEditedMemo()
             guard success else {return}
             setTextEditingDisabled()
-            sender.title = ButtonsNameOnNavigationBar.edit
-            backOrCancelButton.title = ButtonsNameOnNavigationBar.back
+            sender.title = ButtonNames.edit
+            backOrCancelButton.title = ButtonNames.back
             switchingImageAddingViewDisplayMode()
             UIView.animate(withDuration: 0.5) {
                 self.noticeLabel.transform = .identity
