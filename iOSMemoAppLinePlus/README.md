@@ -1,21 +1,30 @@
-#  프로젝트 소개
+# iOS Memo App
+
+[[이미지]]
+
+## Features
+
+- Memo management function
+- Supports add / delete / edit / search functions
+- Image attachment support (photo shooting, album attachment, URL image attachment)
+- List-up my memos
+
+## OS Supports
+
+- iOS 10.0 or higher
+
+## Getting Dev Started
+
+### Project Setup
+
+- Repository: https://github.com/IMSEONGJUN/iOSMemoApp
+---
+```
+git clone https://github.com/IMSEONGJUN/iOSMemoApp iOSMemoApp_ImSeongjun
+cd iOSMemoApp_ImSeongjun
+open iOSMemoAppLinePlus.xcworkspace
+```
+
+## Third-party libraries
 
 
-## 앱의 뷰별 전체적인 구성 ( 상속 및 각 파일들의 역할 )
-<> 뷰별 스크린샷으로 피라미드 형태로 이미지 구성 
-
-
-
-
-## 앱의 사용 흐름에 따른 함수 기능 설명 
-1. 앱의 생성 -> 메모가 없을때의 시작뷰 -> 새 메모 생성 ->  타이틀, 메모 -> 이미지 추가 -> 이미지 이동 및 삭제 기능 -> 저장 <각 과정별 이벤트 흐름>
-
-2. 메모리스트(메모가 생성된 후) -> 메모 상세보기 -> 메모수정 -> 수정내용 저장 -> 나가기 -> 수정 후 메모 정렬 
-
-3. 메모 검색 -> 검색어 지우거나 cancel 버튼 누르면 원래 상태로 복귀
-
-4. 메모 삭제
-<검색 전>  
-- 리스트뷰에서 바로 삭제 -> 상세 페이지로 진입 후 삭제 -> 삭제 결과
-<검색 후>
-- 리스트뷰에서 바로 삭제 -> 상세 페이지로 진입 후 삭제 -> 삭제 결과
