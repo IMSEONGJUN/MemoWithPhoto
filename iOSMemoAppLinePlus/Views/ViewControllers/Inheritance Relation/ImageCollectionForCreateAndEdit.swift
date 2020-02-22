@@ -62,6 +62,9 @@ class ImageCollectionForCreateAndEdit: ImageCollectionForDetail {
         checkImagesArrayEmpty()
     }
     
+    deinit {
+        print("Collection for Create&Edit Deinit")
+    }
     
     // MARK: - Setup
     
@@ -120,7 +123,6 @@ class ImageCollectionForCreateAndEdit: ImageCollectionForDetail {
         alert.addAction(url)
         alert.addAction(cancel)
         self.present(alert, animated: true)
-        
     }
     
     @objc func didTapImageAddButton() {
@@ -163,9 +165,7 @@ class ImageCollectionForCreateAndEdit: ImageCollectionForDetail {
         }
     }
     
-    deinit{
-        print("Collection for Create&Edit Deinit")
-    }
+    
     
     // MARK: - Overridden and Just UICollectionViewDataSource Method
     
