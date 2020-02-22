@@ -28,9 +28,7 @@ class ImageCollectionForDetail: UIViewController {
         }
         self.memo = detailVC.memo
         if self.memo.images?.convertToMyImageTypeArray()?.isEmpty ?? true {
-            if self.children.count > 0{
-                self.children.forEach({ $0.willMove(toParent: nil); $0.view.removeFromSuperview(); $0.removeFromParent() })
-            }
+            checkSelfHaveChildrenVC(on: self)
             showEmptyStateViewOnDetailVC()
         }
     }

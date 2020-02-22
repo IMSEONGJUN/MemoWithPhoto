@@ -11,6 +11,8 @@ import SnapKit
 
 class CreateNewMemoViewController: UIViewController {
        
+    // MARK: Properties
+    
     var titleTextField = UITextField()
     var memoTextView = UITextView()
     let placeholderTextForTextView = "메모 내용을 입력하세요."
@@ -34,6 +36,12 @@ class CreateNewMemoViewController: UIViewController {
         addChildViewController()
         createDismissKeyboardTapGesture()
     }
+    
+    deinit {
+           print("CreateNewMemoVC Deinit")
+       }
+    
+    // MARK: - Setup
     
     func addChildViewController() {
         checkSelfHaveChildrenVC(on: self)
@@ -124,9 +132,7 @@ class CreateNewMemoViewController: UIViewController {
         view.addGestureRecognizer(tap)
     }
     
-    deinit{
-        print("CreateNewMemoVC Deinit")
-    }
+   
     
     
     // MARK: - Action

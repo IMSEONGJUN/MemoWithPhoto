@@ -142,32 +142,17 @@ extension MemoListViewController: UITableViewDelegate {
         guard editingStyle == .delete else {return}
         self.searchBar.text?.removeAll()
         DataManager.shared.removeMemo(indexPath: indexPath, isInFilteredMemoList: isSearching)
-//        var activeArray = isSearching ? DataManager.shared.filteredMemoList : DataManager.shared.memoList // 값의 복사가 일어난다 왜지??? // DataManager.shared 를 먼저 받았으면 레퍼런스 타입으로 전달되는데 DataManager.shared.memoList 로 받으면 값으로 들어간다.
-//        let commit = activeArray[indexPath.row]
-//        // Network Manager 에 removeMemo() 함수 만드는것이 좋다.
-//        activeArray.remove(at: indexPath.row)
-//
-//        if isSearching {DataManager.shared.filteredMemoList.remove(at: indexPath.row)}
-//        DataManager.shared.mainContext.delete(commit)
-//        DataManager.shared.fetchMemo()
-//        DataManager.shared.saveContext()
         tableView.deleteRows(at: [indexPath], with: .left)
         
         self.isSearching = false
         tableView.reloadData()
-        
-        
-            
-//        DispatchQueue.main.async {
-//            tableView.reloadData()
-//        }
+
         checkCoreDataEmpty()
     }
 }
 
 extension MemoListViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        print("search")
         let filterKey = searchText
         guard !filterKey.isEmpty else {
             isSearching = false
@@ -182,6 +167,7 @@ extension MemoListViewController: UISearchBarDelegate {
         isSearching = true
         tableView.reloadData()
     }
+    
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
         searchBar.text?.removeAll()
@@ -190,9 +176,7 @@ extension MemoListViewController: UISearchBarDelegate {
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
-        
     }
-
 }
 
 extension MemoListViewController: MemoDetailViewControllerDelegate {
@@ -203,12 +187,5 @@ extension MemoListViewController: MemoDetailViewControllerDelegate {
         self.searchBar.text?.removeAll()
         self.searchBar.resignFirstResponder()
     }
-    
-    
 }
-//                let viewControllers:[UIViewController] = self.children
-//                for viewContoller in viewControllers{
-//                    viewContoller.willMove(toParent: nil)
-//                    viewContoller.view.removeFromSuperview()
-//                    viewContoller.removeFromParent()
-//                }
+

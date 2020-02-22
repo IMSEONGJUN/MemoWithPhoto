@@ -39,9 +39,13 @@ enum MyColors {
     static let body = UIColor(red: 151/255, green: 134/255, blue: 125/255, alpha: 1)
 }
 
-enum MyImageTypes {
+enum MyImageTypes : Equatable {
     case image(UIImage)
     case urlString(String)
+    
+    static func ==(lhs: MyImageTypes, rhs: MyImageTypes) {
+        return lhs == rhs
+    }
 }
 
 enum ButtonsNameOnNavigationBar {

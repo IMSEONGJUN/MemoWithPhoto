@@ -33,10 +33,21 @@
 		CE49680C23F6EC770056E444 /* ImageCollectionForCreateAndEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE49680B23F6EC770056E444 /* ImageCollectionForCreateAndEdit.swift */; };
 		CE49680F23F7CD1F0056E444 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE49680E23F7CD1F0056E444 /* UIViewController+Ext.swift */; };
 		CE49681223F7CDA50056E444 /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE49681123F7CDA50056E444 /* EmptyStateView.swift */; };
+		CE753C3E24010EB400A5CD16 /* iOSMemoAppLinePlusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE753C3D24010EB400A5CD16 /* iOSMemoAppLinePlusTests.swift */; };
 		CE8CF70223F85D4A00B5DC67 /* NotiLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8CF70123F85D4A00B5DC67 /* NotiLabel.swift */; };
 		CEF0DE3523FBE8F700926400 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF0DE3423FBE8F700926400 /* NetworkManager.swift */; };
 		CEF0DE3723FC2BA700926400 /* LoadImageFromURLViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF0DE3623FC2BA700926400 /* LoadImageFromURLViewController.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		CE753C4024010EB400A5CD16 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE4967BB23F46FF50056E444 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CE4967C223F46FF50056E444;
+			remoteInfo = iOSMemoAppLinePlus;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		4C680145DA2140FB39CE9FDD /* Pods-iOSMemoAppLinePlus.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSMemoAppLinePlus.debug.xcconfig"; path = "Target Support Files/Pods-iOSMemoAppLinePlus/Pods-iOSMemoAppLinePlus.debug.xcconfig"; sourceTree = "<group>"; };
@@ -69,6 +80,9 @@
 		CE49680B23F6EC770056E444 /* ImageCollectionForCreateAndEdit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionForCreateAndEdit.swift; sourceTree = "<group>"; };
 		CE49680E23F7CD1F0056E444 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
 		CE49681123F7CDA50056E444 /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
+		CE753C3B24010EB400A5CD16 /* iOSMemoAppLinePlusTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iOSMemoAppLinePlusTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE753C3D24010EB400A5CD16 /* iOSMemoAppLinePlusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSMemoAppLinePlusTests.swift; sourceTree = "<group>"; };
+		CE753C3F24010EB400A5CD16 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE8B910323FE9878005D0F84 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		CE8CF70123F85D4A00B5DC67 /* NotiLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotiLabel.swift; sourceTree = "<group>"; };
 		CEF0DE3423FBE8F700926400 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -81,6 +95,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				634D1C3468B08D763EE9CF46 /* Pods_iOSMemoAppLinePlus.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CE753C3824010EB400A5CD16 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -117,6 +138,7 @@
 			isa = PBXGroup;
 			children = (
 				CE4967C523F46FF50056E444 /* iOSMemoAppLinePlus */,
+				CE753C3C24010EB400A5CD16 /* iOSMemoAppLinePlusTests */,
 				CE4967C423F46FF50056E444 /* Products */,
 				C24658FA7A388F1AE8EF75E4 /* Pods */,
 				2DCC67EE3E358743EFBC764D /* Frameworks */,
@@ -127,6 +149,7 @@
 			isa = PBXGroup;
 			children = (
 				CE4967C323F46FF50056E444 /* iOSMemoAppLinePlus.app */,
+				CE753C3B24010EB400A5CD16 /* iOSMemoAppLinePlusTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -254,6 +277,15 @@
 			path = "Inheritance Relation";
 			sourceTree = "<group>";
 		};
+		CE753C3C24010EB400A5CD16 /* iOSMemoAppLinePlusTests */ = {
+			isa = PBXGroup;
+			children = (
+				CE753C3D24010EB400A5CD16 /* iOSMemoAppLinePlusTests.swift */,
+				CE753C3F24010EB400A5CD16 /* Info.plist */,
+			);
+			path = iOSMemoAppLinePlusTests;
+			sourceTree = "<group>";
+		};
 		CE8B910423FEA22B005D0F84 /* Support */ = {
 			isa = PBXGroup;
 			children = (
@@ -285,6 +317,24 @@
 			productReference = CE4967C323F46FF50056E444 /* iOSMemoAppLinePlus.app */;
 			productType = "com.apple.product-type.application";
 		};
+		CE753C3A24010EB400A5CD16 /* iOSMemoAppLinePlusTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CE753C4424010EB400A5CD16 /* Build configuration list for PBXNativeTarget "iOSMemoAppLinePlusTests" */;
+			buildPhases = (
+				CE753C3724010EB400A5CD16 /* Sources */,
+				CE753C3824010EB400A5CD16 /* Frameworks */,
+				CE753C3924010EB400A5CD16 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CE753C4124010EB400A5CD16 /* PBXTargetDependency */,
+			);
+			name = iOSMemoAppLinePlusTests;
+			productName = iOSMemoAppLinePlusTests;
+			productReference = CE753C3B24010EB400A5CD16 /* iOSMemoAppLinePlusTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -297,6 +347,10 @@
 				TargetAttributes = {
 					CE4967C223F46FF50056E444 = {
 						CreatedOnToolsVersion = 11.3.1;
+					};
+					CE753C3A24010EB400A5CD16 = {
+						CreatedOnToolsVersion = 11.3.1;
+						TestTargetID = CE4967C223F46FF50056E444;
 					};
 				};
 			};
@@ -314,6 +368,7 @@
 			projectRoot = "";
 			targets = (
 				CE4967C223F46FF50056E444 /* iOSMemoAppLinePlus */,
+				CE753C3A24010EB400A5CD16 /* iOSMemoAppLinePlusTests */,
 			);
 		};
 /* End PBXProject section */
@@ -326,6 +381,13 @@
 				CE4967D323F46FF60056E444 /* LaunchScreen.storyboard in Resources */,
 				CE4967D023F46FF60056E444 /* Assets.xcassets in Resources */,
 				CE4967CE23F46FF50056E444 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CE753C3924010EB400A5CD16 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -406,7 +468,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CE753C3724010EB400A5CD16 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE753C3E24010EB400A5CD16 /* iOSMemoAppLinePlusTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CE753C4124010EB400A5CD16 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CE4967C223F46FF50056E444 /* iOSMemoAppLinePlus */;
+			targetProxy = CE753C4024010EB400A5CD16 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		CE4967CC23F46FF50056E444 /* Main.storyboard */ = {
@@ -582,6 +660,46 @@
 			};
 			name = Release;
 		};
+		CE753C4224010EB400A5CD16 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = ADHC8G6NHC;
+				INFOPLIST_FILE = iOSMemoAppLinePlusTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.SeongjunIm.www.iOSMemoAppLinePlusTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iOSMemoAppLinePlus.app/iOSMemoAppLinePlus";
+			};
+			name = Debug;
+		};
+		CE753C4324010EB400A5CD16 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = ADHC8G6NHC;
+				INFOPLIST_FILE = iOSMemoAppLinePlusTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.SeongjunIm.www.iOSMemoAppLinePlusTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iOSMemoAppLinePlus.app/iOSMemoAppLinePlus";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -599,6 +717,15 @@
 			buildConfigurations = (
 				CE4967D823F46FF60056E444 /* Debug */,
 				CE4967D923F46FF60056E444 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CE753C4424010EB400A5CD16 /* Build configuration list for PBXNativeTarget "iOSMemoAppLinePlusTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CE753C4224010EB400A5CD16 /* Debug */,
+				CE753C4324010EB400A5CD16 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
