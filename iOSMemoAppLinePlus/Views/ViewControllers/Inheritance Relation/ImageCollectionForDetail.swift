@@ -34,7 +34,7 @@ class ImageCollectionForDetail: UIViewController {
     }
     
     func showEmptyStateViewOnDetailVC() {
-        showEmptyStateView(with: "등록된 이미지가 없습니다", in: self.view, imageName: EmptyStateViewImageName.noPicture,
+        showEmptyStateView(with: TextMessages.noImages, in: self.view, imageName: EmptyStateViewImageName.noPicture,
                            superViewType: .detail)
     }
     
@@ -127,5 +127,6 @@ extension ImageCollectionForDetail: UICollectionViewDataSource {
 extension ImageCollectionForDetail: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("didselect in detail")
+        // TODO: 선택시 디테일 뷰 띄우기
     }
 }

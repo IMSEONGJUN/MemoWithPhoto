@@ -186,7 +186,7 @@ class ImageCollectionForCreateAndEdit: ImageCollectionForDetail {
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("select in createVC")
-        // TODO: 선택시 디테일 뷰 띄우기
+        
     }
 }
 
@@ -223,12 +223,10 @@ extension ImageCollectionForCreateAndEdit: ImageCellForCollectionDelegate {
     
     func didTapRemoveButtonOnImage(in cell: ImageCellForCollection) {
         guard let indexPath = collectionView.indexPath(for: cell) else { return }
-        collectionView.performBatchUpdates({
             self.imagesToAdd.remove(at: indexPath.row)
             self.collectionView.deleteItems(at: [indexPath])
             self.checkImagesArrayEmpty()
             self.collectionView.reloadData()
-        }, completion: nil)
     }
 }
 
@@ -236,7 +234,6 @@ extension ImageCollectionForCreateAndEdit: ImageCellForCollectionDelegate {
 
 extension ImageCollectionForCreateAndEdit: LoadImageFromURLViewControllerDelegate {
     func passUrlString(urlString: MyImageTypes) {
-        print("pass delegate")
         if self.imagesToAdd == nil {
             self.imagesToAdd = [urlString]
         } else {
