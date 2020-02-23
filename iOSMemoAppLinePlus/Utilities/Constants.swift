@@ -23,7 +23,7 @@ enum ImageLoadError: String, Error {
 }
 
 enum PlaceHolderImages {
-    static let defaultImage = UIImage(named: "noImageThumnail")
+    static let defaultWhenNoImage = UIImage(named: "noImageThumnail")
     static let imageLoadFail = UIImage(named: "noimage")
     static let loading = UIImage(named: "loading")
     static let removeImage = UIImage(named: "remove")
@@ -39,7 +39,7 @@ enum MyColors {
     static let body = UIColor(red: 151/255, green: 134/255, blue: 125/255, alpha: 1)
 }
 
-enum MyImageTypes : Equatable {
+enum MyImageTypes {
     case image(UIImage)
     case urlString(String)
 }
@@ -49,6 +49,7 @@ enum Titles {
     static let info = "알림"
     static let error = "에러"
     static let title = "제목"
+    static let imageDetail = "이미지 상세보기"
 }
 
 enum ButtonNames {
@@ -99,6 +100,8 @@ enum VeryBottomViewTypeOfEmptyStateView {
     case createNew
 }
 
+
+// Use when want to make difference for each Device
 enum ScreenSize {
     static let width        = UIScreen.main.bounds.size.width
     static let height       = UIScreen.main.bounds.size.height

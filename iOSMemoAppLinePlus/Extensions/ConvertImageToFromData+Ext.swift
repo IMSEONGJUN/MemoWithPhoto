@@ -11,14 +11,15 @@ import UIKit
 
 extension Array where Element == MyImageTypes {
     
-    func convertToCoreDataRepresentation() -> Data? {
+    // Convert [MyImageTypes] To Data? For Saving in CoreData
+    func convertToDataType() -> Data? {
         let CDataArray = NSMutableArray()
 
         for img in self {
             switch img {
             case .image(let val):
                 guard let imageRepresentation = val.jpegData(compressionQuality: 0.5) else {
-                    print("Unable to represent image as JPEG")
+                    print("Unable to represent image as JPEG Data")
                     return nil
                 }
                 let nsdata : NSData = NSData(data: imageRepresentation)
@@ -37,7 +38,8 @@ extension Array where Element == MyImageTypes {
 
 
 extension Data {
-
+    
+    // Convert Data To [MyImageTypes]? For Displaying on Views
     func convertToMyImageTypeArray() -> [MyImageTypes]? {
         var myImageArray = [MyImageTypes]()
         
@@ -54,7 +56,7 @@ extension Data {
             return myImageArray
         }
         else {
-            print("Unable to convert data to ImageArray")
+            print("Unable to convert data to [MyImageTypes]")
             return nil
         }
     }

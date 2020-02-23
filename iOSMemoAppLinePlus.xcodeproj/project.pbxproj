@@ -163,9 +163,9 @@
 				CE4967E023F474840056E444 /* Views */,
 				CE4967DD23F471A80056E444 /* Controllers */,
 				CE4967DA23F470A40056E444 /* Model */,
-				CE4967CC23F46FF50056E444 /* Main.storyboard */,
 				CE4967CF23F46FF60056E444 /* Assets.xcassets */,
 				CE4967D123F46FF60056E444 /* LaunchScreen.storyboard */,
+				CE4967CC23F46FF50056E444 /* Main.storyboard */,
 				CE45B7BA23FF53D400444371 /* ViewController.swift */,
 				CE4967D423F46FF60056E444 /* Info.plist */,
 			);

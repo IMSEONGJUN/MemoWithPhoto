@@ -46,7 +46,7 @@ class MemoCell: UITableViewCell {
                 break
             }
         } else {
-            self.thumnailImageView.image = PlaceHolderImages.defaultImage
+            self.thumnailImageView.image = PlaceHolderImages.defaultWhenNoImage
         }
         
         self.titleLabel.text = self.memoData.title

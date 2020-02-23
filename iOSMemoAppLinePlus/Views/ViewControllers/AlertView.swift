@@ -10,6 +10,7 @@ import UIKit
 
 class AlertViewController: UIViewController {
     
+    // MARK: Properties
     private let containerView = UIView()
     private let titleLabel = TitleLabel(textAlignment: .center, fontSize: 20)
     private let messageLabel = BodyLabel(textAlignment: .center)
@@ -21,6 +22,8 @@ class AlertViewController: UIViewController {
     
     let padding: CGFloat = 20
     
+    
+    // MARK: Initializer
     init(title: String, message: String, buttonTitle: String) {
         super.init(nibName: nil, bundle: nil)
         self.alertTitle = title
@@ -32,6 +35,8 @@ class AlertViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
+    // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -40,6 +45,9 @@ class AlertViewController: UIViewController {
         configureMessageLabel()
         configureConfirmButton()
     }
+    
+    
+     // MARK: - Setup
     
     func setupView() {
         view.backgroundColor = UIColor.black.withAlphaComponent(0.6)
@@ -99,6 +107,7 @@ class AlertViewController: UIViewController {
         ])
     }
     
+    // MARK: - Action Handle
     @objc func dismissVC() {
         dismiss(animated: true)
     }

@@ -36,7 +36,7 @@ class iOSMemoAppLinePlusTests: XCTestCase {
 
     func testConvertMyImageTypeArrayToDataTypeAndInverseCase() {
         print(myImageTypesArray!.count) // 10개
-        coreDataRepresentation = myImageTypesArray?.convertToCoreDataRepresentation() // convert to Data?
+        coreDataRepresentation = myImageTypesArray?.convertToDataType() // convert to Data?
     
         XCTAssertNotNil(coreDataRepresentation)
         XCTAssertTrue(type(of: coreDataRepresentation) == type(of: typeCompareData))
@@ -108,7 +108,7 @@ class iOSMemoAppLinePlusTests: XCTestCase {
         for i in 0..<count {
             DataManager.mock.addNewMemo(title: "\(i)",
                                           memo: "\(i)",
-                                          images: myImageTypeValue.convertToCoreDataRepresentation())
+                                          images: myImageTypeValue.convertToDataType())
         }
         var testMemoList = [Memo]()
         testMemoList = DataManager.mock.memoList
@@ -126,7 +126,7 @@ class iOSMemoAppLinePlusTests: XCTestCase {
         for i in 0..<inputCount {
             DataManager.mock.addNewMemo(title: "\(i)",
                                           memo: "\(i)",
-                                          images: myImageTypeValue.convertToCoreDataRepresentation())
+                                          images: myImageTypeValue.convertToDataType())
         }
         for i in 0..<deleteCount {
             DataManager.mock.removeMemo(indexPath: IndexPath(row: i, section: 0), isInFilteredMemoList: false)
@@ -163,7 +163,7 @@ class iOSMemoAppLinePlusTests: XCTestCase {
         DataManager.mock.editMemo(index: 0,
                                     title: editedTitle,
                                     memo: editedContent,
-                                    images: editedMyImageTypeValue.convertToCoreDataRepresentation())
+                                    images: editedMyImageTypeValue.convertToDataType())
         
         var testEditedMemoList = [Memo]()
         testEditedMemoList = DataManager.mock.memoList

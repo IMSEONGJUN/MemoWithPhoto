@@ -18,7 +18,7 @@ class MemoDetailViewController: CreateNewMemoViewController {
     var memo: Memo!
     var indexPath: IndexPath!
     var isFilteredBefore = false
-    let collectionForEdit = ImageCollectionForCreateAndEdit()
+    var collectionForEdit: ImageCollectionForCreateAndEdit?
     
     weak var delegate: MemoDetailViewControllerDelegate?
     
@@ -142,9 +142,10 @@ class MemoDetailViewController: CreateNewMemoViewController {
     
     func switchingImageAddingViewEditMode() {
         checkSelfHaveChildrenVC(on: self)
-        collectionForEdit.delegate = self
-        collectionForEdit.imagesToAdd = memo.images?.convertToMyImageTypeArray()
-        self.add(childVC: self.collectionForEdit, to: self.addImageViewContainer)
+        collectionForEdit = ImageCollectionForCreateAndEdit()
+        collectionForEdit?.delegate = self
+        collectionForEdit?.imagesToAdd = memo.images?.convertToMyImageTypeArray()
+        self.add(childVC: self.collectionForEdit!, to: self.addImageViewContainer)
     }
     
     func switchingImageAddingViewDisplayMode() {
@@ -169,7 +170,7 @@ class MemoDetailViewController: CreateNewMemoViewController {
             return false
         }
         
-        let imageForCoreData = collectionForEdit.imagesToAdd?.convertToCoreDataRepresentation()
+        let imageForCoreData = collectionForEdit?.imagesToAdd?.convertToDataType()
         if isFilteredBefore {
             let memoDateInfilteredList = DataManager.shared.filteredMemoList[indexPath.row].createdDate
             if let index = DataManager.shared.memoList.firstIndex(where: {$0.createdDate == memoDateInfilteredList}) {
@@ -180,28 +181,6 @@ class MemoDetailViewController: CreateNewMemoViewController {
         }
         
         indexPath.row = 0
-        
-//        if let imageForCoreData = collectionForEdit.imagesToAdd?.convertToCoreDataRepresentation() {
-//            if isFilteredBefore {
-//                let memoDateInfilteredList = DataManager.shared.filteredMemoList[indexPath.row].createdDate
-//                if let index = DataManager.shared.memoList.firstIndex(where: {$0.createdDate == memoDateInfilteredList}){
-//                    DataManager.shared.editMemo(index: index, title: title, memo: memo, images: imageForCoreData)
-//                }
-//            } else {
-//                DataManager.shared.editMemo(index: indexPath.row, title: title, memo: memo, images: imageForCoreData)
-//            }
-//        } else {
-//            if isFilteredBefore {
-//                let memoDateInfilteredList = DataManager.shared.filteredMemoList[indexPath.row].createdDate
-//                if let index = DataManager.shared.memoList.firstIndex(where: {$0.createdDate == memoDateInfilteredList}){
-//                    DataManager.shared.editMemo(index: index, title: title, memo: memo, images: nil)
-//                }
-//            } else {
-//                DataManager.shared.editMemo(index: indexPath.row, title: title, memo: memo, images: nil)
-//
-//            }
-//        }
-        
         self.memo = DataManager.shared.memoList.first
         return true
         

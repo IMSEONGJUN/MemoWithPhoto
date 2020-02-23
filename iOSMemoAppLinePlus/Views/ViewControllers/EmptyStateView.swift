@@ -10,6 +10,7 @@ import UIKit
 
 final class EmptyStateView: UIViewController {
     
+    // MARK: Properties
     let messageLabel = NotiLabel(textAlignment: .center, fontSize: 18)
     let logoImageView = UIImageView()
     let createNewButton = UIButton()
@@ -20,6 +21,20 @@ final class EmptyStateView: UIViewController {
     
     var padding:CGFloat = 5
     
+    
+    // MARK: Initializer
+    init(message: String, imageName: String) {
+        super.init(nibName: nil, bundle: nil)
+        messageLabel.text = message
+        logoImageView.image = UIImage(named: imageName)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+    // MARK: Lifecycle
     override func viewDidLoad() {
         view.backgroundColor = .white
         configure()
@@ -31,16 +46,15 @@ final class EmptyStateView: UIViewController {
         setNotiObserver()
     }
     
-    init(message: String, imageName: String) {
-        super.init(nibName: nil, bundle: nil)
-        messageLabel.text = message
-        logoImageView.image = UIImage(named: imageName)
+    deinit{
+        if let token = token {
+            NotificationCenter.default.removeObserver(token)
+        }
+        print("EmptyStateView Deinit")
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
+    // MARK: - Setup
     private func configure() {
         view.addSubview(messageLabel)
         view.addSubview(logoImageView)
@@ -99,6 +113,9 @@ final class EmptyStateView: UIViewController {
         }
     }
     
+    
+    // MARK: - Action Handle
+    
     @objc private func didTapCreateNewButton() {
         if isOnTheCreateNewOrDetailVC {
             print("add image")
@@ -109,14 +126,10 @@ final class EmptyStateView: UIViewController {
         }
     }
     
-    deinit{
-        if let token = token {
-            NotificationCenter.default.removeObserver(token)
-        }
-        print("EmptyStateView Deinit")
-    }
+    
 }
 
+    // MARK: - Notification Names
 extension EmptyStateView {
     static let didTapNewMemoCreatedButton = Notification.Name(rawValue: "didTapCreateNewMemoButton")
     static let didTapNewImageAddedButton = Notification.Name(rawValue: "didTapNewImageAddedButton")

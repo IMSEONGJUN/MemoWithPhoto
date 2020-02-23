@@ -42,6 +42,7 @@ extension UIViewController {
         emptyStateView.didMove(toParent: self)
     }
     
+    // Remove all children ViewControllers if have
     func checkSelfHaveChildrenVC(on selfView: UIViewController ) {
         if selfView.children.count > 0 {
             selfView.children.forEach({
@@ -52,6 +53,7 @@ extension UIViewController {
         }
     }
     
+    // Show Activity Indicator during loading image from URL
     func showLoadingView() {
         containerView = UIView(frame: view.bounds)
         view.addSubview(containerView)

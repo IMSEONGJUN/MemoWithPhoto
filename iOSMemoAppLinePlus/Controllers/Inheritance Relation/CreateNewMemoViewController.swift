@@ -156,7 +156,7 @@ class CreateNewMemoViewController: UIViewController {
         if addedImages.isEmpty {
             DataManager.shared.addNewMemo(title: title, memo: memo, images: nil)
         } else {
-            guard let coreDataObjectArray = addedImages.convertToCoreDataRepresentation() else { return }
+            guard let coreDataObjectArray = addedImages.convertToDataType() else { return }
             DataManager.shared.addNewMemo(title: title, memo: memo, images: coreDataObjectArray)
         }
         

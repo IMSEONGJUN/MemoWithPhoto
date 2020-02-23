@@ -14,7 +14,6 @@ import MobileCoreServices
     func collectionViewHasImageMoreThanOne(hasImage: Bool)
 }
 
-
 class ImageCollectionForCreateAndEdit: ImageCollectionForDetail {
 
     // MARK: Properties
@@ -159,8 +158,7 @@ class ImageCollectionForCreateAndEdit: ImageCollectionForDetail {
     
     // MARK: - Overridden and Just UICollectionViewDataSource Method
     
-    override func collectionView(_ collectionView: UICollectionView,
-                                 numberOfItemsInSection section: Int) -> Int {
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return imagesToAdd?.count ?? 0
     }
     
@@ -170,7 +168,7 @@ class ImageCollectionForCreateAndEdit: ImageCollectionForDetail {
                                                       for: indexPath) as! ImageCellForCollection
         cell.delegate = self
         guard let image = imagesToAdd?[indexPath.item] else {
-            cell.imageView.image = PlaceHolderImages.defaultImage
+            cell.imageView.image = PlaceHolderImages.defaultWhenNoImage
             return cell
         }
         checkImageSourceTypeAndSetValueOnCell(checkObject: image, for: cell)
@@ -187,13 +185,6 @@ class ImageCollectionForCreateAndEdit: ImageCollectionForDetail {
         
         let element = imagesToAdd.remove(at: source)
         imagesToAdd.insert(element, at: destination)
-    }
-    
-    // MARK: - Overridden UICollectionViewDelegate Method
-    
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("select in createVC")
-        
     }
 }
 
