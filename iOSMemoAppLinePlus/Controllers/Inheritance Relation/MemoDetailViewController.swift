@@ -169,37 +169,38 @@ class MemoDetailViewController: CreateNewMemoViewController {
             return false
         }
         
-//        let imageForCoreData = collectionForEdit.imagesToAdd?.convertToCoreDataRepresentation()
-//        if isFilteredBefore {
-//            let memoDateInfilteredList = DataManager.shared.filteredMemoList[indexPath.row].createdDate
-//            if let index = DataManager.shared.memoList.firstIndex(where: {$0.createdDate == memoDateInfilteredList}) {
-//                DataManager.shared.editMemo(index: index, title: title, memo: memo, images: imageForCoreData)
-//            }
-//        } else {
-//            DataManager.shared.editMemo(index: indexPath.row, title: title, memo: memo, images: imageForCoreData)
-//        }
-        
-        
-        if let imageForCoreData = collectionForEdit.imagesToAdd?.convertToCoreDataRepresentation() {
-            if isFilteredBefore {
-                let memoDateInfilteredList = DataManager.shared.filteredMemoList[indexPath.row].createdDate
-                if let index = DataManager.shared.memoList.firstIndex(where: {$0.createdDate == memoDateInfilteredList}){
-                    DataManager.shared.editMemo(index: index, title: title, memo: memo, images: imageForCoreData)
-                }
-            } else {
-                DataManager.shared.editMemo(index: indexPath.row, title: title, memo: memo, images: imageForCoreData)
+        let imageForCoreData = collectionForEdit.imagesToAdd?.convertToCoreDataRepresentation()
+        if isFilteredBefore {
+            let memoDateInfilteredList = DataManager.shared.filteredMemoList[indexPath.row].createdDate
+            if let index = DataManager.shared.memoList.firstIndex(where: {$0.createdDate == memoDateInfilteredList}) {
+                DataManager.shared.editMemo(index: index, title: title, memo: memo, images: imageForCoreData)
             }
         } else {
-            if isFilteredBefore {
-                let memoDateInfilteredList = DataManager.shared.filteredMemoList[indexPath.row].createdDate
-                if let index = DataManager.shared.memoList.firstIndex(where: {$0.createdDate == memoDateInfilteredList}){
-                    DataManager.shared.editMemo(index: index, title: title, memo: memo, images: nil)
-                }
-            } else {
-                DataManager.shared.editMemo(index: indexPath.row, title: title, memo: memo, images: nil)
-
-            }
+            DataManager.shared.editMemo(index: indexPath.row, title: title, memo: memo, images: imageForCoreData)
         }
+        
+        indexPath.row = 0
+        
+//        if let imageForCoreData = collectionForEdit.imagesToAdd?.convertToCoreDataRepresentation() {
+//            if isFilteredBefore {
+//                let memoDateInfilteredList = DataManager.shared.filteredMemoList[indexPath.row].createdDate
+//                if let index = DataManager.shared.memoList.firstIndex(where: {$0.createdDate == memoDateInfilteredList}){
+//                    DataManager.shared.editMemo(index: index, title: title, memo: memo, images: imageForCoreData)
+//                }
+//            } else {
+//                DataManager.shared.editMemo(index: indexPath.row, title: title, memo: memo, images: imageForCoreData)
+//            }
+//        } else {
+//            if isFilteredBefore {
+//                let memoDateInfilteredList = DataManager.shared.filteredMemoList[indexPath.row].createdDate
+//                if let index = DataManager.shared.memoList.firstIndex(where: {$0.createdDate == memoDateInfilteredList}){
+//                    DataManager.shared.editMemo(index: index, title: title, memo: memo, images: nil)
+//                }
+//            } else {
+//                DataManager.shared.editMemo(index: indexPath.row, title: title, memo: memo, images: nil)
+//
+//            }
+//        }
         
         self.memo = DataManager.shared.memoList.first
         return true
