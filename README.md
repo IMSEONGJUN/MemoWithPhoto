@@ -1,6 +1,6 @@
 # iOS Memo App
 
-[[이미지]]
+![Main](https://raw.githubusercontent.com/IMSEONGJUN/iOSMemoApp/master/images/01.jpg)
 
 ## Features
 
