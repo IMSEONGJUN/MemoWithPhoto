@@ -34,6 +34,7 @@
 		CE49681223F7CDA50056E444 /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE49681123F7CDA50056E444 /* EmptyStateView.swift */; };
 		CE753C3E24010EB400A5CD16 /* iOSMemoAppLinePlusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE753C3D24010EB400A5CD16 /* iOSMemoAppLinePlusTests.swift */; };
 		CE8CF70223F85D4A00B5DC67 /* NotiLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8CF70123F85D4A00B5DC67 /* NotiLabel.swift */; };
+		CEA3354B24029BA9002AFECE /* ImageDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA3354A24029BA9002AFECE /* ImageDetailViewController.swift */; };
 		CEF0DE3523FBE8F700926400 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF0DE3423FBE8F700926400 /* NetworkManager.swift */; };
 		CEF0DE3723FC2BA700926400 /* LoadImageFromURLViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF0DE3623FC2BA700926400 /* LoadImageFromURLViewController.swift */; };
 /* End PBXBuildFile section */
@@ -83,6 +84,7 @@
 		CE753C3F24010EB400A5CD16 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE8B910323FE9878005D0F84 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		CE8CF70123F85D4A00B5DC67 /* NotiLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotiLabel.swift; sourceTree = "<group>"; };
+		CEA3354A24029BA9002AFECE /* ImageDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageDetailViewController.swift; sourceTree = "<group>"; };
 		CEF0DE3423FBE8F700926400 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		CEF0DE3623FC2BA700926400 /* LoadImageFromURLViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadImageFromURLViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -243,6 +245,7 @@
 				CE49680D23F7C0070056E444 /* Inheritance Relation */,
 				CE4967F523F5449B0056E444 /* AlertView.swift */,
 				CE49681123F7CDA50056E444 /* EmptyStateView.swift */,
+				CEA3354A24029BA9002AFECE /* ImageDetailViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -451,6 +454,7 @@
 				CE49681223F7CDA50056E444 /* EmptyStateView.swift in Sources */,
 				CEF0DE3523FBE8F700926400 /* NetworkManager.swift in Sources */,
 				CE49680C23F6EC770056E444 /* ImageCollectionForCreateAndEdit.swift in Sources */,
+				CEA3354B24029BA9002AFECE /* ImageDetailViewController.swift in Sources */,
 				CE4967F623F5449B0056E444 /* AlertView.swift in Sources */,
 				CE49680023F546950056E444 /* BodyLabel.swift in Sources */,
 				CE4967E823F476710056E444 /* UIView+Ext.swift in Sources */,
@@ -623,6 +627,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = ADHC8G6NHC;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = iOSMemoAppLinePlus/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (

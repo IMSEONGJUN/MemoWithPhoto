@@ -87,6 +87,9 @@ class ImageCollectionForCreateAndEdit: ImageCollectionForDetail {
         }
     }
     
+    override func setTapGestureOnCollection() {
+    }
+    
     func setupLongPressGestureRecognizer() {
         let gesture = UILongPressGestureRecognizer(target: self,
                                                    action: #selector(reorderCollectionViewItem(_:)))

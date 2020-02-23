@@ -23,11 +23,13 @@ class ImageCollectionForDetail: UIViewController {
         super.viewDidLoad()
         configureCollectionView()
         fetchMemo()
+        setTapGestureOnCollection()
     }
     
     deinit{
         print("Collection for Detail Deinit")
     }
+    
     
     // MARK: - Setup
     
@@ -37,11 +39,14 @@ class ImageCollectionForDetail: UIViewController {
         
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         view.addSubview(collectionView)
+        
         setConstraints()
         
         collectionView.dataSource = self
+        collectionView.delegate = self
         collectionView.backgroundColor = .white
         collectionView.allowsSelection = true
+        collectionView.isUserInteractionEnabled = true
         collectionView.register(ImageCellForCollection.self,
                                 forCellWithReuseIdentifier: ImageCellForCollection.identifier)
     }
@@ -55,6 +60,11 @@ class ImageCollectionForDetail: UIViewController {
             checkSelfHaveChildrenVC(on: self)
             showEmptyStateViewOnDetailVC()
         }
+    }
+    
+    func setTapGestureOnCollection() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
+        self.collectionView.addGestureRecognizer(tap)
     }
     
     private func configureFlowlayout() {
@@ -81,6 +91,17 @@ class ImageCollectionForDetail: UIViewController {
     
     
     // MARK: - Action Handle
+    
+    @objc private func handleTap(_ sender: UITapGestureRecognizer) {
+        if let indexPath = self.collectionView?.indexPathForItem(at: sender.location(in: self.collectionView)) {
+            let cell = collectionView.cellForItem(at: indexPath) as! ImageCellForCollection
+            guard let selectedImage = cell.imageView.image else { return }
+            let imageDetailVC = ImageDetailViewController()
+            imageDetailVC.set(image: selectedImage)
+            imageDetailVC.modalPresentationStyle = .fullScreen
+            present(imageDetailVC, animated: true)
+        }
+    }
     
     func showEmptyStateViewOnDetailVC() {
         showEmptyStateView(with: TextMessages.noImages,
@@ -136,3 +157,9 @@ extension ImageCollectionForDetail: UICollectionViewDataSource {
     }
 }
 
+
+extension ImageCollectionForDetail: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("select cell!!")
+    }
+}
