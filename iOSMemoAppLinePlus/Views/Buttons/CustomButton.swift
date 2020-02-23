@@ -28,6 +28,8 @@ class CustomButton: UIButton {
     private func configure() {
         layer.cornerRadius = 10
         setTitleColor(.white, for: .normal)
+        titleLabel?.adjustsFontSizeToFitWidth = true
+        titleLabel?.minimumScaleFactor = 0.8
         titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
         translatesAutoresizingMaskIntoConstraints = false
     }

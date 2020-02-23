@@ -52,6 +52,7 @@ class MemoCell: UITableViewCell {
         somePartsOfMemoLabel.lineBreakMode = .byTruncatingTail
         
         dateLabel.font = UIFont.systemFont(ofSize: 12)
+        dateLabel.textColor = MyColors.title
         nextImage.backgroundColor = MyColors.content
     }
     
