@@ -15,6 +15,7 @@ protocol MemoDetailViewControllerDelegate: class {
 
 class MemoDetailViewController: CreateNewMemoViewController {
     
+    // MARK: Properties
     var memo: Memo!
     var indexPath: IndexPath!
     var isFilteredBefore = false
@@ -26,6 +27,7 @@ class MemoDetailViewController: CreateNewMemoViewController {
     var editOrSaveButton = UIBarButtonItem()
     
     
+    // MARK: LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         addImageViewContainer.backgroundColor = .white
@@ -38,6 +40,13 @@ class MemoDetailViewController: CreateNewMemoViewController {
         backOrCancelButton.title = ButtonNames.back
     }
     
+    deinit {
+        print("DetailVC Deinit")
+    }
+    
+    
+    // MARK: - Setup
+    
     override func addChildViewController() {
         addChildToSelf()
     }
@@ -47,6 +56,9 @@ class MemoDetailViewController: CreateNewMemoViewController {
         let collectionForDetail = ImageCollectionForDetail()
         add(childVC: collectionForDetail, to: addImageViewContainer)
     }
+    
+    
+    // MARK: - Overridden Setup Method
     
     override func setupNavigationBar() {
         backOrCancelButton = UIBarButtonItem(title: ButtonNames.back,
@@ -74,6 +86,9 @@ class MemoDetailViewController: CreateNewMemoViewController {
         memoTextView.clipsToBounds = true
     }
     
+    
+    // MARK: - Setup
+    
     private func configure() {
         titleTextField.text = self.memo.title
         memoTextView.text = self.memo.content
@@ -83,6 +98,9 @@ class MemoDetailViewController: CreateNewMemoViewController {
         titleTextField.isUserInteractionEnabled = false
         memoTextView.isEditable = false
     }
+    
+    
+    // MARK: - Action Handle
     
     @objc private func didTapBackOrCancelButton(_ sender: UIBarButtonItem) {
         switch sender.title {
@@ -197,9 +215,8 @@ class MemoDetailViewController: CreateNewMemoViewController {
         present(alert, animated: true)
     }
     
-    deinit {
-        print("DetailVC Deinit")
-    }
+    
+    // MARK: - Overridden ImageCollectionForCreateAndEditDelegate Method
     
     override func collectionViewHasImageMoreThanOne(hasImage: Bool) {
         if hasImage {

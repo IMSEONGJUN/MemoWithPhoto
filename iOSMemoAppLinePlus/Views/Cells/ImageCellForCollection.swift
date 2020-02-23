@@ -12,9 +12,9 @@ protocol ImageCellForCollectionDelegate: class {
     func didTapRemoveButtonOnImage(in cell:ImageCellForCollection)
 }
 
-
 class ImageCellForCollection: UICollectionViewCell {
     
+    // MARK: Properties
     static let identifier = "ImageCellForCollection"
     
     var isImageFromURL = false
@@ -23,6 +23,7 @@ class ImageCellForCollection: UICollectionViewCell {
     
     weak var delegate: ImageCellForCollectionDelegate?
     
+    // MARK: Initializer
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
@@ -30,6 +31,21 @@ class ImageCellForCollection: UICollectionViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+    // MARK: - Setup
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        let removeButtonSizeRatioToImageView: CGFloat = 0.2
+        let cellInset: CGFloat = 10
+        
+        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: cellInset, left: cellInset,
+                                                                     bottom: cellInset, right: cellInset))
+        imageView.frame = contentView.bounds
+        let removeButtonSize:CGFloat = imageView.frame.size.width * removeButtonSizeRatioToImageView
+        removeButton.frame = CGRect(x: imageView.frame.size.width - removeButtonSize, y: 0, width: removeButtonSize, height: removeButtonSize)
     }
     
     private func configure() {
@@ -44,19 +60,12 @@ class ImageCellForCollection: UICollectionViewCell {
         removeButton.isEnabled = true
     }
     
+    
+    // MARK: - Action Handle
+    
     @objc private func didTapRemoveButton() {
         delegate?.didTapRemoveButtonOnImage(in: self)
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        let removeButtonSizeRatioToImageView: CGFloat = 0.2
-        let cellInset: CGFloat = 10
-        
-        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: cellInset, left: cellInset,
-                                                                     bottom: cellInset, right: cellInset))
-        imageView.frame = contentView.bounds
-        let removeButtonSize:CGFloat = imageView.frame.size.width * removeButtonSizeRatioToImageView
-        removeButton.frame = CGRect(x: imageView.frame.size.width - removeButtonSize, y: 0, width: removeButtonSize, height: removeButtonSize)
-    }
+    
 }

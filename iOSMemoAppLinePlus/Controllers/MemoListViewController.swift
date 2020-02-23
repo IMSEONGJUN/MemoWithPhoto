@@ -9,13 +9,16 @@
 import UIKit
 
 class MemoListViewController: UIViewController {
-
+    
+    // MARK: Properties
     fileprivate let tableView = UITableView()
     
     var token: NSObjectProtocol?
     var isSearching = false
     lazy var searchBar = UISearchBar(frame: .zero)
     
+    
+    // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
@@ -30,6 +33,15 @@ class MemoListViewController: UIViewController {
         DataManager.shared.fetchMemo()
         checkCoreDataEmpty()
     }
+    
+    deinit{
+        if let token = token {
+            NotificationCenter.default.removeObserver(token)
+        }
+    }
+    
+    
+    // MARK: - Setup
     
     func checkCoreDataEmpty() {
         if DataManager.shared.memoList.isEmpty {
@@ -81,20 +93,19 @@ class MemoListViewController: UIViewController {
         navigationItem.titleView = searchBar
     }
     
+    
+    // MARK: - Action Handle
+    
     @objc func didTapAddNewMemoButton() {
         self.checkSelfHaveChildrenVC(on: self)
         let createNewMemoVC = UINavigationController(rootViewController: CreateNewMemoViewController())
         createNewMemoVC.modalPresentationStyle = .fullScreen
         present(createNewMemoVC, animated: true)
     }
-    
-    deinit{
-        if let token = token {
-            NotificationCenter.default.removeObserver(token)
-        }
-    }
 }
 
+
+    // MARK: - UITableViewDataSource
 
 extension MemoListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -115,6 +126,9 @@ extension MemoListViewController: UITableViewDataSource {
         return cell
     }
 }
+
+    
+    // MARK: - UITableViewDelegate
 
 extension MemoListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -143,6 +157,9 @@ extension MemoListViewController: UITableViewDelegate {
     }
 }
 
+
+    // MARK: - UISearchBarDelegate
+
 extension MemoListViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         let filterKey = searchText
@@ -168,6 +185,9 @@ extension MemoListViewController: UISearchBarDelegate {
         self.tableView.reloadData()
     }
 }
+
+
+    // MARK: - MemoDetailViewControllerDelegate
 
 extension MemoListViewController: MemoDetailViewControllerDelegate {
     func removeTableViewRow(indexPath: IndexPath, isSearching: Bool) {

@@ -16,6 +16,7 @@ protocol LoadImageFromURLViewControllerDelegate: class {
 
 class LoadImageFromURLViewController: UIViewController {
 
+    // MARK: Properties
     let urlTextField = UITextField()
     private var tempURLStorage = ""
     
@@ -28,6 +29,8 @@ class LoadImageFromURLViewController: UIViewController {
     let cancelButton = CustomButton(backgroundColor: .systemPurple, title: ButtonNames.cancel)
     let useImageButton = CustomButton(backgroundColor: MyColors.KeyColor, title: ButtonNames.usePicture)
     
+    
+    // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -35,6 +38,13 @@ class LoadImageFromURLViewController: UIViewController {
         setConstraints()
         createDismissKeyboardTapGesture()
     }
+    
+    deinit {
+        print("LoadImageFromUrlVC Deinit")
+    }
+    
+    
+    // MARK: - Setup
     
     private func configure() {
         [urlTextField, loadButton, deleteImageButton, tempImageView, cancelButton, useImageButton].forEach({
@@ -94,6 +104,9 @@ class LoadImageFromURLViewController: UIViewController {
         }
     }
     
+    
+    // MARK: - Action Handle
+    
     @objc private func didTapButton(_ sender: UIButton) {
         switch sender {
         case loadButton:
@@ -146,9 +159,5 @@ class LoadImageFromURLViewController: UIViewController {
     private func createDismissKeyboardTapGesture() {
         let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:)))
         view.addGestureRecognizer(tap)
-    }
-    
-    deinit {
-        print("LoadImageFromUrlVC Deinit")
     }
 }

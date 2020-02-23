@@ -10,7 +10,8 @@ import UIKit
 import SnapKit
 
 class MemoCell: UITableViewCell {
-
+    
+    // MARK: Properties
     static let identifier = "MemoCell"
     
     private let thumnailImageView = UIImageView()
@@ -25,6 +26,8 @@ class MemoCell: UITableViewCell {
         }
     }
     
+    
+    // MARK: Initializer
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupUI()
@@ -35,39 +38,8 @@ class MemoCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func reConfigureCell() {
-        if let retrievedImageArray = self.memoData.images?.convertToMyImageTypeArray(), retrievedImageArray.count != 0 {
-            switch retrievedImageArray.first {
-            case .image(let image):
-                self.thumnailImageView.image = image
-            case .urlString(let urlString):
-                getImageFromURL(urlString: urlString)
-            default:
-                break
-            }
-        } else {
-            self.thumnailImageView.image = PlaceHolderImages.defaultWhenNoImage
-        }
-        
-        self.titleLabel.text = self.memoData.title
-        self.somePartsOfMemoLabel.text = self.memoData.content
-        self.dateLabel.text = formatter.string(for: self.memoData.recentlyEditedDate)
-    }
     
-    private func getImageFromURL(urlString: String) {
-        self.thumnailImageView.image = PlaceHolderImages.loading
-        NetworkManager.shared.downloadImage(from: urlString) { [weak self] result in
-            guard let self = self else { return }
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let image):
-                    self.thumnailImageView.image = image
-                case .failure(_):
-                    self.thumnailImageView.image = PlaceHolderImages.imageLoadFail
-                }
-            }
-        }
-    }
+    // MARK: - Setup
     
     private func setupUI() {
         [thumnailImageView, titleLabel, somePartsOfMemoLabel, dateLabel, nextImage].forEach {contentView.addSubview($0)}
@@ -131,6 +103,43 @@ class MemoCell: UITableViewCell {
             dateLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             dateLabel.trailingAnchor.constraint(equalTo: nextImage.leadingAnchor, constant: -15),
         ])
+    }
+    
+    
+    // MARK: - Action Handle
+    
+    private func reConfigureCell() {
+        if let retrievedImageArray = self.memoData.images?.convertToMyImageTypeArray(), retrievedImageArray.count != 0 {
+            switch retrievedImageArray.first {
+            case .image(let image):
+                self.thumnailImageView.image = image
+            case .urlString(let urlString):
+                getImageFromURL(urlString: urlString)
+            default:
+                break
+            }
+        } else {
+            self.thumnailImageView.image = PlaceHolderImages.defaultWhenNoImage
+        }
+        
+        self.titleLabel.text = self.memoData.title
+        self.somePartsOfMemoLabel.text = self.memoData.content
+        self.dateLabel.text = formatter.string(for: self.memoData.recentlyEditedDate)
+    }
+    
+    private func getImageFromURL(urlString: String) {
+        self.thumnailImageView.image = PlaceHolderImages.loading
+        NetworkManager.shared.downloadImage(from: urlString) { [weak self] result in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let image):
+                    self.thumnailImageView.image = image
+                case .failure(_):
+                    self.thumnailImageView.image = PlaceHolderImages.imageLoadFail
+                }
+            }
+        }
     }
     
     func set(memo: Memo) {

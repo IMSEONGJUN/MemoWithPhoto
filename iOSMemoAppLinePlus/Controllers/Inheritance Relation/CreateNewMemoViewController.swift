@@ -12,7 +12,6 @@ import SnapKit
 class CreateNewMemoViewController: UIViewController {
        
     // MARK: Properties
-    
     var titleTextField = UITextField()
     var memoTextView = UITextView()
     let placeholderTextForTextView = TextMessages.inputMemoDetail
@@ -22,8 +21,8 @@ class CreateNewMemoViewController: UIViewController {
     var addImageViewContainer = UIView()
     let imageCollectionVC = ImageCollectionForCreateAndEdit()
     
-    // MARK:  - LifeCycle
     
+    // MARK: LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
@@ -34,8 +33,9 @@ class CreateNewMemoViewController: UIViewController {
     }
     
     deinit {
-           print("CreateNewMemoVC Deinit")
-       }
+        print("CreateNewMemoVC Deinit")
+    }
+    
     
     // MARK: - Setup
     
@@ -139,7 +139,7 @@ class CreateNewMemoViewController: UIViewController {
     
    
     
-    // MARK: - Action
+    // MARK: - Action Handle
     
     func saveMemo() {
         guard let title = titleTextField.text, title.count > 0 else {
@@ -182,10 +182,13 @@ class CreateNewMemoViewController: UIViewController {
 }
 
 
+    // MARK: - Notification Name
 extension CreateNewMemoViewController {
     static let newMemoCreated = Notification.Name(rawValue: "newMemoCreated")
 }
 
+
+    // MARK: - UITextFieldDelegate
 
 extension CreateNewMemoViewController: UITextFieldDelegate {
     
@@ -197,6 +200,9 @@ extension CreateNewMemoViewController: UITextFieldDelegate {
         return true
     }
 }
+
+
+    // MARK: - UITextViewDelegate
 
 extension CreateNewMemoViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
@@ -213,6 +219,9 @@ extension CreateNewMemoViewController: UITextViewDelegate {
         }
     }
 }
+
+
+    // MARK: - ImageCollectionForCreateAndEditDelegate
 
 extension CreateNewMemoViewController: ImageCollectionForCreateAndEditDelegate {
     func collectionViewHasImageMoreThanOne(hasImage: Bool) {
