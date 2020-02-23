@@ -1,6 +1,6 @@
 # iOS Memo App
 
-![Main](https://github.com/IMSEONGJUN/iOSMemoApp/raw/master/images/00.png)![Main](https://raw.githubusercontent.com/IMSEONGJUN/iOSMemoApp/master/images/01.jpg?token=ALO5HCNX3YNH2XMESGCCLVC6KJ3TU)
+![Main](https://github.com/IMSEONGJUN/iOSMemoApp/raw/master/images/00.png)![Main](https://github.com/IMSEONGJUN/iOSMemoApp/raw/master/images/01.jpg)
 
 ## Features
 
