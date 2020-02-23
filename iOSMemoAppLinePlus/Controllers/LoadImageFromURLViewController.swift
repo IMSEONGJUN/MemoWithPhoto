@@ -119,15 +119,12 @@ class LoadImageFromURLViewController: UIViewController {
         NetworkManager.shared.downloadImage(from: tempURLStorage) { [weak self] result in
             guard let self = self else { return }
             self.dismissLoadingView()
-            
-            switch result {
-            case .success(let image):
-                DispatchQueue.main.async {
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let image):
                     self.tempImageView.image = image
-                }
-            case .failure(let error):
-                self.presentAlertOnMainThread(title: Titles.error, message: error.rawValue)
-                DispatchQueue.main.async {
+                case .failure(let error):
+                    self.presentAlertOnMainThread(title: Titles.error, message: error.rawValue)
                     self.tempImageView.image = PlaceHolderImages.imageLoadFail
                 }
             }

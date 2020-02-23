@@ -37,8 +37,8 @@ class ImageCollectionForCreateAndEdit: ImageCollectionForDetail {
                                         superViewType: .createNew)
             } else {
                 delegate?.collectionViewHasImageMoreThanOne(hasImage: true)
-                guard let createVC = self.parent as? CreateNewMemoViewController else {return}
-                guard let images = self.imagesToAdd else {return}
+                guard let createVC = self.parent as? CreateNewMemoViewController else { return }
+                guard let images = self.imagesToAdd else { return }
                 createVC.addedImages = images
             }
         }
@@ -119,7 +119,14 @@ class ImageCollectionForCreateAndEdit: ImageCollectionForDetail {
             self.present(loadImageVC, animated: true)
         }
         
-        let cancel = UIAlertAction(title: ButtonNames.cancel, style: .cancel)
+        let cancel = UIAlertAction(title: ButtonNames.cancel, style: .default) { (_) in
+            if self.imagesToAdd == nil {
+                self.showEmptyStateView(with: TextMessages.attachPicture,
+                in: self.view,
+                imageName: EmptyStateViewImageName.offerImage,
+                superViewType: .createNew)
+            }
+        }
         
         alert.addAction(takePhoto)
         alert.addAction(album)

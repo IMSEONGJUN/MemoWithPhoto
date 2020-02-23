@@ -34,7 +34,9 @@ class ImageCollectionForDetail: UIViewController {
     }
     
     func showEmptyStateViewOnDetailVC() {
-        showEmptyStateView(with: TextMessages.noImages, in: self.view, imageName: EmptyStateViewImageName.noPicture,
+        showEmptyStateView(with: TextMessages.noImages,
+                           in: self.view,
+                           imageName: EmptyStateViewImageName.noPicture,
                            superViewType: .detail)
     }
     

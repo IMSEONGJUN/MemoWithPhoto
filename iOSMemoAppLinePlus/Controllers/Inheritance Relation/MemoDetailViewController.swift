@@ -14,7 +14,7 @@ protocol MemoDetailViewControllerDelegate: class {
 
 
 class MemoDetailViewController: CreateNewMemoViewController {
-
+    
     var memo: Memo!
     var indexPath: IndexPath!
     var isFilteredBefore = false
@@ -35,7 +35,7 @@ class MemoDetailViewController: CreateNewMemoViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        backOrCancelButton.title = "나가기"
+        backOrCancelButton.title = ButtonNames.back
     }
     
     override func addChildViewController() {
@@ -49,9 +49,19 @@ class MemoDetailViewController: CreateNewMemoViewController {
     }
     
     override func setupNavigationBar() {
-        backOrCancelButton = UIBarButtonItem(title: ButtonNames.back, style: .plain, target: self, action: #selector(didTapBackOrCancelButton(_:)))
-        editOrSaveButton = UIBarButtonItem(title: ButtonNames.edit, style: .plain, target: self, action: #selector(didTapEditOrSaveButton(_:)))
-        let removeButton = UIBarButtonItem(title: ButtonNames.remove, style: .plain, target: self, action: #selector(didTapRemoveButton))
+        backOrCancelButton = UIBarButtonItem(title: ButtonNames.back,
+                                             style: .plain,
+                                             target: self,
+                                             action: #selector(didTapBackOrCancelButton(_:)))
+        editOrSaveButton = UIBarButtonItem(title: ButtonNames.edit,
+                                           style: .plain,
+                                           target: self,
+                                           action: #selector(didTapEditOrSaveButton(_:)))
+        let removeButton = UIBarButtonItem(title: ButtonNames.remove,
+                                           style: .plain,
+                                           target: self,
+                                           action: #selector(didTapRemoveButton))
+        
         navigationItem.leftBarButtonItem = backOrCancelButton
         navigationItem.rightBarButtonItems = [editOrSaveButton, removeButton]
     }
@@ -77,18 +87,17 @@ class MemoDetailViewController: CreateNewMemoViewController {
     @objc private func didTapBackOrCancelButton(_ sender: UIBarButtonItem) {
         switch sender.title {
         case ButtonNames.back:
-             navigationController?.popViewController(animated: true)
+            navigationController?.popViewController(animated: true)
         case ButtonNames.cancel:
             configure()
             setTextEditingDisabled()
             addChildToSelf()
-            DispatchQueue.main.async {
-                self.editOrSaveButton.title = ButtonNames.edit
-                self.backOrCancelButton.title = ButtonNames.back
-                UIView.animate(withDuration: 0.5) {
-                    self.noticeLabel.transform = .identity
-                    self.noticeLabel.alpha = 0.0
-                }
+
+            self.editOrSaveButton.title = ButtonNames.edit
+            self.backOrCancelButton.title = ButtonNames.back
+            UIView.animate(withDuration: 0.5) {
+                self.noticeLabel.transform = .identity
+                self.noticeLabel.alpha = 0.0
             }
         default:
             break
@@ -97,7 +106,15 @@ class MemoDetailViewController: CreateNewMemoViewController {
     }
     
     @objc private func didTapRemoveButton() {
-        deleteOrNotAlert(title: "알림", message: "메모를 삭제하시겠습니까?")
+        confirmDeleteMemo(title: Titles.info,
+                          message: TextMessages.confirmDeleteMemo,
+                          handler: {
+                              DataManager.shared.removeMemo(indexPath: self.indexPath,
+                                                            isInFilteredMemoList: self.isFilteredBefore)
+                              self.delegate?.removeTableViewRow(indexPath: self.indexPath,
+                                                                isSearching: false)
+                              self.navigationController?.popViewController(animated: true)
+                          })
     }
     
     @objc private func didTapEditOrSaveButton(_ sender: UIBarButtonItem) {
@@ -111,7 +128,7 @@ class MemoDetailViewController: CreateNewMemoViewController {
             
         } else if sender.title == ButtonNames.save {
             let success = saveEditedMemo()
-            guard success else {return}
+            guard success else { return }
             setTextEditingDisabled()
             sender.title = ButtonNames.edit
             backOrCancelButton.title = ButtonNames.back
@@ -133,27 +150,35 @@ class MemoDetailViewController: CreateNewMemoViewController {
     func switchingImageAddingViewDisplayMode() {
         let collectionForDisplay = ImageCollectionForDetail()
         collectionForDisplay.memo = DataManager.shared.memoList.first
-
+        
         checkSelfHaveChildrenVC(on: self)
-        DispatchQueue.main.async {
-            self.add(childVC: collectionForDisplay, to: self.addImageViewContainer)
-            if self.memo.images?.convertToMyImageTypeArray() == nil{
-                collectionForDisplay.showEmptyStateViewOnDetailVC()
-            }
+        self.add(childVC: collectionForDisplay, to: self.addImageViewContainer)
+        if self.memo.images?.convertToMyImageTypeArray() == nil{
+            collectionForDisplay.showEmptyStateViewOnDetailVC()
         }
     }
     
     func saveEditedMemo() -> Bool {
         guard let title = titleTextField.text, title.count > 0 else {
-            presentAlertOnMainThread(title: "제목이 없습니다.", message: "제목을 입력하세요")
+            presentAlertOnMainThread(title: TextMessages.noTitle, message: TextMessages.enterTitle)
             titleTextField.becomeFirstResponder()
             return false
         }
-        guard let memo = memoTextView.text,
-              memo.count > 0, memo != placeholderTextForTextView else{
-            presentAlertOnMainThread(title: "메모가 없습니다.", message: "메모를 입력하세요")
+        guard let memo = memoTextView.text, memo.count > 0, memo != placeholderTextForTextView else {
+            presentAlertOnMainThread(title: TextMessages.noMemoDetail, message: TextMessages.enterMemoDetail)
             return false
         }
+        
+//        let imageForCoreData = collectionForEdit.imagesToAdd?.convertToCoreDataRepresentation()
+//        if isFilteredBefore {
+//            let memoDateInfilteredList = DataManager.shared.filteredMemoList[indexPath.row].createdDate
+//            if let index = DataManager.shared.memoList.firstIndex(where: {$0.createdDate == memoDateInfilteredList}) {
+//                DataManager.shared.editMemo(index: index, title: title, memo: memo, images: imageForCoreData)
+//            }
+//        } else {
+//            DataManager.shared.editMemo(index: indexPath.row, title: title, memo: memo, images: imageForCoreData)
+//        }
+        
         
         if let imageForCoreData = collectionForEdit.imagesToAdd?.convertToCoreDataRepresentation() {
             if isFilteredBefore {
@@ -172,22 +197,21 @@ class MemoDetailViewController: CreateNewMemoViewController {
                 }
             } else {
                 DataManager.shared.editMemo(index: indexPath.row, title: title, memo: memo, images: nil)
-                
+
             }
         }
+        
         self.memo = DataManager.shared.memoList.first
         return true
         
     }
     
-    func deleteOrNotAlert(title: String, message: String) {
+    func confirmDeleteMemo(title: String, message: String, handler:(() -> ())?) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let ok = UIAlertAction(title: "네", style: .default) { (_) in
-            DataManager.shared.removeMemo(indexPath: self.indexPath, isInFilteredMemoList: self.isFilteredBefore)
-            self.delegate?.removeTableViewRow(indexPath: self.indexPath, isSearching: false)
-            self.navigationController?.popViewController(animated: true)
+        let ok = UIAlertAction(title: ButtonNames.yes, style: .default) { (_) in
+            handler?()
         }
-        let no = UIAlertAction(title: "아니요", style: .cancel)
+        let no = UIAlertAction(title: ButtonNames.no, style: .cancel)
         alert.addAction(ok)
         alert.addAction(no)
         present(alert, animated: true)
@@ -211,5 +235,5 @@ class MemoDetailViewController: CreateNewMemoViewController {
             }
         }
     }
-
+    
 }

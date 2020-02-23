@@ -58,6 +58,7 @@ enum ButtonNames {
     static let remove = "삭제"
     static let back = "나가기"
     static let confirm = "확인"
+    static let newMemo = "새 메모"
     static let yes = "예"
     static let no = "아니오"
     static let addImage = "이미지 추가"

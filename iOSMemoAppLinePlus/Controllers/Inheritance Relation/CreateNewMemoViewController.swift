@@ -54,7 +54,7 @@ class CreateNewMemoViewController: UIViewController {
     }
     
     func setupNavigationBar() {
-        title = ButtonNames.confirm
+        title = ButtonNames.newMemo
         let cancelButton = UIBarButtonItem(title: ButtonNames.cancel,
                                            style: .plain,
                                            target: self,
@@ -189,9 +189,7 @@ extension CreateNewMemoViewController {
 
 extension CreateNewMemoViewController: UITextFieldDelegate {
     
-    func textField(_ textField: UITextField,
-                   shouldChangeCharactersIn range: NSRange,
-                   replacementString string: String) -> Bool {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         guard let text = textField.text, let range = Range(range, in: text) else { return true }
         
         let replacedText = text.replacingCharacters(in: range, with: string)

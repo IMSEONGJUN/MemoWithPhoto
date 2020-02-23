@@ -43,7 +43,7 @@ extension UIViewController {
     }
     
     func checkSelfHaveChildrenVC(on selfView: UIViewController ) {
-        if selfView.children.count > 0{
+        if selfView.children.count > 0 {
             selfView.children.forEach({
                 $0.willMove(toParent: nil)
                 $0.view.removeFromSuperview()
@@ -58,9 +58,7 @@ extension UIViewController {
         containerView.backgroundColor = .white
         containerView.alpha = 0
         
-        UIView.animate(withDuration: 0.25) {
-            containerView.alpha = 0.5
-        }
+        UIView.animate(withDuration: 0.25) { containerView.alpha = 0.5 }
         
         let activityIndicator = UIActivityIndicatorView()
         activityIndicator.color = .green

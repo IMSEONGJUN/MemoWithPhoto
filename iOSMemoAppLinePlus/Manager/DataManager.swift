@@ -41,6 +41,7 @@ final class DataManager {
         memoToEdit.isEdited = isEdited
         memoToEdit.recentlyEditedDate = Date()
         
+        mainContext.delete(memoToEdit)
         memoList.remove(at: index)
         memoList.insert(memoToEdit, at: 0)
         

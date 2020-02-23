@@ -14,7 +14,6 @@
 		CE4967CE23F46FF50056E444 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE4967CC23F46FF50056E444 /* Main.storyboard */; };
 		CE4967D023F46FF60056E444 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE4967CF23F46FF60056E444 /* Assets.xcassets */; };
 		CE4967D323F46FF60056E444 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE4967D123F46FF60056E444 /* LaunchScreen.storyboard */; };
-		CE4967DC23F470C20056E444 /* Memo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4967DB23F470C20056E444 /* Memo.swift */; };
 		CE4967DF23F471C00056E444 /* MemoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4967DE23F471C00056E444 /* MemoListViewController.swift */; };
 		CE4967E223F474AB0056E444 /* MemoCellForTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4967E123F474AB0056E444 /* MemoCellForTableView.swift */; };
 		CE4967E823F476710056E444 /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4967E723F476710056E444 /* UIView+Ext.swift */; };
@@ -61,7 +60,6 @@
 		CE4967CF23F46FF60056E444 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE4967D223F46FF60056E444 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE4967D423F46FF60056E444 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CE4967DB23F470C20056E444 /* Memo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Memo.swift; sourceTree = "<group>"; };
 		CE4967DE23F471C00056E444 /* MemoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoListViewController.swift; sourceTree = "<group>"; };
 		CE4967E123F474AB0056E444 /* MemoCellForTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoCellForTableView.swift; sourceTree = "<group>"; };
 		CE4967E723F476710056E444 /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
@@ -178,7 +176,6 @@
 			isa = PBXGroup;
 			children = (
 				CE4967F023F489340056E444 /* LinePlusMemo.xcdatamodeld */,
-				CE4967DB23F470C20056E444 /* Memo.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -458,7 +455,6 @@
 				CE49680023F546950056E444 /* BodyLabel.swift in Sources */,
 				CE4967E823F476710056E444 /* UIView+Ext.swift in Sources */,
 				CE4967F423F48A810056E444 /* CreateNewMemoViewController.swift in Sources */,
-				CE4967DC23F470C20056E444 /* Memo.swift in Sources */,
 				CE49680423F5859B0056E444 /* ImageCollectionForDetail.swift in Sources */,
 				CE4967E223F474AB0056E444 /* MemoCellForTableView.swift in Sources */,
 				CE49680823F6A03A0056E444 /* ConvertImageToFromData+Ext.swift in Sources */,

@@ -149,13 +149,13 @@ extension MemoListViewController: UISearchBarDelegate {
         guard !filterKey.isEmpty else {
             isSearching = false
             DataManager.shared.filteredMemoList.removeAll()
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
+            self.tableView.reloadData()
             return
         }
-        DataManager.shared.filteredMemoList = DataManager.shared.memoList.filter({($0.title?.lowercased().contains(filterKey.lowercased()) ?? false) ||
-            $0.content?.lowercased().contains(filterKey.lowercased()) ?? false })
+        DataManager.shared.filteredMemoList = DataManager.shared.memoList.filter({
+            $0.title?.lowercased().contains(filterKey.lowercased()) ?? false ||
+            $0.content?.lowercased().contains(filterKey.lowercased()) ?? false
+        })
         isSearching = true
         tableView.reloadData()
     }
@@ -165,9 +165,7 @@ extension MemoListViewController: UISearchBarDelegate {
         searchBar.text?.removeAll()
         DataManager.shared.filteredMemoList.removeAll()
         isSearching = false
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
+        self.tableView.reloadData()
     }
 }
 
