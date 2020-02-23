@@ -27,4 +27,4 @@ open iOSMemoAppLinePlus.xcworkspace
 
 ## Third-party libraries
 
-- SnapKit
+- SnapKit ( https://github.com/SnapKit/SnapKit )
