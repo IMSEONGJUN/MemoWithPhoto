@@ -24,14 +24,14 @@ class iOSMemoAppLinePlusTests: XCTestCase {
     override func setUp() {
         testImages = ["01","02","03","04","05","06","07","08","09","10"].map({ UIImage(named: $0)!})
         myImageTypesArray = testImages.map { MyImageTypes.image($0) }
-        DataManager.shared.deleteAllRecords()
-        DataManager.shared.fetchMemo()
     }
     
     override func tearDown() {
         myImageTypesArray?.removeAll()
-        DataManager.shared.deleteAllRecords()
-        DataManager.shared.fetchMemo()
+    }
+    
+    func clearData() {
+        DataManager.mock.flushData()
     }
 
     func testConvertMyImageTypeArrayToDataTypeAndInverseCase() {
@@ -86,33 +86,37 @@ class iOSMemoAppLinePlusTests: XCTestCase {
     }
     
     func testCoreDataCredibilityCheck() {
+        clearData()
+        
         var testMemoList = [Memo]()
         
         let title = "메모 제목"
         let content = "메모 내용"
         
-        DataManager.shared.addNewMemo(title: title, memo: content, images: nil)
-        testMemoList = DataManager.shared.memoList
+        DataManager.mock.addNewMemo(title: title, memo: content, images: nil)
+        testMemoList = DataManager.mock.memoList
         
         XCTAssertTrue(testMemoList.first?.title == title)
         XCTAssertTrue(testMemoList.first?.content == content)
     }
     
     func testCompareInputMemoCountAndOutputMemoCount() {
+        clearData()
         let count = 5
         let myImageTypeValue = [MyImageTypes.image(UIImage(named: "01")!)]
         
         for i in 0..<count {
-            DataManager.shared.addNewMemo(title: "\(i)",
+            DataManager.mock.addNewMemo(title: "\(i)",
                                           memo: "\(i)",
                                           images: myImageTypeValue.convertToCoreDataRepresentation())
         }
         var testMemoList = [Memo]()
-        testMemoList = DataManager.shared.memoList
+        testMemoList = DataManager.mock.memoList
         XCTAssertTrue(testMemoList.count == count)
     }
     
-    func testInputFiveMemoAndDeleteTwoMemoThenResult(){
+    func testInputFiveMemoAndDeleteTwoMemoThenResult() {
+        clearData()
         let inputCount = 5
         let deleteCount = 2
         let outputCount = 3
@@ -120,31 +124,32 @@ class iOSMemoAppLinePlusTests: XCTestCase {
         let myImageTypeValue = [MyImageTypes.image(UIImage(named: "01")!)]
         
         for i in 0..<inputCount {
-            DataManager.shared.addNewMemo(title: "\(i)",
+            DataManager.mock.addNewMemo(title: "\(i)",
                                           memo: "\(i)",
                                           images: myImageTypeValue.convertToCoreDataRepresentation())
         }
         for i in 0..<deleteCount {
-            DataManager.shared.removeMemo(indexPath: IndexPath(row: i, section: 0), isInFilteredMemoList: false)
+            DataManager.mock.removeMemo(indexPath: IndexPath(row: i, section: 0), isInFilteredMemoList: false)
         }
         
         var testMemoList = [Memo]()
-        testMemoList = DataManager.shared.memoList
+        testMemoList = DataManager.mock.memoList
         XCTAssertTrue(testMemoList.count == outputCount)
     }
     
     func testEditMemoTitleAndContent() {
+        clearData()
         
         // Before Edited
         let title = "programmer"
         let content = "nice and good"
         
-        DataManager.shared.addNewMemo(title: title,
+        DataManager.mock.addNewMemo(title: title,
                                       memo: content,
                                       images: nil, at: 0)
         
         var testMemoList = [Memo]()
-        testMemoList = DataManager.shared.memoList
+        testMemoList = DataManager.mock.memoList
         
         XCTAssertTrue(testMemoList.first?.title == title)
         XCTAssertTrue(testMemoList.first?.content == content)
@@ -155,13 +160,13 @@ class iOSMemoAppLinePlusTests: XCTestCase {
         let editedContent = "amazing and awesome"
         let editedMyImageTypeValue = [MyImageTypes.image(UIImage(named: "02")!)]
         
-        DataManager.shared.editMemo(index: 0,
+        DataManager.mock.editMemo(index: 0,
                                     title: editedTitle,
                                     memo: editedContent,
                                     images: editedMyImageTypeValue.convertToCoreDataRepresentation())
         
         var testEditedMemoList = [Memo]()
-        testEditedMemoList = DataManager.shared.memoList
+        testEditedMemoList = DataManager.mock.memoList
         
         XCTAssertTrue(testEditedMemoList.first?.title == editedTitle)
         XCTAssertTrue(testEditedMemoList.first?.content == editedContent)

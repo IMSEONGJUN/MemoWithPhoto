@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 extension Array where Element == MyImageTypes {
     
     func convertToCoreDataRepresentation() -> Data? {
@@ -32,6 +33,8 @@ extension Array where Element == MyImageTypes {
         return NSKeyedArchiver.archivedData(withRootObject: CDataArray)
     }
 }
+
+
 
 extension Data {
 

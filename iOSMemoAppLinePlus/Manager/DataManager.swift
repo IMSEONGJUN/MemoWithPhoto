@@ -11,8 +11,14 @@ import CoreData
 
 final class DataManager {
     
-    static let shared = DataManager()
-    private init() {}
+    static let shared = DataManager(isMock: false)
+    static let mock = DataManager(isMock: true)
+    
+    private let isMock: Bool!
+    
+    private init(isMock: Bool) {
+        self.isMock = isMock
+    }
     
     var mainContext: NSManagedObjectContext{
         return persistentContainer.viewContext
@@ -81,6 +87,13 @@ final class DataManager {
     lazy var persistentContainer: NSPersistentContainer = {
         
         let container = NSPersistentContainer(name: "LinePlusMemo")
+        if isMock {
+            let description = NSPersistentStoreDescription()
+            description.type = NSInMemoryStoreType
+            description.shouldAddStoreAsynchronously = false
+            container.persistentStoreDescriptions = [description]
+        }
+
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
@@ -117,5 +130,14 @@ final class DataManager {
             let nserror = error as NSError
             fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
         }
+    }
+    
+    func flushData() {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Memo")
+        let objs = try! persistentContainer.viewContext.fetch(fetchRequest)
+        for case let obj as NSManagedObject in objs {
+            persistentContainer.viewContext.delete(obj)
+        }
+        try! persistentContainer.viewContext.save()
     }
 }
