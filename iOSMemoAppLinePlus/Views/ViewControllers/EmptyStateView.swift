@@ -95,7 +95,8 @@ final class EmptyStateView: UIViewController {
             token = NotificationCenter.default.addObserver(forName: EmptyStateView.didTapNewImageAddedButton,
                                                            object: nil,
                                                            queue: OperationQueue.main,
-                                                           using: { (noti) in
+                                                           using: { [weak self] (noti) in
+                                                            guard let self = self else { return }
                                                             if let vc = self.parent as? ImageCollectionForCreateAndEdit{
                                                                 self.checkSelfHaveChildrenVC(on: vc)
                                                                 vc.presentActionSheetToSelectImageSource()
@@ -105,7 +106,8 @@ final class EmptyStateView: UIViewController {
             token = NotificationCenter.default.addObserver(forName: EmptyStateView.didTapNewMemoCreatedButton,
                                                            object: nil,
                                                            queue: OperationQueue.main,
-                                                           using: { (noti) in
+                                                           using: { [weak self] (noti) in
+                                                            guard let self = self else { return }
                                                             if let vc = self.parent as? MemoListViewController {
                                                                 vc.didTapAddNewMemoButton()
                                                             }
