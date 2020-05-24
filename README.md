@@ -1,8 +1,10 @@
 
 # MemoWithPhoto <img src = "https://github.com/IMSEONGJUN/iOSMemoApp/blob/master/images/Icon-60.png?raw=true" width = 50 align = right>
 
-## -Latest Update : 2020.05.20
-## -Latest Version : v1.02
+## Version
+
+- Latest Update : 2020.05.20
+- Latest Version : v1.02
 
 > **Take Home Project For LINE.Corp App Challenge and this project was Passed but canceled because I'm too old :(**
 > **Changed images associated with LINE.Corp and Service on AppStore** 
