@@ -14,7 +14,7 @@
 ![Main](https://github.com/IMSEONGJUN/iOSMemoApp/raw/master/images/00.png)![Main](https://github.com/IMSEONGJUN/iOSMemoApp/raw/master/images/01.jpg)
 
 ## Features
-
+- Unit TEST configured well
 - Memo management function
 - Supports add / delete / edit / search functions
 - Image attachment support (photo shooting, album attachment, URL image attachment)
