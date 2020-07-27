@@ -10,7 +10,6 @@
 		01C550A53C9E2047C83F8E85BBB558E6 /* ConstraintLayoutSupportDSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56D17419B45F7AEA8E9FD4713B0D394 /* ConstraintLayoutSupportDSL.swift */; };
 		039EAFE7935113805F3FC21BF1B7C9D5 /* LayoutConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = F738E14AC76C938181436DD3CAF2C114 /* LayoutConstraint.swift */; };
 		04543980C4A7CE442330B0F1BC4A9A54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
-		182406E6BBF12E197E457FE6C6478BE3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
 		1956E392D500F3CD899D39A5F805736D /* Typealiases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2048BAD969893AF74BE692ED91CDAF1A /* Typealiases.swift */; };
 		1AFB1E9136716C0B61D6C700FF1E60FD /* ConstraintLayoutGuide+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90363F632F42F81DAFA242A8F46218E7 /* ConstraintLayoutGuide+Extensions.swift */; };
 		21AB1101BBE4D28D74ED4EDF0D59025A /* ConstraintInsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAC4BBC219F813FDC65BFB63E07DCFA /* ConstraintInsets.swift */; };
@@ -32,64 +31,77 @@
 		7C1702076F3A31D8D2D45A4A9F09B266 /* ConstraintMakerEditable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95615519C42793A3F9BFD614096E493A /* ConstraintMakerEditable.swift */; };
 		8277256ADEC3C4DCF79957D1CA681A9A /* ConstraintDSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FFFB67EF8E7135A063A1163E2BE514E /* ConstraintDSL.swift */; };
 		8705BBF0D428BF0AE1B554A377ECC540 /* ConstraintOffsetTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4D286E4BD20698B5C694EA69111A47 /* ConstraintOffsetTarget.swift */; };
-		9961B92556B6FAD5B5EA68DBEBCEE9BF /* Pods-iOSMemoAppLinePlus-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DFC46173EBF2F24FB94F5C16EEEF9D3 /* Pods-iOSMemoAppLinePlus-dummy.m */; };
 		99B5296A5EDECE0557B9DA53D9E19CA1 /* ConstraintItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF26E13590AB8190A1F5DEC7E7BECCA /* ConstraintItem.swift */; };
 		9B09968922C73D50040C6EEF57890D6E /* ConstraintConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA803CC2969C21BC90D73347E1980B1 /* ConstraintConfig.swift */; };
+		9CE637B3F87BDAFEBF01F92CA705BF5B /* Pods-MemoWithPhoto-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = D95A1C9269F4E6A82A15D79478856F68 /* Pods-MemoWithPhoto-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A270CD9EC3C541FE86E65AEDCEF500CF /* ConstraintLayoutGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101A54E43B6DFAA6BC849E4547B7C282 /* ConstraintLayoutGuide.swift */; };
 		A66ED57B365A35434C5BAF4B990819B7 /* SnapKit-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D17D99D978CF81C2FE6BC01137C7E9F /* SnapKit-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AC35C9341C4BB156BB26FDD237EE3721 /* ConstraintDirectionalInsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = E86CFD34EFB62B5D4FA9AB14C2F3654F /* ConstraintDirectionalInsets.swift */; };
+		AF6FA1B10DCCA0A7A8B8B54CF485AF8F /* Pods-MemoWithPhotoTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 380DE3F4EB4DF450BC8BB89051E964E9 /* Pods-MemoWithPhotoTests-dummy.m */; };
+		B3D8C2B3A67E547EECDED93695A5C3CD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
 		B599696DFEF6B2A5ECF528F4E5BB1846 /* ConstraintDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D94FD5F9D1E70514063D05CF6ABC99 /* ConstraintDescription.swift */; };
 		B780B272106411CBE258BB60FFC45410 /* Debugging.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA08B21F65760AB725806CF81513EDD6 /* Debugging.swift */; };
 		BECA67DFB5E0984DFAEFCB775C31972E /* ConstraintView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1ACF77247BB1059203369EEA2F03D76 /* ConstraintView.swift */; };
 		C412F27D75AFC0DF0F0289DBB270931C /* ConstraintMakerFinalizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA26282AD0058A9D2C5E948FB218029 /* ConstraintMakerFinalizable.swift */; };
 		CE62FEABA57B2B53EABF8C7DCCC6B2C4 /* ConstraintRelation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09EEF551863CDDE4C5DFB0B0C1BD9835 /* ConstraintRelation.swift */; };
+		D39197F9750304B34C8419C2F71AEA03 /* Pods-MemoWithPhoto-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = F9115C5722EDB7892682431E3C8D3024 /* Pods-MemoWithPhoto-dummy.m */; };
 		D4697DC40F3B059E4A0867838CA1814E /* ConstraintMultiplierTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC5B4F88C96976B456904499E9530A03 /* ConstraintMultiplierTarget.swift */; };
-		DC2F57EE1BC4DA6B694ACCC7A7C825F1 /* Pods-iOSMemoAppLinePlus-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 844BF30AB69926FB6D4CEED0E0A24E9B /* Pods-iOSMemoAppLinePlus-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E8F2429683B3015CBD39CE883770BCA7 /* ConstraintPriorityTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A818CD9D52DAB63058A6279B32B948 /* ConstraintPriorityTarget.swift */; };
 		E9A970BC24EA15832F248EA020072746 /* LayoutConstraintItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA0A5F80FD7D1C11B44362F2840A71F /* LayoutConstraintItem.swift */; };
 		EB1726F5E0D0EEBA20E4528B1E37A8FA /* ConstraintViewDSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51C387F75F998F3D11ACA67B32F28A89 /* ConstraintViewDSL.swift */; };
 		EE909C7C786140109051BC9562EEC7C8 /* ConstraintMakerPriortizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39E09B644150C5F99180FDFDFD440D0 /* ConstraintMakerPriortizable.swift */; };
+		F586FD3EE28623B3FF1C07C92E1DBDF0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
+		F6109E3CB7E396909DC76975BBED7EB4 /* Pods-MemoWithPhotoTests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = F36679C767605E86DE0F3B257FC517D9 /* Pods-MemoWithPhotoTests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		15D61B28F14BE559E23027A04681635A /* PBXContainerItemProxy */ = {
+		58155559E97A42642B1471F858B565B1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 19622742EBA51E823D6DAE3F8CDBFAD4;
 			remoteInfo = SnapKit;
 		};
+		F1C0C5BAB69CC9F8FB85569897A3DA3B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 630A6569967AA49F6D2C8E20A639B9FC;
+			remoteInfo = "Pods-MemoWithPhoto";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		034F6590E8EFFD995DDF6121E326DA90 /* Pods-iOSMemoAppLinePlus-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-iOSMemoAppLinePlus-acknowledgements.plist"; sourceTree = "<group>"; };
 		07E06B9BA934C46F84976ABC2D7141ED /* ConstraintInsetTarget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintInsetTarget.swift; path = Source/ConstraintInsetTarget.swift; sourceTree = "<group>"; };
 		09EEF551863CDDE4C5DFB0B0C1BD9835 /* ConstraintRelation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintRelation.swift; path = Source/ConstraintRelation.swift; sourceTree = "<group>"; };
+		0A0E3C8795920FB9E1C1FEEE3DAB8F0D /* Pods-MemoWithPhotoTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-MemoWithPhotoTests-acknowledgements.plist"; sourceTree = "<group>"; };
 		0FFFB67EF8E7135A063A1163E2BE514E /* ConstraintDSL.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintDSL.swift; path = Source/ConstraintDSL.swift; sourceTree = "<group>"; };
 		101A54E43B6DFAA6BC849E4547B7C282 /* ConstraintLayoutGuide.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintLayoutGuide.swift; path = Source/ConstraintLayoutGuide.swift; sourceTree = "<group>"; };
+		15400B06DFB6BAA14589888238E046A6 /* Pods-MemoWithPhoto-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-MemoWithPhoto-acknowledgements.markdown"; sourceTree = "<group>"; };
 		2048BAD969893AF74BE692ED91CDAF1A /* Typealiases.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Typealiases.swift; path = Source/Typealiases.swift; sourceTree = "<group>"; };
-		222F131CFB23C7DAD324FA081B71AD1F /* Pods-iOSMemoAppLinePlus-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-iOSMemoAppLinePlus-acknowledgements.markdown"; sourceTree = "<group>"; };
+		2073A2897B7D1EDA7AC48AFEF23FD1FB /* Pods-MemoWithPhotoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-MemoWithPhotoTests.release.xcconfig"; sourceTree = "<group>"; };
 		2813DAD1A398260A46420E012A4EC917 /* ConstraintMaker.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintMaker.swift; path = Source/ConstraintMaker.swift; sourceTree = "<group>"; };
-		301B2DAA76154BE90919C5AE0104BFC0 /* Pods-iOSMemoAppLinePlus.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-iOSMemoAppLinePlus.debug.xcconfig"; sourceTree = "<group>"; };
+		2E1FEB89D6A69CE7646F130297B53F7B /* Pods_MemoWithPhoto.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_MemoWithPhoto.framework; path = "Pods-MemoWithPhoto.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		380DE3F4EB4DF450BC8BB89051E964E9 /* Pods-MemoWithPhotoTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-MemoWithPhotoTests-dummy.m"; sourceTree = "<group>"; };
 		3C4D286E4BD20698B5C694EA69111A47 /* ConstraintOffsetTarget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintOffsetTarget.swift; path = Source/ConstraintOffsetTarget.swift; sourceTree = "<group>"; };
 		3CFFD5DFB83283597B0DC408E2144099 /* ConstraintPriority.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintPriority.swift; path = Source/ConstraintPriority.swift; sourceTree = "<group>"; };
 		3F2E193C13A3A14CB612EB51F05A543B /* UILayoutSupport+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UILayoutSupport+Extensions.swift"; path = "Source/UILayoutSupport+Extensions.swift"; sourceTree = "<group>"; };
 		42D9B891112E7E8DC9504C3CC09FB484 /* ConstraintLayoutGuideDSL.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintLayoutGuideDSL.swift; path = Source/ConstraintLayoutGuideDSL.swift; sourceTree = "<group>"; };
 		46A818CD9D52DAB63058A6279B32B948 /* ConstraintPriorityTarget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintPriorityTarget.swift; path = Source/ConstraintPriorityTarget.swift; sourceTree = "<group>"; };
-		4D23102D9F45B8682199F699058AD319 /* Pods-iOSMemoAppLinePlus.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-iOSMemoAppLinePlus.modulemap"; sourceTree = "<group>"; };
-		50BAA6E5595496078A3D8F4C4BD0AACF /* Pods-iOSMemoAppLinePlus-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-iOSMemoAppLinePlus-Info.plist"; sourceTree = "<group>"; };
+		4D7BF432E304124ED49501D9475A9648 /* Pods-MemoWithPhotoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-MemoWithPhotoTests.debug.xcconfig"; sourceTree = "<group>"; };
+		4D89432924B8935F47D34585F7D32010 /* Pods_MemoWithPhotoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_MemoWithPhotoTests.framework; path = "Pods-MemoWithPhotoTests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		51C387F75F998F3D11ACA67B32F28A89 /* ConstraintViewDSL.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintViewDSL.swift; path = Source/ConstraintViewDSL.swift; sourceTree = "<group>"; };
 		61EC6EE15D4D67183E93DEDF18A40981 /* ConstraintConstantTarget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintConstantTarget.swift; path = Source/ConstraintConstantTarget.swift; sourceTree = "<group>"; };
 		62904996FDA9DE5467B70321F8C07955 /* ConstraintView+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "ConstraintView+Extensions.swift"; path = "Source/ConstraintView+Extensions.swift"; sourceTree = "<group>"; };
 		6AA803CC2969C21BC90D73347E1980B1 /* ConstraintConfig.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintConfig.swift; path = Source/ConstraintConfig.swift; sourceTree = "<group>"; };
-		6DFC46173EBF2F24FB94F5C16EEEF9D3 /* Pods-iOSMemoAppLinePlus-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-iOSMemoAppLinePlus-dummy.m"; sourceTree = "<group>"; };
+		6F1EF1BE494DD2C85AF4D5C39BBF9C4F /* Pods-MemoWithPhotoTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-MemoWithPhotoTests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		74B8ABA4F93FA9E68362C7C76006D5C9 /* SnapKit-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "SnapKit-Info.plist"; sourceTree = "<group>"; };
 		754536E6E725F807D5C3BAAD54EACF2D /* SnapKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SnapKit-dummy.m"; sourceTree = "<group>"; };
 		7D17D99D978CF81C2FE6BC01137C7E9F /* SnapKit-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SnapKit-umbrella.h"; sourceTree = "<group>"; };
+		7DFCAC11150A4936E3259227A5ECC54B /* Pods-MemoWithPhoto-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-MemoWithPhoto-Info.plist"; sourceTree = "<group>"; };
 		7E511DC742D2D9571D1AE768505A7F95 /* SnapKit.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = SnapKit.modulemap; sourceTree = "<group>"; };
 		7FF26E13590AB8190A1F5DEC7E7BECCA /* ConstraintItem.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintItem.swift; path = Source/ConstraintItem.swift; sourceTree = "<group>"; };
-		844BF30AB69926FB6D4CEED0E0A24E9B /* Pods-iOSMemoAppLinePlus-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-iOSMemoAppLinePlus-umbrella.h"; sourceTree = "<group>"; };
 		8CA0A5F80FD7D1C11B44362F2840A71F /* LayoutConstraintItem.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LayoutConstraintItem.swift; path = Source/LayoutConstraintItem.swift; sourceTree = "<group>"; };
 		90363F632F42F81DAFA242A8F46218E7 /* ConstraintLayoutGuide+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "ConstraintLayoutGuide+Extensions.swift"; path = "Source/ConstraintLayoutGuide+Extensions.swift"; sourceTree = "<group>"; };
 		90D94FD5F9D1E70514063D05CF6ABC99 /* ConstraintDescription.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintDescription.swift; path = Source/ConstraintDescription.swift; sourceTree = "<group>"; };
@@ -99,27 +111,42 @@
 		979486118B3E90C08386079D57962701 /* SnapKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SnapKit.framework; path = SnapKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A8860C52E1C4160B71696E3B6A361D3 /* SnapKit-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SnapKit-prefix.pch"; sourceTree = "<group>"; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		A046084737246EEB529DA5BB5E592504 /* Pods-iOSMemoAppLinePlus.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-iOSMemoAppLinePlus.release.xcconfig"; sourceTree = "<group>"; };
+		A2801E0158D0733605E05EBABFF98124 /* Pods-MemoWithPhoto.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-MemoWithPhoto.modulemap"; sourceTree = "<group>"; };
+		A9B581C028A1E1DBF40B88665EBB63D3 /* Pods-MemoWithPhotoTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-MemoWithPhotoTests.modulemap"; sourceTree = "<group>"; };
 		A9DC1416BB8D683DA0609A8D9C1D1D8F /* SnapKit.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SnapKit.xcconfig; sourceTree = "<group>"; };
 		AA08B21F65760AB725806CF81513EDD6 /* Debugging.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Debugging.swift; path = Source/Debugging.swift; sourceTree = "<group>"; };
 		AAD407D076C59AEB6AFE4508E4B95808 /* ConstraintRelatableTarget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintRelatableTarget.swift; path = Source/ConstraintRelatableTarget.swift; sourceTree = "<group>"; };
 		B39E09B644150C5F99180FDFDFD440D0 /* ConstraintMakerPriortizable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintMakerPriortizable.swift; path = Source/ConstraintMakerPriortizable.swift; sourceTree = "<group>"; };
 		BB0B9A61896874A4153DA213B5FDBA23 /* Constraint.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Constraint.swift; path = Source/Constraint.swift; sourceTree = "<group>"; };
 		BB481C58427FA3F4E097F6E133F8118B /* ConstraintDirectionalInsetTarget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintDirectionalInsetTarget.swift; path = Source/ConstraintDirectionalInsetTarget.swift; sourceTree = "<group>"; };
+		C20FCCB4808C12441796B8B5CC1CC8A6 /* Pods-MemoWithPhoto.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-MemoWithPhoto.release.xcconfig"; sourceTree = "<group>"; };
 		D418A1EF57CADF7AC73AE2E19D3475E1 /* ConstraintMakerExtendable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintMakerExtendable.swift; path = Source/ConstraintMakerExtendable.swift; sourceTree = "<group>"; };
+		D95A1C9269F4E6A82A15D79478856F68 /* Pods-MemoWithPhoto-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-MemoWithPhoto-umbrella.h"; sourceTree = "<group>"; };
 		DCAC4BBC219F813FDC65BFB63E07DCFA /* ConstraintInsets.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintInsets.swift; path = Source/ConstraintInsets.swift; sourceTree = "<group>"; };
 		E1ACF77247BB1059203369EEA2F03D76 /* ConstraintView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintView.swift; path = Source/ConstraintView.swift; sourceTree = "<group>"; };
-		E42FB5EEE9ABB0231EF4D89850622D2F /* Pods-iOSMemoAppLinePlus-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-iOSMemoAppLinePlus-frameworks.sh"; sourceTree = "<group>"; };
 		E56D17419B45F7AEA8E9FD4713B0D394 /* ConstraintLayoutSupportDSL.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintLayoutSupportDSL.swift; path = Source/ConstraintLayoutSupportDSL.swift; sourceTree = "<group>"; };
 		E86CFD34EFB62B5D4FA9AB14C2F3654F /* ConstraintDirectionalInsets.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintDirectionalInsets.swift; path = Source/ConstraintDirectionalInsets.swift; sourceTree = "<group>"; };
-		E9FE20B862CF2C8DC8E02DC8FA712F2D /* Pods_iOSMemoAppLinePlus.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_iOSMemoAppLinePlus.framework; path = "Pods-iOSMemoAppLinePlus.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E9C2EE74424DFDEF3DD0CFDF9C55430C /* Pods-MemoWithPhoto-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-MemoWithPhoto-frameworks.sh"; sourceTree = "<group>"; };
 		EC5B4F88C96976B456904499E9530A03 /* ConstraintMultiplierTarget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintMultiplierTarget.swift; path = Source/ConstraintMultiplierTarget.swift; sourceTree = "<group>"; };
 		EDDD718AFA0616F5C00341E1E3B64D5E /* ConstraintMakerRelatable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintMakerRelatable.swift; path = Source/ConstraintMakerRelatable.swift; sourceTree = "<group>"; };
+		EF2B21AEC5F920057C6098C8BDC2D8B8 /* Pods-MemoWithPhoto.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-MemoWithPhoto.debug.xcconfig"; sourceTree = "<group>"; };
+		F36679C767605E86DE0F3B257FC517D9 /* Pods-MemoWithPhotoTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-MemoWithPhotoTests-umbrella.h"; sourceTree = "<group>"; };
 		F738E14AC76C938181436DD3CAF2C114 /* LayoutConstraint.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LayoutConstraint.swift; path = Source/LayoutConstraint.swift; sourceTree = "<group>"; };
+		F9115C5722EDB7892682431E3C8D3024 /* Pods-MemoWithPhoto-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-MemoWithPhoto-dummy.m"; sourceTree = "<group>"; };
+		FB25E22E8E6D95F1EB50279534A673C2 /* Pods-MemoWithPhotoTests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-MemoWithPhotoTests-Info.plist"; sourceTree = "<group>"; };
+		FD6A32656DEA16809DF8BA1872E38E29 /* Pods-MemoWithPhoto-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-MemoWithPhoto-acknowledgements.plist"; sourceTree = "<group>"; };
 		FFA26282AD0058A9D2C5E948FB218029 /* ConstraintMakerFinalizable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintMakerFinalizable.swift; path = Source/ConstraintMakerFinalizable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		0E6BA0D8327D0CFDC157E78D8149BF45 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B3D8C2B3A67E547EECDED93695A5C3CD /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3C8B1704CC97EF12D3409771318C6433 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -128,26 +155,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5D9B7DDD35E25D5A00AF503D413A54C2 /* Frameworks */ = {
+		C6632E2BD7795A7C88BB68993D77FBD2 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				182406E6BBF12E197E457FE6C6478BE3 /* Foundation.framework in Frameworks */,
+				F586FD3EE28623B3FF1C07C92E1DBDF0 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		044892DCA7412343D6DA59245DF00DA7 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				E9FE20B862CF2C8DC8E02DC8FA712F2D /* Pods_iOSMemoAppLinePlus.framework */,
-				979486118B3E90C08386079D57962701 /* SnapKit.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		14D487C84B91C6E3C6AAF35FEBE9B1DF /* SnapKit */ = {
 			isa = PBXGroup;
 			children = (
@@ -193,6 +211,22 @@
 			path = SnapKit;
 			sourceTree = "<group>";
 		};
+		4715B704CEE9BA024D966EF96927280E /* Pods-MemoWithPhotoTests */ = {
+			isa = PBXGroup;
+			children = (
+				A9B581C028A1E1DBF40B88665EBB63D3 /* Pods-MemoWithPhotoTests.modulemap */,
+				6F1EF1BE494DD2C85AF4D5C39BBF9C4F /* Pods-MemoWithPhotoTests-acknowledgements.markdown */,
+				0A0E3C8795920FB9E1C1FEEE3DAB8F0D /* Pods-MemoWithPhotoTests-acknowledgements.plist */,
+				380DE3F4EB4DF450BC8BB89051E964E9 /* Pods-MemoWithPhotoTests-dummy.m */,
+				FB25E22E8E6D95F1EB50279534A673C2 /* Pods-MemoWithPhotoTests-Info.plist */,
+				F36679C767605E86DE0F3B257FC517D9 /* Pods-MemoWithPhotoTests-umbrella.h */,
+				4D7BF432E304124ED49501D9475A9648 /* Pods-MemoWithPhotoTests.debug.xcconfig */,
+				2073A2897B7D1EDA7AC48AFEF23FD1FB /* Pods-MemoWithPhotoTests.release.xcconfig */,
+			);
+			name = "Pods-MemoWithPhotoTests";
+			path = "Target Support Files/Pods-MemoWithPhotoTests";
+			sourceTree = "<group>";
+		};
 		71BFF8DEE087891C80100BB29880775D /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -205,14 +239,6 @@
 			);
 			name = "Support Files";
 			path = "../Target Support Files/SnapKit";
-			sourceTree = "<group>";
-		};
-		7535DCC66D560F35A7B6F402797A3495 /* Targets Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				EA289377A238299B849CE5C0C3E89ECD /* Pods-iOSMemoAppLinePlus */,
-			);
-			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
 		BA22F08D059965C9A09F78196176CEDB /* Pods */ = {
@@ -231,14 +257,50 @@
 			name = iOS;
 			sourceTree = "<group>";
 		};
+		C364C4A951DBC632E050E26732775FE0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2E1FEB89D6A69CE7646F130297B53F7B /* Pods_MemoWithPhoto.framework */,
+				4D89432924B8935F47D34585F7D32010 /* Pods_MemoWithPhotoTests.framework */,
+				979486118B3E90C08386079D57962701 /* SnapKit.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C67989E5E1DB0D776525B3E4398E1CAB /* Pods-MemoWithPhoto */ = {
+			isa = PBXGroup;
+			children = (
+				A2801E0158D0733605E05EBABFF98124 /* Pods-MemoWithPhoto.modulemap */,
+				15400B06DFB6BAA14589888238E046A6 /* Pods-MemoWithPhoto-acknowledgements.markdown */,
+				FD6A32656DEA16809DF8BA1872E38E29 /* Pods-MemoWithPhoto-acknowledgements.plist */,
+				F9115C5722EDB7892682431E3C8D3024 /* Pods-MemoWithPhoto-dummy.m */,
+				E9C2EE74424DFDEF3DD0CFDF9C55430C /* Pods-MemoWithPhoto-frameworks.sh */,
+				7DFCAC11150A4936E3259227A5ECC54B /* Pods-MemoWithPhoto-Info.plist */,
+				D95A1C9269F4E6A82A15D79478856F68 /* Pods-MemoWithPhoto-umbrella.h */,
+				EF2B21AEC5F920057C6098C8BDC2D8B8 /* Pods-MemoWithPhoto.debug.xcconfig */,
+				C20FCCB4808C12441796B8B5CC1CC8A6 /* Pods-MemoWithPhoto.release.xcconfig */,
+			);
+			name = "Pods-MemoWithPhoto";
+			path = "Target Support Files/Pods-MemoWithPhoto";
+			sourceTree = "<group>";
+		};
+		CB7AA16824F7F188D45F67A1E0730155 /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				C67989E5E1DB0D776525B3E4398E1CAB /* Pods-MemoWithPhoto */,
+				4715B704CEE9BA024D966EF96927280E /* Pods-MemoWithPhotoTests */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
 		CF1408CF629C7361332E53B88F7BD30C = {
 			isa = PBXGroup;
 			children = (
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
 				D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */,
 				BA22F08D059965C9A09F78196176CEDB /* Pods */,
-				044892DCA7412343D6DA59245DF00DA7 /* Products */,
-				7535DCC66D560F35A7B6F402797A3495 /* Targets Support Files */,
+				C364C4A951DBC632E050E26732775FE0 /* Products */,
+				CB7AA16824F7F188D45F67A1E0730155 /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
@@ -250,26 +312,17 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		EA289377A238299B849CE5C0C3E89ECD /* Pods-iOSMemoAppLinePlus */ = {
-			isa = PBXGroup;
-			children = (
-				4D23102D9F45B8682199F699058AD319 /* Pods-iOSMemoAppLinePlus.modulemap */,
-				222F131CFB23C7DAD324FA081B71AD1F /* Pods-iOSMemoAppLinePlus-acknowledgements.markdown */,
-				034F6590E8EFFD995DDF6121E326DA90 /* Pods-iOSMemoAppLinePlus-acknowledgements.plist */,
-				6DFC46173EBF2F24FB94F5C16EEEF9D3 /* Pods-iOSMemoAppLinePlus-dummy.m */,
-				E42FB5EEE9ABB0231EF4D89850622D2F /* Pods-iOSMemoAppLinePlus-frameworks.sh */,
-				50BAA6E5595496078A3D8F4C4BD0AACF /* Pods-iOSMemoAppLinePlus-Info.plist */,
-				844BF30AB69926FB6D4CEED0E0A24E9B /* Pods-iOSMemoAppLinePlus-umbrella.h */,
-				301B2DAA76154BE90919C5AE0104BFC0 /* Pods-iOSMemoAppLinePlus.debug.xcconfig */,
-				A046084737246EEB529DA5BB5E592504 /* Pods-iOSMemoAppLinePlus.release.xcconfig */,
-			);
-			name = "Pods-iOSMemoAppLinePlus";
-			path = "Target Support Files/Pods-iOSMemoAppLinePlus";
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		0D87230D6A0E78E6E6DB08C71E8D5D67 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F6109E3CB7E396909DC76975BBED7EB4 /* Pods-MemoWithPhotoTests-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7DFCF5F12AEEED0500986DBC9BF76170 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -278,11 +331,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D6BE2CB38E7A7BA3F42389A5D20E6C58 /* Headers */ = {
+		86DF6BF10A6DA3FA7B31CA4E32EA46CF /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DC2F57EE1BC4DA6B694ACCC7A7C825F1 /* Pods-iOSMemoAppLinePlus-umbrella.h in Headers */,
+				9CE637B3F87BDAFEBF01F92CA705BF5B /* Pods-MemoWithPhoto-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -307,23 +360,42 @@
 			productReference = 979486118B3E90C08386079D57962701 /* SnapKit.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		352BFC314902482A32BF8A57E66499AB /* Pods-iOSMemoAppLinePlus */ = {
+		24971F927F36FC91BE81C7926E4B7D8C /* Pods-MemoWithPhotoTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 35377DF29B0023228CFD708A0B2020BF /* Build configuration list for PBXNativeTarget "Pods-iOSMemoAppLinePlus" */;
+			buildConfigurationList = A9E0B0ABF2E51B5DE66FB4A3EFC1ED4D /* Build configuration list for PBXNativeTarget "Pods-MemoWithPhotoTests" */;
 			buildPhases = (
-				D6BE2CB38E7A7BA3F42389A5D20E6C58 /* Headers */,
-				AED242E1349F08917CB6A169C2D58382 /* Sources */,
-				5D9B7DDD35E25D5A00AF503D413A54C2 /* Frameworks */,
-				B86B6645C2751B02B57A585F66154DFA /* Resources */,
+				0D87230D6A0E78E6E6DB08C71E8D5D67 /* Headers */,
+				3E83C63A712D620D17AE0986155A0ADD /* Sources */,
+				C6632E2BD7795A7C88BB68993D77FBD2 /* Frameworks */,
+				B586270861E6EFBDE7E8359002100085 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				7B6BC2836F2FD645CBEA2E533C2A4D36 /* PBXTargetDependency */,
+				10CB285C1DFC4896FA8F683BD82D20D4 /* PBXTargetDependency */,
 			);
-			name = "Pods-iOSMemoAppLinePlus";
-			productName = "Pods-iOSMemoAppLinePlus";
-			productReference = E9FE20B862CF2C8DC8E02DC8FA712F2D /* Pods_iOSMemoAppLinePlus.framework */;
+			name = "Pods-MemoWithPhotoTests";
+			productName = "Pods-MemoWithPhotoTests";
+			productReference = 4D89432924B8935F47D34585F7D32010 /* Pods_MemoWithPhotoTests.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		630A6569967AA49F6D2C8E20A639B9FC /* Pods-MemoWithPhoto */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EE614E6A171994831EDBB783EA6244D8 /* Build configuration list for PBXNativeTarget "Pods-MemoWithPhoto" */;
+			buildPhases = (
+				86DF6BF10A6DA3FA7B31CA4E32EA46CF /* Headers */,
+				9EB10F940CF53640B6077E0A273361FB /* Sources */,
+				0E6BA0D8327D0CFDC157E78D8149BF45 /* Frameworks */,
+				E5B5D24543F4DCA00332AB78E61158A4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BB1473C0129955CB05F4CF50482FB5B4 /* PBXTargetDependency */,
+			);
+			name = "Pods-MemoWithPhoto";
+			productName = "Pods-MemoWithPhoto";
+			productReference = 2E1FEB89D6A69CE7646F130297B53F7B /* Pods_MemoWithPhoto.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -344,11 +416,12 @@
 				Base,
 			);
 			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
-			productRefGroup = 044892DCA7412343D6DA59245DF00DA7 /* Products */;
+			productRefGroup = C364C4A951DBC632E050E26732775FE0 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				352BFC314902482A32BF8A57E66499AB /* Pods-iOSMemoAppLinePlus */,
+				630A6569967AA49F6D2C8E20A639B9FC /* Pods-MemoWithPhoto */,
+				24971F927F36FC91BE81C7926E4B7D8C /* Pods-MemoWithPhotoTests */,
 				19622742EBA51E823D6DAE3F8CDBFAD4 /* SnapKit */,
 			);
 		};
@@ -362,7 +435,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B86B6645C2751B02B57A585F66154DFA /* Resources */ = {
+		B586270861E6EFBDE7E8359002100085 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E5B5D24543F4DCA00332AB78E61158A4 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -372,6 +452,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		3E83C63A712D620D17AE0986155A0ADD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AF6FA1B10DCCA0A7A8B8B54CF485AF8F /* Pods-MemoWithPhotoTests-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		89222AF845A30312C284F407BA48B98F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -416,22 +504,28 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AED242E1349F08917CB6A169C2D58382 /* Sources */ = {
+		9EB10F940CF53640B6077E0A273361FB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9961B92556B6FAD5B5EA68DBEBCEE9BF /* Pods-iOSMemoAppLinePlus-dummy.m in Sources */,
+				D39197F9750304B34C8419C2F71AEA03 /* Pods-MemoWithPhoto-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		7B6BC2836F2FD645CBEA2E533C2A4D36 /* PBXTargetDependency */ = {
+		10CB285C1DFC4896FA8F683BD82D20D4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Pods-MemoWithPhoto";
+			target = 630A6569967AA49F6D2C8E20A639B9FC /* Pods-MemoWithPhoto */;
+			targetProxy = F1C0C5BAB69CC9F8FB85569897A3DA3B /* PBXContainerItemProxy */;
+		};
+		BB1473C0129955CB05F4CF50482FB5B4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = SnapKit;
 			target = 19622742EBA51E823D6DAE3F8CDBFAD4 /* SnapKit */;
-			targetProxy = 15D61B28F14BE559E23027A04681635A /* PBXContainerItemProxy */;
+			targetProxy = 58155559E97A42642B1471F858B565B1 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -472,6 +566,44 @@
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
+		};
+		0456900815C07B1E02C5C103272C795E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4D7BF432E304124ED49501D9475A9648 /* Pods-MemoWithPhotoTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-MemoWithPhotoTests/Pods-MemoWithPhotoTests-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-MemoWithPhotoTests/Pods-MemoWithPhotoTests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
 		};
 		196DFA3E4A09A28224918543529A1885 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -537,44 +669,6 @@
 			};
 			name = Debug;
 		};
-		24485E3B655658EB183F5C43B4C11A2C /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 301B2DAA76154BE90919C5AE0104BFC0 /* Pods-iOSMemoAppLinePlus.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-iOSMemoAppLinePlus/Pods-iOSMemoAppLinePlus-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-iOSMemoAppLinePlus/Pods-iOSMemoAppLinePlus.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
 		2E3C8A300772E0028147E4BAF0D5078A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A9DC1416BB8D683DA0609A8D9C1D1D8F /* SnapKit.xcconfig */;
@@ -611,9 +705,9 @@
 			};
 			name = Debug;
 		};
-		4F072FA50B490E07BCB64EA70FE49B02 /* Release */ = {
+		6658427CAF620549CE00D44108C0B465 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A046084737246EEB529DA5BB5E592504 /* Pods-iOSMemoAppLinePlus.release.xcconfig */;
+			baseConfigurationReference = EF2B21AEC5F920057C6098C8BDC2D8B8 /* Pods-MemoWithPhoto.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ENABLE_OBJC_WEAK = NO;
@@ -626,7 +720,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-iOSMemoAppLinePlus/Pods-iOSMemoAppLinePlus-Info.plist";
+				INFOPLIST_FILE = "Target Support Files/Pods-MemoWithPhoto/Pods-MemoWithPhoto-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -635,7 +729,84 @@
 					"@loader_path/Frameworks",
 				);
 				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-iOSMemoAppLinePlus/Pods-iOSMemoAppLinePlus.modulemap";
+				MODULEMAP_FILE = "Target Support Files/Pods-MemoWithPhoto/Pods-MemoWithPhoto.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		7C6A651B301627537B343798CB7EE0EC /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2073A2897B7D1EDA7AC48AFEF23FD1FB /* Pods-MemoWithPhotoTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-MemoWithPhotoTests/Pods-MemoWithPhotoTests-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-MemoWithPhotoTests/Pods-MemoWithPhotoTests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		808364A8A3095F0A69164398CEC7C730 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C20FCCB4808C12441796B8B5CC1CC8A6 /* Pods-MemoWithPhoto.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-MemoWithPhoto/Pods-MemoWithPhoto-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-MemoWithPhoto/Pods-MemoWithPhoto.modulemap";
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
@@ -713,15 +884,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		35377DF29B0023228CFD708A0B2020BF /* Build configuration list for PBXNativeTarget "Pods-iOSMemoAppLinePlus" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				24485E3B655658EB183F5C43B4C11A2C /* Debug */,
-				4F072FA50B490E07BCB64EA70FE49B02 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -736,6 +898,24 @@
 			buildConfigurations = (
 				2E3C8A300772E0028147E4BAF0D5078A /* Debug */,
 				020BEC27E3AD6D7C84D288C148A58E74 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A9E0B0ABF2E51B5DE66FB4A3EFC1ED4D /* Build configuration list for PBXNativeTarget "Pods-MemoWithPhotoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0456900815C07B1E02C5C103272C795E /* Debug */,
+				7C6A651B301627537B343798CB7EE0EC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EE614E6A171994831EDBB783EA6244D8 /* Build configuration list for PBXNativeTarget "Pods-MemoWithPhoto" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6658427CAF620549CE00D44108C0B465 /* Debug */,
+				808364A8A3095F0A69164398CEC7C730 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
