@@ -44,6 +44,14 @@ class ImageCollectionForCreateAndEdit: ImageCollectionForDetail {
     }
     
     // MARK: Lifecycle
+    override init() {
+        super.init()
+        print("Collection for Create&Edit init")
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -87,8 +95,8 @@ class ImageCollectionForCreateAndEdit: ImageCollectionForDetail {
         }
     }
     
-    override func setTapGestureOnCollection() {
-    }
+//    override func setTapGestureOnCollection() {
+//    }
     
     func setupLongPressGestureRecognizer() {
         let gesture = UILongPressGestureRecognizer(target: self,

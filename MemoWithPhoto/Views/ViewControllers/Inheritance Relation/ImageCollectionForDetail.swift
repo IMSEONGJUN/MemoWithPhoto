@@ -25,6 +25,14 @@ class ImageCollectionForDetail: UIViewController {
         fetchMemo()
         setTapGestureOnCollection()
     }
+    init() {
+        super.init(nibName: nil, bundle: nil)
+        print("Collection for Detail init")
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     deinit{
         print("Collection for Detail Deinit")

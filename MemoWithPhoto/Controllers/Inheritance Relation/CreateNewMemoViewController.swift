@@ -25,7 +25,7 @@ class CreateNewMemoViewController: UIViewController {
     // MARK: LifeCycle
     init() {
         super.init(nibName: nil, bundle: nil)
-        print("init CreateNewMemoViewController")
+        print("init CreateNewMemoVC")
     }
     
     required init?(coder: NSCoder) {

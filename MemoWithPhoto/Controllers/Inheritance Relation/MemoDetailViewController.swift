@@ -242,8 +242,8 @@ class MemoDetailViewController: CreateNewMemoViewController {
     
     // MARK: - Overridden ImageCollectionForCreateAndEditDelegate Method
     
-    override func collectionViewHasImageMoreThanOne(hasImage: Bool) {
-        super.collectionViewHasImageMoreThanOne(hasImage: hasImage)
+//    override func collectionViewHasImageMoreThanOne(hasImage: Bool) {
+//        super.collectionViewHasImageMoreThanOne(hasImage: hasImage)
 //        if hasImage {
 //            UIView.animate(withDuration: 0.5) {
 //                self.noticeLabel.transform = CGAffineTransform(translationX: 0,
@@ -256,6 +256,6 @@ class MemoDetailViewController: CreateNewMemoViewController {
 //                self.noticeLabel.alpha = 0.0
 //            }
 //        }
-    }
+//    }
     
 }

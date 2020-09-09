@@ -23,6 +23,7 @@ final class DataManager {
     
     var mainContext: NSManagedObjectContext{
         return persistentContainer.viewContext
+//        persistentContainer.newBackgroundContext() // 멀티쓰레딩시에 사용하면 백그라운드 쓰레드에서 동작하는 관리객체로 반환된다.
     }
     
     var memoList = [Memo]() // 코어데이터 entity 의 타입네임과 같은 타입으로 이루어진 배열로 일명 'managed object'(관리객체)로서 메모리에서 변화가 있는 경우 persistentContainer.viewContext를 통해 이를 관리하고 저장한다.
