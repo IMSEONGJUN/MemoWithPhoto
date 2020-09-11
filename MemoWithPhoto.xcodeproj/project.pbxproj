@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		814A64F122B78A9AE7B40955 /* Pods_MemoWithPhoto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44C0CA8B0DA73912E451409A /* Pods_MemoWithPhoto.framework */; };
+		CE29A3A3250AFF9D00BF0326 /* MemoWithPhotoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE29A3A2250AFF9D00BF0326 /* MemoWithPhotoUITests.swift */; };
 		CE45B7BB23FF53D400444371 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE45B7BA23FF53D400444371 /* ViewController.swift */; };
 		CE4967C723F46FF50056E444 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4967C623F46FF50056E444 /* AppDelegate.swift */; };
 		CE4967C923F46FF50056E444 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4967C823F46FF50056E444 /* SceneDelegate.swift */; };
@@ -40,6 +41,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		CE29A3A5250AFF9D00BF0326 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE4967BB23F46FF50056E444 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CE4967C223F46FF50056E444;
+			remoteInfo = MemoWithPhoto;
+		};
 		CE753C4024010EB400A5CD16 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CE4967BB23F46FF50056E444 /* Project object */;
@@ -55,6 +63,9 @@
 		9F05B1463FE66B277A08A728 /* Pods-MemoWithPhotoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MemoWithPhotoTests.release.xcconfig"; path = "Target Support Files/Pods-MemoWithPhotoTests/Pods-MemoWithPhotoTests.release.xcconfig"; sourceTree = "<group>"; };
 		A5EAB6F54FDD975FEE1AD4AB /* Pods-MemoWithPhoto.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MemoWithPhoto.release.xcconfig"; path = "Target Support Files/Pods-MemoWithPhoto/Pods-MemoWithPhoto.release.xcconfig"; sourceTree = "<group>"; };
 		C7E017BF6B2F7710275DD5C5 /* Pods-MemoWithPhoto.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MemoWithPhoto.debug.xcconfig"; path = "Target Support Files/Pods-MemoWithPhoto/Pods-MemoWithPhoto.debug.xcconfig"; sourceTree = "<group>"; };
+		CE29A3A0250AFF9D00BF0326 /* MemoWithPhotoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MemoWithPhotoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE29A3A2250AFF9D00BF0326 /* MemoWithPhotoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoWithPhotoUITests.swift; sourceTree = "<group>"; };
+		CE29A3A4250AFF9D00BF0326 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE45B7BA23FF53D400444371 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		CE4967C623F46FF50056E444 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE4967C823F46FF50056E444 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -92,6 +103,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		CE29A39D250AFF9D00BF0326 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CE4967C023F46FF50056E444 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -130,6 +148,15 @@
 			path = "Inheritance Relation";
 			sourceTree = "<group>";
 		};
+		CE29A3A1250AFF9D00BF0326 /* MemoWithPhotoUITests */ = {
+			isa = PBXGroup;
+			children = (
+				CE29A3A2250AFF9D00BF0326 /* MemoWithPhotoUITests.swift */,
+				CE29A3A4250AFF9D00BF0326 /* Info.plist */,
+			);
+			path = MemoWithPhotoUITests;
+			sourceTree = "<group>";
+		};
 		CE4967BA23F46FF50056E444 = {
 			isa = PBXGroup;
 			children = (
@@ -137,9 +164,11 @@
 				CE4967C523F46FF50056E444 /* MemoWithPhoto */,
 				CE753C3C24010EB400A5CD16 /* MemoWithPhotoTests */,
 				142F4FB9F367380C53235BD1 /* Pods */,
+				CE29A3A1250AFF9D00BF0326 /* MemoWithPhotoUITests */,
 				E99B32270C7C56FDE391F395 /* Frameworks */,
 				CEA138062432D8520017FC10 /* MemoWithPhoto.app */,
 				CEA138072432D8520017FC10 /* MemoWithPhotoTests.xctest */,
+				CE29A3A0250AFF9D00BF0326 /* MemoWithPhotoUITests.xctest */,
 			);
 			sourceTree = "<group>";
 		};
@@ -294,6 +323,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		CE29A39F250AFF9D00BF0326 /* MemoWithPhotoUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CE29A3A9250AFF9D00BF0326 /* Build configuration list for PBXNativeTarget "MemoWithPhotoUITests" */;
+			buildPhases = (
+				CE29A39C250AFF9D00BF0326 /* Sources */,
+				CE29A39D250AFF9D00BF0326 /* Frameworks */,
+				CE29A39E250AFF9D00BF0326 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CE29A3A6250AFF9D00BF0326 /* PBXTargetDependency */,
+			);
+			name = MemoWithPhotoUITests;
+			productName = MemoWithPhotoUITests;
+			productReference = CE29A3A0250AFF9D00BF0326 /* MemoWithPhotoUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		CE4967C223F46FF50056E444 /* MemoWithPhoto */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = CE4967D723F46FF60056E444 /* Build configuration list for PBXNativeTarget "MemoWithPhoto" */;
@@ -338,10 +385,14 @@
 		CE4967BB23F46FF50056E444 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1130;
+				LastSwiftUpdateCheck = 1170;
 				LastUpgradeCheck = 1130;
 				ORGANIZATIONNAME = "Seongjun Im";
 				TargetAttributes = {
+					CE29A39F250AFF9D00BF0326 = {
+						CreatedOnToolsVersion = 11.7;
+						TestTargetID = CE4967C223F46FF50056E444;
+					};
 					CE4967C223F46FF50056E444 = {
 						CreatedOnToolsVersion = 11.3.1;
 					};
@@ -366,11 +417,19 @@
 			targets = (
 				CE4967C223F46FF50056E444 /* MemoWithPhoto */,
 				CE753C3A24010EB400A5CD16 /* MemoWithPhotoTests */,
+				CE29A39F250AFF9D00BF0326 /* MemoWithPhotoUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		CE29A39E250AFF9D00BF0326 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CE4967C123F46FF50056E444 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -455,6 +514,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		CE29A39C250AFF9D00BF0326 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE29A3A3250AFF9D00BF0326 /* MemoWithPhotoUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CE4967BF23F46FF50056E444 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -498,6 +565,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		CE29A3A6250AFF9D00BF0326 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CE4967C223F46FF50056E444 /* MemoWithPhoto */;
+			targetProxy = CE29A3A5250AFF9D00BF0326 /* PBXContainerItemProxy */;
+		};
 		CE753C4124010EB400A5CD16 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = CE4967C223F46FF50056E444 /* MemoWithPhoto */;
@@ -525,6 +597,48 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		CE29A3A7250AFF9D00BF0326 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = ADHC8G6NHC;
+				INFOPLIST_FILE = MemoWithPhotoUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.7;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.seongjunIm.www.MemoWithPhotoUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = MemoWithPhoto;
+			};
+			name = Debug;
+		};
+		CE29A3A8250AFF9D00BF0326 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = ADHC8G6NHC;
+				INFOPLIST_FILE = MemoWithPhotoUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.7;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.seongjunIm.www.MemoWithPhotoUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = MemoWithPhoto;
+			};
+			name = Release;
+		};
 		CE4967D523F46FF60056E444 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -729,6 +843,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		CE29A3A9250AFF9D00BF0326 /* Build configuration list for PBXNativeTarget "MemoWithPhotoUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CE29A3A7250AFF9D00BF0326 /* Debug */,
+				CE29A3A8250AFF9D00BF0326 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		CE4967BE23F46FF50056E444 /* Build configuration list for PBXProject "MemoWithPhoto" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

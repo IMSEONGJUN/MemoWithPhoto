@@ -34,6 +34,7 @@ class CreateNewMemoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        titleTextField.accessibilityIdentifier = "title"
         setupViews()
         setupNavigationBar()
         setConstraints()

@@ -11,7 +11,7 @@ import UIKit
 class MemoListViewController: UIViewController {
     
     // MARK: Properties
-    fileprivate let tableView = UITableView()
+    let tableView = UITableView()
     
     var token: NSObjectProtocol?
     var isSearching = false
@@ -27,6 +27,7 @@ class MemoListViewController: UIViewController {
         setConstraints()
         setNotiToken()
         configureSearchBar()
+        tableView.accessibilityIdentifier = "tableView"
         
     }
     
@@ -132,6 +133,7 @@ extension MemoListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: MemoCell.identifier, for: indexPath) as! MemoCell
+        cell.accessibilityIdentifier = "memo \(indexPath.row)"
         if !isSearching {
             cell.set(memo: DataManager.shared.memoList[indexPath.row])
         } else {

@@ -38,6 +38,16 @@
                ReferencedContainer = "container:MemoWithPhoto.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "CE29A39F250AFF9D00BF0326"
+               BuildableName = "MemoWithPhotoUITests.xctest"
+               BlueprintName = "MemoWithPhotoUITests"
+               ReferencedContainer = "container:MemoWithPhoto.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
