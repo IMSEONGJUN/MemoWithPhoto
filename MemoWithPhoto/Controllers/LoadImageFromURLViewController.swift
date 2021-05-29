@@ -9,10 +9,9 @@
 import UIKit
 import SnapKit
 
-protocol LoadImageFromURLViewControllerDelegate: class {
+protocol LoadImageFromURLViewControllerDelegate: AnyObject {
     func passUrlString(urlString: MyImageTypes)
 }
-
 
 class LoadImageFromURLViewController: UIViewController {
 

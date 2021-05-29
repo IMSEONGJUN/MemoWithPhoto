@@ -8,10 +8,9 @@
 
 import UIKit
 
-protocol MemoDetailViewControllerDelegate: class {
+protocol MemoDetailViewControllerDelegate: AnyObject {
     func removeTableViewRow(indexPath: IndexPath, isSearching: Bool)
 }
-
 
 class MemoDetailViewController: CreateNewMemoViewController {
     

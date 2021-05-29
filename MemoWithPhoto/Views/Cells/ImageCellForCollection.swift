@@ -9,7 +9,7 @@
 import UIKit
 import SnapKit
 
-protocol ImageCellForCollectionDelegate: class {
+protocol ImageCellForCollectionDelegate: AnyObject {
     func didTapRemoveButtonOnImage(in cell:ImageCellForCollection)
 }
 

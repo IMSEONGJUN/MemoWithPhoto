@@ -10,7 +10,7 @@ import UIKit
 import SnapKit // Third party Library
 import MobileCoreServices
 
-@objc protocol ImageCollectionForCreateAndEditDelegate: class {
+@objc protocol ImageCollectionForCreateAndEditDelegate: AnyObject {
     func collectionViewHasImageMoreThanOne(hasImage: Bool)
 }
 
