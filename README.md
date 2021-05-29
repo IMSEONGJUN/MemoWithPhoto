@@ -5,7 +5,8 @@
 > **Changed images associated with LINE.Corp and Service on AppStore** 
 
 [<img src = "https://devimages-cdn.apple.com/app-store/marketing/guidelines/images/badge-download-on-the-app-store.svg">](https://apps.apple.com/us/app/memowithphoto/id1506735819?mt=8) [<img src = "https://devimages-cdn.apple.com/app-store/marketing/guidelines/images/badge-download-on-the-app-store-kr.svg">](https://apps.apple.com/kr/app/memowithphoto/id1506735819?mt=8)
-
+## Period
+- 2020.02.13 ~ 2020.02.23
 ## Version
 
 - Latest Update : 2020. 05. 20
